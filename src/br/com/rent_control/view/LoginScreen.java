@@ -16,7 +16,7 @@ public class LoginScreen extends JPanel {
 
 	private static final long serialVersionUID = 7811418568475134687L;
 
-	private final ImageIcon fundo;
+	private final ImageIcon backgroundPanel;
 
 	private final RentControl frameRentControl;
 
@@ -40,7 +40,7 @@ public class LoginScreen extends JPanel {
 	public LoginScreen(final RentControl frameRenteControl) {
 
 		setLayout(null);
-		fundo = new ImageIcon(getClass().getResource("/br/com/rent_control/view/images/backgroundLogin.png"));
+		backgroundPanel = new ImageIcon(getClass().getResource("/br/com/rent_control/view/images/backgroundLogin.png"));
 		this.frameRentControl = frameRenteControl;
 
 		nameLabel = new JLabel("Nome");
@@ -127,6 +127,6 @@ public class LoginScreen extends JPanel {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		g.drawImage(fundo.getImage(), 0, 0, fundo.getIconWidth(), fundo.getIconHeight(), this);
+		g.drawImage(backgroundPanel.getImage(), 0, 0, backgroundPanel.getIconWidth(), backgroundPanel.getIconHeight(), this);
 	}
 }

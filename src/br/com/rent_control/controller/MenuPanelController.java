@@ -39,7 +39,7 @@ public class MenuPanelController {
 		COLOR_PRIMARY_DARK = new Color(0, 102, 51);
 		selectedButton = null;
 		
-		menuPanelScreen.getBooKCarButton().getOptionMenuButton().addActionListener(new ActionListener() {
+		menuPanelScreen.getBooKCarButton().getButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				menuPanelScreen.getContentPanel().removeAll();
@@ -50,68 +50,68 @@ public class MenuPanelController {
 				menuPanelScreen.getContentPanel().revalidate();
 				menuPanelScreen.getContentPanel().repaint();
 				
-				menuPanelScreen.getBooKCarButton().getOptionMenuButton().setBackground(COLOR_PRIMARY_DARK);
+				menuPanelScreen.getBooKCarButton().getButton().setBackground(COLOR_PRIMARY_DARK);
 				
                 if (selectedButton != null) {
                     selectedButton.setBackground(COLOR_PRIMARY);
                 }
 
-                selectedButton = menuPanelScreen.getBooKCarButton().getOptionMenuButton();
+                selectedButton = menuPanelScreen.getBooKCarButton().getButton();
 			}
 		});
 		
-		menuPanelScreen.getBooKCarButton().getOptionMenuButton().addMouseListener(new MouseAdapter() {
+		menuPanelScreen.getBooKCarButton().getButton().addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e) {
-				menuPanelScreen.getBooKCarButton().setBackground(COLOR_PRIMARY_DARK);
+				menuPanelScreen.getBooKCarButton().getButton().setBackground(COLOR_PRIMARY_DARK);
 			}
 			
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				menuPanelScreen.getBooKCarButton().getOptionMenuButton().setBackground(COLOR_PRIMARY_DARK);
+				menuPanelScreen.getBooKCarButton().getButton().setBackground(COLOR_PRIMARY_DARK);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (selectedButton != menuPanelScreen.getBooKCarButton()) {
-                    menuPanelScreen.getBooKCarButton().setBackground(COLOR_PRIMARY);
+				if (selectedButton != menuPanelScreen.getBooKCarButton().getButton()) {
+                    menuPanelScreen.getBooKCarButton().getButton().setBackground(COLOR_PRIMARY);
                 }
 			}
 		});
 		
-		menuPanelScreen.getAddCarButton().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				menuPanelScreen.getContentPanel().removeAll();
-
-				AddCarScreen addCarScreen = new AddCarScreen(menuPanelScreen.getFrameRentControl());
-				menuPanelScreen.getContentPanel().add(addCarScreen);
-
-				menuPanelScreen.getContentPanel().revalidate();
-				menuPanelScreen.getContentPanel().repaint();
-				
-				menuPanelScreen.getAddCarButton().setBackground(COLOR_PRIMARY_DARK);
-				
-				if (selectedButton != null) {
-                    selectedButton.setBackground(COLOR_PRIMARY);
-                }
-				
-				selectedButton = menuPanelScreen.getAddCarButton();
-			}
-		});
-		
-		menuPanelScreen.getAddCarButton().addMouseListener(new MouseAdapter() {			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				menuPanelScreen.getAddCarButton().setBackground(COLOR_PRIMARY_DARK);
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				if (selectedButton != menuPanelScreen.getAddCarButton()) {
-                    menuPanelScreen.getAddCarButton().setBackground(COLOR_PRIMARY);
-                }
-			}
-		});
+//		menuPanelScreen.getAddCarButton().addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				menuPanelScreen.getContentPanel().removeAll();
+//
+//				AddCarScreen addCarScreen = new AddCarScreen(menuPanelScreen.getFrameRentControl());
+//				menuPanelScreen.getContentPanel().add(addCarScreen);
+//
+//				menuPanelScreen.getContentPanel().revalidate();
+//				menuPanelScreen.getContentPanel().repaint();
+//				
+//				menuPanelScreen.getAddCarButton().setBackground(COLOR_PRIMARY_DARK);
+//				
+//				if (selectedButton != null) {
+//                    selectedButton.setBackground(COLOR_PRIMARY);
+//                }
+//				
+//				selectedButton = menuPanelScreen.getAddCarButton();
+//			}
+//		});
+//		
+//		menuPanelScreen.getAddCarButton().addMouseListener(new MouseAdapter() {			
+//			@Override
+//			public void mouseEntered(MouseEvent e) {
+//				menuPanelScreen.getAddCarButton().setBackground(COLOR_PRIMARY_DARK);
+//			}
+//
+//			@Override
+//			public void mouseExited(MouseEvent e) {
+//				if (selectedButton != menuPanelScreen.getAddCarButton()) {
+//                    menuPanelScreen.getAddCarButton().setBackground(COLOR_PRIMARY);
+//                }
+//			}
+//		});
 		
 	}
 }

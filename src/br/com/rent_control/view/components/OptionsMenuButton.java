@@ -2,6 +2,7 @@ package br.com.rent_control.view.components;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 /**
  * Class OptionsMenuButton - Represents the options menu button in the application
@@ -13,13 +14,10 @@ public class OptionsMenuButton extends JButton {
 
 	private static final long serialVersionUID = 2371912274022254839L;
 	private String text;
-	private int x;
 	private int y;
-	private int width;
-	private int height;
 	private Icon iconCollapsed;
 	private Icon iconExpanded;
-	private JButton optionMenuButton;
+	private JButton button;
 
 	/**
 	 * Class constructor with parameters.
@@ -30,20 +28,18 @@ public class OptionsMenuButton extends JButton {
 	 * @param width
 	 * @param height
 	 */
-	public OptionsMenuButton(String text, int x, int y, int width, int height) {
+	public OptionsMenuButton(String text, int y) {
 		this.text = text;
-		this.x = x;
 		this.y = y;
-		this.width = width;
-		this.height = height;
 		
-		optionMenuButton = new JButton(this.text);
-		optionMenuButton.setBounds(this.x, this.y, this.width, this.height);
-		optionMenuButton.setBackground(ColorUtils.BUTTON_COLOR);
-		optionMenuButton.setFocusPainted(false);
-		optionMenuButton.setForeground(Color.WHITE);
-		optionMenuButton.setFont(optionMenuButton.getFont().deriveFont(Font.BOLD, 14));
-		optionMenuButton.setBorder(null);
+		button = new JButton(this.text);
+		button.setBounds(0, this.y, 200, 35);
+		button.setBackground(ColorUtils.BUTTON_COLOR);
+		button.setFocusPainted(false);
+		button.setForeground(Color.WHITE);
+		button.setFont(button.getFont().deriveFont(Font.BOLD, 14));
+		button.setBorder(new EmptyBorder(0, 16, 0, 0));
+		button.setHorizontalAlignment(SwingConstants.LEFT);
 	}
 
 	/**
@@ -75,16 +71,16 @@ public class OptionsMenuButton extends JButton {
 	}
 
 	/**
-	 * @return o optionMenuButton
+	 * @return o button
 	 */
-	public JButton getOptionMenuButton() {
-		return optionMenuButton;
+	public JButton getButton() {
+		return button;
 	}
 
 	/**
-	 * @param optionMenuButton o optionMenuButton a ser configurado
+	 * @param button o button a ser configurado
 	 */
 	public void setOptionMenuButton(JButton optionMenuButton) {
-		this.optionMenuButton = optionMenuButton;
+		this.button = optionMenuButton;
 	}
 }
