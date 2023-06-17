@@ -1,0 +1,25 @@
+/**
+ * 
+ */
+package br.com.rent_control.view;
+
+import javax.swing.*;
+import java.awt.*;
+
+/**
+ * Class ContentPanel - Represents the content panel in the application
+ * @author Ayumi Aoki &lt;ayumi.santana@icomp.ufam.edu.br&gt;
+ */
+
+public class ContentPanel extends JPanel {
+
+    private static final long serialVersionUID = -3093766985729099958L;
+    
+    /**
+     * Parameterless constructor
+     */
+    public ContentPanel() {
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBackground(Color.white);
+    }
+}
