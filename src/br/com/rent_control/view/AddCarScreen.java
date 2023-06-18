@@ -8,40 +8,30 @@ import javax.swing.border.EmptyBorder;
 import br.com.rent_control.controller.AddCarController;
 import br.com.rent_control.controller.RentControl;
 import br.com.rent_control.view.components.ColorUtils;
+import br.com.rent_control.view.components.CustomField;
 
 public class AddCarScreen extends JPanel{
 	private static final long serialVersionUID = 6407486089823829922L;
-	
-	private JComboBox<String> categoryField;
-	private JTextField maxPassengersField;
-	private JTextField trunkSizeField;
-	private JTextField transmissionTypeField;
-	private JTextField fuelTypeField;
-	private JTextField hasAcField;
-	private JTextField hasAirbagField;
-	private JTextField hasAbsBrakesField;
-	private JTextField hasDvdPlayerField;
-	private JTextField dailyCostField;
 
-	private JLabel messagerLabel;
-	private JLabel categoryLabel;
-	private JLabel maxPassengersLabel;
-	private JLabel trunkSizeLabel;
-	private JLabel transmissionTypeLabel;
-	private JLabel fuelTypeLabel;
-	private JLabel hasAcLabel;
-	private JLabel hasAirbagLabel;
-	private JLabel hasAbsBrakesLabel;
-	private JLabel hasDvdPlayerLabel;
-	private JLabel dailyCostLabel;
+	private CustomField messagerField;
+	private CustomField categoryField;
+	private CustomField modelCarField;
+	private CustomField maxPassengersField;
+	private CustomField trunkSizeField;
+	private CustomField transmissionTypeField;
+	private CustomField fuelTypeField;
+	private CustomField consumptionAverageField;
+	private CustomField dailyCostField;
+	private CustomField hasAcField;
+	private CustomField hasAirbagField;
+	private CustomField hasAbsBrakesField;
+	private CustomField hasDvdPlayerField;
 	
     private JButton addCarButton;
     
     private AddCarController addCarController;
     private final RentControl frameRentControl;
-	
-	private final Color COLOR_SECUNDARY = new Color(48, 46, 37);
-	
+		
 	public AddCarScreen(final RentControl frameRentControl) {
 		setLayout(null);
 		setBackground(Color.white);
@@ -50,215 +40,78 @@ public class AddCarScreen extends JPanel{
 		addCarController = new AddCarController(this);
 		this.frameRentControl = frameRentControl;
 		
-		messagerLabel = new JLabel("Cadastro de veículo");
-		messagerLabel.setBounds(111, 48, 320, 15);
-		messagerLabel.setForeground(ColorUtils.PRIMARY_COLOR);
-		messagerLabel.setFont(messagerLabel.getFont().deriveFont(Font.BOLD, 16));
-		
-		categoryLabel = new JLabel("Categoria");
-		categoryLabel.setBounds(111, 140, 100, 15);
-		categoryLabel.setForeground(ColorUtils.PRIMARY_COLOR);
-		
-		categoryField = new JComboBox<>(getHasAcOptions());
-		categoryField.setBackground(Color.WHITE);
-		categoryField.setBounds(111,163,320,35);
-		categoryField.setBorder(null);
-		categoryField.setEditable(false);
-		categoryField.setFocusable(false);
-		categoryField.setForeground(ColorUtils.PRIMARY_COLOR);
-		
-		maxPassengersLabel = new JLabel("Quantidade de passageiros");
-		maxPassengersLabel.setBounds(455, 140, 320, 15);
-		maxPassengersLabel.setForeground(ColorUtils.PRIMARY_COLOR);
-		maxPassengersField = new JTextField();
-		maxPassengersField.setBounds(455,163,320,35);
-		maxPassengersField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
-		maxPassengersField.setCaretColor(COLOR_SECUNDARY);
-		maxPassengersField.setEditable(true);
-		
-		trunkSizeLabel = new JLabel("Volume do bagageiro (L)");
-		trunkSizeLabel.setBounds(50, 178, 320, 15);
-		trunkSizeLabel.setForeground(ColorUtils.PRIMARY_COLOR);
-		trunkSizeField = new JTextField();
-		trunkSizeField.setBounds(50,201,320,35);
-		trunkSizeField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
-		trunkSizeField.setCaretColor(COLOR_SECUNDARY);
-		trunkSizeField.setEditable(true);
-		
-		transmissionTypeLabel = new JLabel("Tipo de câmbio");
-		transmissionTypeLabel.setBounds(394, 178, 320, 15);
-		transmissionTypeLabel.setForeground(ColorUtils.PRIMARY_COLOR);
-		transmissionTypeField = new JTextField();
-		transmissionTypeField.setBounds(394,201,320,35);
-		transmissionTypeField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
-		transmissionTypeField.setCaretColor(COLOR_SECUNDARY);
-		transmissionTypeField.setEditable(true);
-		
-		fuelTypeLabel = new JLabel("Tipo de combustível");
-		fuelTypeLabel.setBounds(50, 252, 320, 15);
-		fuelTypeLabel.setForeground(ColorUtils.PRIMARY_COLOR);
-		fuelTypeField = new JTextField();
-		fuelTypeField.setBounds(50,275,320,35);
-		fuelTypeField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
-		fuelTypeField.setCaretColor(COLOR_SECUNDARY);
-		fuelTypeField.setEditable(true);
-		
-		dailyCostLabel = new JLabel("Custo diário");
-		dailyCostLabel.setBounds(394, 252, 320, 15);
-		dailyCostLabel.setForeground(ColorUtils.PRIMARY_COLOR);
-		dailyCostField = new JTextField();
-		dailyCostField.setBounds(394,275,320,35);
-		dailyCostField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
-		dailyCostField.setCaretColor(COLOR_SECUNDARY);
-		dailyCostField.setEditable(true);
-		
-		hasAcLabel = new JLabel("Possui ar condicionado (sim ou nao)");
-		hasAcLabel.setBounds(50, 326, 320, 15);
-		hasAcLabel.setForeground(ColorUtils.PRIMARY_COLOR);
-		hasAcField = new JTextField();
-		hasAcField.setBounds(50,349,320,35);
-		hasAcField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
-		hasAcField.setCaretColor(COLOR_SECUNDARY);
-		hasAcField.setEditable(true);
-		
-		hasAirbagLabel = new JLabel("Possui airbag (sim ou nao)");
-		hasAirbagLabel.setBounds(394, 326, 320, 15);
-		hasAirbagLabel.setForeground(ColorUtils.PRIMARY_COLOR);
-		hasAirbagField = new JTextField();
-		hasAirbagField.setBounds(394,349,320,35);
-		hasAirbagField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
-		hasAirbagField.setCaretColor(COLOR_SECUNDARY);
-		hasAirbagField.setEditable(true);
-		
-		hasAbsBrakesLabel = new JLabel("Possui freio abs (sim ou nao)");
-		hasAbsBrakesLabel.setBounds(50, 400, 320, 15);
-		hasAbsBrakesLabel.setForeground(ColorUtils.PRIMARY_COLOR);
-		hasAbsBrakesField = new JTextField();
-		hasAbsBrakesField.setBounds(50,423,320,35);
-		hasAbsBrakesField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
-		hasAbsBrakesField.setCaretColor(COLOR_SECUNDARY);
-		hasAbsBrakesField.setEditable(true);
-		
-		hasDvdPlayerLabel = new JLabel("Possui dvd (sim ou nao)");
-		hasDvdPlayerLabel.setBounds(394, 400, 320, 15);
-		hasDvdPlayerLabel.setForeground(ColorUtils.PRIMARY_COLOR);
-		hasDvdPlayerField = new JTextField();
-		hasDvdPlayerField.setBounds(394,423,320,35);
-		hasDvdPlayerField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
-		hasDvdPlayerField.setCaretColor(COLOR_SECUNDARY);
-		hasDvdPlayerField.setEditable(true);
+		messagerField = new CustomField("Cadastro de veículo");
+		categoryField = new CustomField("Categoria", 111, 92, getCategoryOptions());
+		modelCarField = new CustomField("Modelo", 455, 92);
+		maxPassengersField = new CustomField("Quantidade de passageiros", 111, 182, getMaxPassengersOptions());
+		trunkSizeField = new CustomField("Volume do porta malas (L)", 455, 182);
+		transmissionTypeField = new CustomField("Tipo de câmbio", 111, 272, getTransmissionTypeOptions());
+		fuelTypeField = new CustomField("Tipo de combustível", 455, 272, getFuelTypeOptions()); 
+		consumptionAverageField = new CustomField("Média de consumo (Km/L)", 111, 362); 
+		dailyCostField = new CustomField("Custo diário", 455, 362); 
+		hasAcField = new CustomField("Possui ar condicionado?", 111, 452, getHasOptions()); 
+		hasAirbagField = new CustomField("Possui airbag?", 455, 452, getHasOptions()); 
+		hasAbsBrakesField = new CustomField("Possui freio abs?", 111, 542, getHasOptions()); 
+		hasDvdPlayerField = new CustomField("Possui dvd ?", 455, 542, getHasOptions()); 
 		
 		addCarButton = new JButton("Cadastrar");
 		addCarButton.setForeground(Color.WHITE);
-		addCarButton.setBounds(266, 554, 240, 35);
+		addCarButton.setBounds(323, 632, 240, 35);
 		addCarButton.setBackground(ColorUtils.PRIMARY_COLOR);
 		addCarButton.setBorder(null);
 		
-		add(messagerLabel);
-		add(categoryLabel);
-		add(categoryField);
-		add(maxPassengersLabel);
-		add(maxPassengersField);
-		add(trunkSizeLabel);
-		add(trunkSizeField);
-		add(transmissionTypeLabel);
-		add(transmissionTypeField);
-		add(fuelTypeLabel);
-		add(fuelTypeField);
-		add(dailyCostLabel);
-		add(dailyCostField);
-		add(hasAcLabel);
-		add(hasAcField);
-		add(hasAirbagLabel);
-		add(hasAirbagField);
-		add(hasAbsBrakesLabel);
-		add(hasAbsBrakesField);
-		add(hasDvdPlayerLabel);
-		add(hasDvdPlayerField);
+		add(messagerField.getLabel());
+		add(categoryField.getLabel());
+		add(categoryField.getComboBox());
+		add(modelCarField.getLabel());
+		add(modelCarField.getTextField());
+		add(maxPassengersField.getLabel());
+		add(maxPassengersField.getComboBox());
+		add(trunkSizeField.getLabel());
+		add(trunkSizeField.getTextField());
+		add(transmissionTypeField.getLabel());
+		add(transmissionTypeField.getComboBox());
+		add(fuelTypeField.getLabel());
+		add(fuelTypeField.getComboBox());
+		add(consumptionAverageField.getLabel());
+		add(consumptionAverageField.getTextField());
+		add(dailyCostField.getLabel());
+		add(dailyCostField.getTextField());
+		add(hasAcField.getLabel());
+		add(hasAcField.getComboBox());
+		add(hasAirbagField.getLabel());
+		add(hasAirbagField.getComboBox());
+		add(hasAbsBrakesField.getLabel());
+		add(hasAbsBrakesField.getComboBox());
+		add(hasDvdPlayerField.getLabel());
+		add(hasDvdPlayerField.getComboBox());
 		add(addCarButton);
 		
 		addCarButton.addActionListener(e -> addCarController.addCarButtonClicked());
 	}
 	
-	private String[] getHasAcOptions() {
+	private String[] getCategoryOptions() {
+        List<String> options = Arrays.asList("Compacto", "Standard", "Grande", "Econômico", "Premium", "Minivan");
+        return options.toArray(new String[0]);
+    }
+	
+	private String[] getMaxPassengersOptions() {
+        List<String> options = Arrays.asList("2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
+        return options.toArray(new String[0]);
+    }
+	
+	private String[] getTransmissionTypeOptions() {
+        List<String> options = Arrays.asList("Manual", "Automático");
+        return options.toArray(new String[0]);
+    }
+	
+	private String[] getFuelTypeOptions() {
+        List<String> options = Arrays.asList("Gasolina", "Diesel", "Etanol", "Hibrido");
+        return options.toArray(new String[0]);
+    }
+	
+	private String[] getHasOptions() {
         List<String> options = Arrays.asList("Sim", "Não");
         return options.toArray(new String[0]);
     }
-
-	/**
-	 * @return o frameRentControl
-	 */
-	public RentControl getFrameRentControl() {
-		return frameRentControl;
-	}
-
-	/**
-	 * @return o categoryField
-	 */
-	public JComboBox getCategoryField() {
-		return categoryField;
-	}
-
-	/**
-	 * @return o maxPassengersField
-	 */
-	public JTextField getMaxPassengersField() {
-		return maxPassengersField;
-	}
-
-	/**
-	 * @return o trunkSizeField
-	 */
-	public JTextField getTrunkSizeField() {
-		return trunkSizeField;
-	}
-
-	/**
-	 * @return o transmissionTypeField
-	 */
-	public JTextField getTransmissionTypeField() {
-		return transmissionTypeField;
-	}
-
-	/**
-	 * @return o fuelTypeField
-	 */
-	public JTextField getFuelTypeField() {
-		return fuelTypeField;
-	}
-
-	/**
-	 * @return o hasAcField
-	 */
-	public JTextField getHasAcField() {
-		return hasAcField;
-	}
-
-	/**
-	 * @return o hasAirbagField
-	 */
-	public JTextField getHasAirbagField() {
-		return hasAirbagField;
-	}
-
-	/**
-	 * @return o hasAbsBrakesField
-	 */
-	public JTextField getHasAbsBrakesField() {
-		return hasAbsBrakesField;
-	}
-
-	/**
-	 * @return o hasDvdPlayerField
-	 */
-	public JTextField getHasDvdPlayerField() {
-		return hasDvdPlayerField;
-	}
-
-	/**
-	 * @return o dailyCostField
-	 */
-	public JTextField getDailyCostField() {
-		return dailyCostField;
-	}
 }
