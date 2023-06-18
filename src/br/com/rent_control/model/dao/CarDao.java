@@ -16,20 +16,22 @@ import br.com.rent_control.model.vo.Car;
 public class CarDao {
 
 	public boolean addCar(Car car) {
-		String sql = "INSERT INTO car VALUES (?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO car VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		try (Connection connection = ConnectionDB.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 			preparedStatement.setString(1, car.getCategory());
-			preparedStatement.setInt(2, car.getMaxPassengers());
-			preparedStatement.setDouble(3, car.getTrunkSize());
-			preparedStatement.setString(4, car.getTransmissionType());
-			preparedStatement.setString(5, car.getFuelType());
-			preparedStatement.setDouble(6, car.getDailyCost());
-			preparedStatement.setBoolean(7, car.isHasAc());
-			preparedStatement.setBoolean(8, car.isHasAirbag());
-			preparedStatement.setBoolean(9, car.isHasAbsBrakes());
-			preparedStatement.setBoolean(10, car.isHasDvdPlayer());
+			preparedStatement.setString(2, car.getModelCar());
+			preparedStatement.setInt(3, car.getMaxPassengers());
+			preparedStatement.setDouble(4, car.getTrunkSize());
+			preparedStatement.setString(5, car.getTransmissionType());
+			preparedStatement.setString(6, car.getFuelType());
+			preparedStatement.setDouble(7, car.getConsumptionAverage());
+			preparedStatement.setDouble(8, car.getDailyCost());
+			preparedStatement.setBoolean(9, car.isHasAc());
+			preparedStatement.setBoolean(10, car.isHasAirbag());
+			preparedStatement.setBoolean(11, car.isHasAbsBrakes());
+			preparedStatement.setBoolean(12, car.isHasDvdPlayer());
 
 			preparedStatement.executeUpdate();
 

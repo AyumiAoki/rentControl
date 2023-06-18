@@ -9,15 +9,17 @@ package br.com.rent_control.model.vo;
 public class Car {
 	
 	private String category;
+	private String modelCar;
 	private int maxPassengers;
 	private double trunkSize;
 	private String transmissionType;
 	private String fuelType;
+	private double consumptionAverage;
+	private double dailyCost;
 	private boolean hasAc;
 	private boolean hasAirbag;
 	private boolean hasAbsBrakes;
 	private boolean hasDvdPlayer;
-	private double dailyCost;
 	
 	/**
 	 * Parameterless class constructor.
@@ -37,18 +39,20 @@ public class Car {
 	 * @param hasDvdPlayer
 	 * @param dailyCost
 	 */
-	public Car(String category, int maxPassengers, double trunkSize, String transmissionType, String fuelType,
-			boolean hasAc, boolean hasAirbag, boolean hasAbsBrakes, boolean hasDvdPlayer, double dailyCost) {
+	public Car(String category, String modelCar, int maxPassengers, double trunkSize, String transmissionType, String fuelType, 
+			double consumptionAverage, double dailyCost, boolean hasAc, boolean hasAirbag, boolean hasAbsBrakes, boolean hasDvdPlayer) {
 		this.category = category;
+		this.modelCar = modelCar;
 		this.maxPassengers = maxPassengers;
 		this.trunkSize = trunkSize;
 		this.transmissionType = transmissionType;
 		this.fuelType = fuelType;
+		this.consumptionAverage = consumptionAverage;
+		this.dailyCost = dailyCost;
 		this.hasAc = hasAc;
 		this.hasAirbag = hasAirbag;
 		this.hasAbsBrakes = hasAbsBrakes;
 		this.hasDvdPlayer = hasDvdPlayer;
-		this.dailyCost = dailyCost;
 	}
 
 	/**
@@ -65,6 +69,20 @@ public class Car {
 	 */
 	public void setCategory(String category) {
 		this.category = category;
+	}
+	
+	/**
+	 * @return o modelCar
+	 */
+	public String getModelCar() {
+		return modelCar;
+	}
+
+	/**
+	 * @param modelCar o modelCar a ser configurado
+	 */
+	public void setModelCar(String modelCar) {
+		this.modelCar = modelCar;
 	}
 	
 	/**
@@ -117,7 +135,7 @@ public class Car {
 	
 	/**
 	 * Returns the fuel type (diesel, gasoline, ethanol or flex).
-	 * @return char containing the fuel type (d, g, e or f).
+	 * @return string containing the fuel type (diesel, gasoline, ethanol or flex).
 	 */
 	public String getFuelType() {
 		return fuelType;
@@ -129,6 +147,36 @@ public class Car {
 	 */
 	public void setFuelType(String fuelType) {
 		this.fuelType = fuelType;
+	}
+	
+	/**
+	 * @return o consumptionAverage
+	 */
+	public double getConsumptionAverage() {
+		return consumptionAverage;
+	}
+
+	/**
+	 * @param consumptionAverage o consumptionAverage a ser configurado
+	 */
+	public void setConsumptionAverage(double consumptionAverage) {
+		this.consumptionAverage = consumptionAverage;
+	}
+	
+	/**
+	 * Returns the daily Cost.
+	 * @return double containing the daily Cost.
+	 */
+	public double getDailyCost() {
+		return dailyCost;
+	}
+	
+	/**
+	 * Defines the daily Cost.
+	 * @param dailyCost The daily Cost to set.
+	 */
+	public void setDailyCost(double dailyCost) {
+		this.dailyCost = dailyCost;
 	}
 		
 	/**
@@ -193,21 +241,5 @@ public class Car {
 	 */
 	public void setHasDvdPlayer(boolean hasDvdPlayer) {
 		this.hasDvdPlayer = hasDvdPlayer;
-	}
-	
-	/**
-	 * Returns the daily Cost.
-	 * @return double containing the daily Cost.
-	 */
-	public double getDailyCost() {
-		return dailyCost;
-	}
-	
-	/**
-	 * Defines the daily Cost.
-	 * @param dailyCost The daily Cost to set.
-	 */
-	public void setDailyCost(double dailyCost) {
-		this.dailyCost = dailyCost;
 	}
 }

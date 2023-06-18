@@ -26,7 +26,7 @@ public class RentControl extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Rent Control");
 		setSize(1086, 705);
-		setResizable(true);
+		setResizable(false);
 		setVisible(true);
 		setLocationRelativeTo(null);
 

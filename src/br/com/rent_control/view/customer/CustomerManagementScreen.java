@@ -45,14 +45,16 @@ public class CustomerManagementScreen extends JPanel {
 		newButton.setBorder(null);
 		
 		
-		
+		JPanel panel = new JPanel();
+		panel.setBounds(30, 100, 789, 500);
+		panel.setBackground(Color.black);
 		
 		CustomTable customTable = new CustomTable();
 		JScrollPane scrollPane = new JScrollPane(customTable);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setBounds(30, 100, 789, 600);
 		
-		add(scrollPane);
+		add(panel);
 		
 		add(newButton);
 		

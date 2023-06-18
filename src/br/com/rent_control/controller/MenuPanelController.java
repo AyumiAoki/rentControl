@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import br.com.rent_control.view.*;
@@ -26,8 +27,6 @@ public class MenuPanelController {
 
 	@SuppressWarnings("unused")
 	private MenuPanel menuPanelScreen;
-	private final Color COLOR_PRIMARY;
-	private final Color COLOR_PRIMARY_DARK;
     private JButton selectedButton;
 	
 	/**
@@ -37,8 +36,6 @@ public class MenuPanelController {
 	public MenuPanelController(MenuPanel menuPanelScreen) {
 		this.menuPanelScreen = menuPanelScreen;
 		
-		COLOR_PRIMARY = new Color(38, 135, 78);
-		COLOR_PRIMARY_DARK = new Color(0, 102, 51);
 		selectedButton = null;
 		
 		changeScreen(menuPanelScreen.getBooKCarButton(), new RentalScreen());
@@ -55,31 +52,31 @@ public class MenuPanelController {
 				menuPanelScreen.getContentPanel().add(component);
 				menuPanelScreen.getContentPanel().revalidate();
 				menuPanelScreen.getContentPanel().repaint();
-				button.getButton().setBackground(COLOR_PRIMARY_DARK);
-				if (selectedButton != null) {
-		            selectedButton.setBackground(COLOR_PRIMARY);
-		        }	
-				selectedButton = button.getButton();
+				button.setImagePath("src/br/com/rent_control/view/images/iconRentalButton");
+				button.getButton().setIcon(new ImageIcon("src/br/com/rent_control/view/images/iconRentalButton"));
+//				if (selectedButton != null) {
+//		            selectedButton.setIcon(new ImageIcon("src/br/com/rent_control/view/images/iconRentalButtonSelected"));
+//		        }	
+//				selectedButton = button.getButton();
 			}
 		});
 		
-		button.getButton().addMouseListener(new MouseAdapter() {
-			public void mouseReleased(MouseEvent e) {
-				button.getButton().setBackground(COLOR_PRIMARY_DARK);
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				button.getButton().setBackground(COLOR_PRIMARY_DARK);
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				if (selectedButton != button.getButton()) {
-					button.getButton().setBackground(COLOR_PRIMARY);
-                }
-			}
-		});
-		
+//		button.getButton().addMouseListener(new MouseAdapter() {
+//			public void mouseReleased(MouseEvent e) {
+//				//button.getButton().setIcon(new ImageIcon("src/br/com/rent_control/view/images/iconRentalButton"));;
+//			}
+//			
+//			@Override
+//			public void mouseEntered(MouseEvent e) {
+//				//button.getButton().setIcon(new ImageIcon("src/br/com/rent_control/view/images/iconRentalButton"));;
+//			}
+//
+//			@Override
+//			public void mouseExited(MouseEvent e) {
+//				if (selectedButton != button.getButton()) {
+//					//button.getButton().setIcon(new ImageIcon("src/br/com/rent_control/view/images/iconRentalButtonSelected"));
+//                }
+//			}
+//		});
 	}
 }

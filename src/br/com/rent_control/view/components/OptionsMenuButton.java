@@ -1,8 +1,6 @@
 package br.com.rent_control.view.components;
 
-import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 /**
  * Class OptionsMenuButton - Represents the options menu button in the application
@@ -13,63 +11,27 @@ import javax.swing.border.EmptyBorder;
 public class OptionsMenuButton extends JButton {
 
 	private static final long serialVersionUID = 2371912274022254839L;
-	private String text;
+	private String imagePath;
 	private int y;
-	private Icon iconCollapsed;
-	private Icon iconExpanded;
 	private JButton button;
 
 	/**
 	 * Class constructor with parameters.
 	 * 
-	 * @param text
-	 * @param x
+	 * @param imagePath
 	 * @param y
-	 * @param width
-	 * @param height
 	 */
-	public OptionsMenuButton(String text, int y) {
-		this.text = text;
+	public OptionsMenuButton(String imagePath, int y) {
+		this.imagePath = imagePath;
 		this.y = y;
 		
-		button = new JButton(this.text);
-		button.setBounds(0, this.y, 200, 35);
-		button.setBackground(ColorUtils.BUTTON_COLOR);
+		button = new JButton();
+		button.setBounds(0, this.y, 200, 40);
+		button.setIcon(new ImageIcon("src/br/com/rent_control/view/images/"+this.imagePath));
 		button.setFocusPainted(false);
-		button.setForeground(Color.WHITE);
-		button.setFont(button.getFont().deriveFont(Font.BOLD, 14));
-		button.setBorder(new EmptyBorder(0, 16, 0, 0));
-		button.setHorizontalAlignment(SwingConstants.LEFT);
+		button.setBorder(null);
 	}
-
-	/**
-	 * @return o iconCollapsed
-	 */
-	public Icon getIconCollapsed() {
-		return iconCollapsed;
-	}
-
-	/**
-	 * @param iconCollapsed o iconCollapsed a ser configurado
-	 */
-	public void setIconCollapsed(Icon iconCollapsed) {
-		this.iconCollapsed = iconCollapsed;
-	}
-
-	/**
-	 * @return o iconExpanded
-	 */
-	public Icon getIconExpanded() {
-		return iconExpanded;
-	}
-
-	/**
-	 * @param iconExpanded o iconExpanded a ser configurado
-	 */
-	public void setIconExpanded(Icon iconExpanded) {
-		this.iconExpanded = iconExpanded;
-	}
-
+	
 	/**
 	 * @return o button
 	 */
@@ -83,4 +45,19 @@ public class OptionsMenuButton extends JButton {
 	public void setOptionMenuButton(JButton optionMenuButton) {
 		this.button = optionMenuButton;
 	}
+
+	/**
+	 * @return o imagePath
+	 */
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	/**
+	 * @param imagePath o imagePath a ser configurado
+	 */
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+	
 }

@@ -50,12 +50,13 @@ public class CarCardPanel extends JPanel {
 		setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
 		// Elementos do painel de informações
-		groupLabel = new JLabel(car.getCategory());
+		//groupLabel = new JLabel(car.getCategory());
+		groupLabel = new JLabel("HBCXDSHBCVJHDFN DVCHDJHBV");
 		groupLabel.setForeground(COLOR_PRIMARY);
 		groupLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 14));
 
 		imageCarLabel = new JLabel(imagePath);
-		imageCarLabel.setPreferredSize(new Dimension(186, 130));
+		imageCarLabel.setPreferredSize(new Dimension(186, 120));
 		imageCarLabel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
 
 		carNameLabel = new JLabel(nameCategory);
@@ -67,7 +68,7 @@ public class CarCardPanel extends JPanel {
 		carValueLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 14));
 
 		selectCarButton = new JButton("Escolher este grupo");
-		selectCarButton.setPreferredSize(new Dimension(190, 30));
+		selectCarButton.setPreferredSize(new Dimension(190, 25));
 		selectCarButton.setFont(selectCarButton.getFont().deriveFont(Font.BOLD, 14));
 		selectCarButton.setForeground(Color.WHITE);
 		selectCarButton.setBorder(null);

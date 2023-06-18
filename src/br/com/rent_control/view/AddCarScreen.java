@@ -1,17 +1,18 @@
 package br.com.rent_control.view;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
 import br.com.rent_control.controller.AddCarController;
 import br.com.rent_control.controller.RentControl;
+import br.com.rent_control.view.components.ColorUtils;
 
 public class AddCarScreen extends JPanel{
 	private static final long serialVersionUID = 6407486089823829922L;
 	
-	private JTextField categoryField;
+	private JComboBox<String> categoryField;
 	private JTextField maxPassengersField;
 	private JTextField trunkSizeField;
 	private JTextField transmissionTypeField;
@@ -40,7 +41,6 @@ public class AddCarScreen extends JPanel{
     private final RentControl frameRentControl;
 	
 	private final Color COLOR_SECUNDARY = new Color(48, 46, 37);
-    private final Color COLOR_PRIMARY = new Color(38, 135, 78);
 	
 	public AddCarScreen(final RentControl frameRentControl) {
 		setLayout(null);
@@ -51,31 +51,34 @@ public class AddCarScreen extends JPanel{
 		this.frameRentControl = frameRentControl;
 		
 		messagerLabel = new JLabel("Cadastro de veículo");
-		messagerLabel.setBounds(50, 24, 320, 15);
-		messagerLabel.setForeground(COLOR_PRIMARY);
+		messagerLabel.setBounds(111, 48, 320, 15);
+		messagerLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		messagerLabel.setFont(messagerLabel.getFont().deriveFont(Font.BOLD, 16));
 		
 		categoryLabel = new JLabel("Categoria");
-		categoryLabel.setBounds(50, 104, 100, 15);
-		categoryLabel.setForeground(COLOR_PRIMARY);
-		categoryField = new JTextField();
-		categoryField.setBounds(50,127,320,35);
-		categoryField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
-		categoryField.setCaretColor(COLOR_SECUNDARY);
-		categoryField.setEditable(true);
+		categoryLabel.setBounds(111, 140, 100, 15);
+		categoryLabel.setForeground(ColorUtils.PRIMARY_COLOR);
+		
+		categoryField = new JComboBox<>(getHasAcOptions());
+		categoryField.setBackground(Color.WHITE);
+		categoryField.setBounds(111,163,320,35);
+		categoryField.setBorder(null);
+		categoryField.setEditable(false);
+		categoryField.setFocusable(false);
+		categoryField.setForeground(ColorUtils.PRIMARY_COLOR);
 		
 		maxPassengersLabel = new JLabel("Quantidade de passageiros");
-		maxPassengersLabel.setBounds(394, 104, 320, 15);
-		maxPassengersLabel.setForeground(COLOR_PRIMARY);
+		maxPassengersLabel.setBounds(455, 140, 320, 15);
+		maxPassengersLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		maxPassengersField = new JTextField();
-		maxPassengersField.setBounds(394,127,320,35);
+		maxPassengersField.setBounds(455,163,320,35);
 		maxPassengersField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
 		maxPassengersField.setCaretColor(COLOR_SECUNDARY);
 		maxPassengersField.setEditable(true);
 		
 		trunkSizeLabel = new JLabel("Volume do bagageiro (L)");
 		trunkSizeLabel.setBounds(50, 178, 320, 15);
-		trunkSizeLabel.setForeground(COLOR_PRIMARY);
+		trunkSizeLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		trunkSizeField = new JTextField();
 		trunkSizeField.setBounds(50,201,320,35);
 		trunkSizeField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
@@ -84,7 +87,7 @@ public class AddCarScreen extends JPanel{
 		
 		transmissionTypeLabel = new JLabel("Tipo de câmbio");
 		transmissionTypeLabel.setBounds(394, 178, 320, 15);
-		transmissionTypeLabel.setForeground(COLOR_PRIMARY);
+		transmissionTypeLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		transmissionTypeField = new JTextField();
 		transmissionTypeField.setBounds(394,201,320,35);
 		transmissionTypeField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
@@ -93,7 +96,7 @@ public class AddCarScreen extends JPanel{
 		
 		fuelTypeLabel = new JLabel("Tipo de combustível");
 		fuelTypeLabel.setBounds(50, 252, 320, 15);
-		fuelTypeLabel.setForeground(COLOR_PRIMARY);
+		fuelTypeLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		fuelTypeField = new JTextField();
 		fuelTypeField.setBounds(50,275,320,35);
 		fuelTypeField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
@@ -102,7 +105,7 @@ public class AddCarScreen extends JPanel{
 		
 		dailyCostLabel = new JLabel("Custo diário");
 		dailyCostLabel.setBounds(394, 252, 320, 15);
-		dailyCostLabel.setForeground(COLOR_PRIMARY);
+		dailyCostLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		dailyCostField = new JTextField();
 		dailyCostField.setBounds(394,275,320,35);
 		dailyCostField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
@@ -111,7 +114,7 @@ public class AddCarScreen extends JPanel{
 		
 		hasAcLabel = new JLabel("Possui ar condicionado (sim ou nao)");
 		hasAcLabel.setBounds(50, 326, 320, 15);
-		hasAcLabel.setForeground(COLOR_PRIMARY);
+		hasAcLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		hasAcField = new JTextField();
 		hasAcField.setBounds(50,349,320,35);
 		hasAcField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
@@ -120,7 +123,7 @@ public class AddCarScreen extends JPanel{
 		
 		hasAirbagLabel = new JLabel("Possui airbag (sim ou nao)");
 		hasAirbagLabel.setBounds(394, 326, 320, 15);
-		hasAirbagLabel.setForeground(COLOR_PRIMARY);
+		hasAirbagLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		hasAirbagField = new JTextField();
 		hasAirbagField.setBounds(394,349,320,35);
 		hasAirbagField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
@@ -129,7 +132,7 @@ public class AddCarScreen extends JPanel{
 		
 		hasAbsBrakesLabel = new JLabel("Possui freio abs (sim ou nao)");
 		hasAbsBrakesLabel.setBounds(50, 400, 320, 15);
-		hasAbsBrakesLabel.setForeground(COLOR_PRIMARY);
+		hasAbsBrakesLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		hasAbsBrakesField = new JTextField();
 		hasAbsBrakesField.setBounds(50,423,320,35);
 		hasAbsBrakesField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
@@ -138,7 +141,7 @@ public class AddCarScreen extends JPanel{
 		
 		hasDvdPlayerLabel = new JLabel("Possui dvd (sim ou nao)");
 		hasDvdPlayerLabel.setBounds(394, 400, 320, 15);
-		hasDvdPlayerLabel.setForeground(COLOR_PRIMARY);
+		hasDvdPlayerLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		hasDvdPlayerField = new JTextField();
 		hasDvdPlayerField.setBounds(394,423,320,35);
 		hasDvdPlayerField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
@@ -148,7 +151,7 @@ public class AddCarScreen extends JPanel{
 		addCarButton = new JButton("Cadastrar");
 		addCarButton.setForeground(Color.WHITE);
 		addCarButton.setBounds(266, 554, 240, 35);
-		addCarButton.setBackground(COLOR_PRIMARY);
+		addCarButton.setBackground(ColorUtils.PRIMARY_COLOR);
 		addCarButton.setBorder(null);
 		
 		add(messagerLabel);
@@ -176,6 +179,11 @@ public class AddCarScreen extends JPanel{
 		
 		addCarButton.addActionListener(e -> addCarController.addCarButtonClicked());
 	}
+	
+	private String[] getHasAcOptions() {
+        List<String> options = Arrays.asList("Sim", "Não");
+        return options.toArray(new String[0]);
+    }
 
 	/**
 	 * @return o frameRentControl
@@ -187,7 +195,7 @@ public class AddCarScreen extends JPanel{
 	/**
 	 * @return o categoryField
 	 */
-	public JTextField getCategoryField() {
+	public JComboBox getCategoryField() {
 		return categoryField;
 	}
 
