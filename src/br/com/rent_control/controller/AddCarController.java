@@ -30,7 +30,7 @@ public class AddCarController {
 	}
 
 	public void addCarButtonClicked() {
-		//String category = addCarScreen.getCategoryField().getText();
+//		String category = addCarScreen.getCategoryField().getText();
 //		int maxPassengers = (addCarScreen.getMaxPassengersField().getText().equals("") ? 0 : Integer.parseInt(addCarScreen.getMaxPassengersField().getText()));
 //		double trunkSize = (addCarScreen.getTrunkSizeField().getText().equals("") ? 0 : Double.parseDouble(addCarScreen.getTrunkSizeField().getText()));
 //		String transmissionType = addCarScreen.getTransmissionTypeField().getText();
@@ -40,7 +40,7 @@ public class AddCarController {
 //		String hasAirbag = addCarScreen.getHasAirbagField().getText();
 //		String hasAbsBrakes = addCarScreen.getHasAbsBrakesField().getText();
 //		String hasDvdPlayer = addCarScreen.getHasDvdPlayerField().getText();
-//		
+		
 //		if (maxPassengers != 0 && trunkSize != 0 && transmissionType.equals("")
 //				&& fuelType.equals("") && dailyCost != 0 && hasAbsBrakes.equals("") && hasAc.equals("")
 //				&& hasAirbag.equals("") && hasAbsBrakes.equals("") && hasDvdPlayer.equals("")) {
@@ -63,13 +63,13 @@ public class AddCarController {
 //				addCarScreen.setVisible(false);
 //
 //				ContentPanel contentPanel = new ContentPanel();
-//				addCarScreen.getFrameRentControl().add(contentPanel, BorderLayout.CENTER);
+//				//addCarScreen.getFrameRentControl().add(contentPanel, BorderLayout.CENTER);
 //			} else {
 //				JOptionPane.showMessageDialog(null, "Erro ao cadastrar veículo!");
 //			}
-
-		} else {
-			JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
-		}
+//
+//		} else {
+//			JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+//		}
 	}
 }
