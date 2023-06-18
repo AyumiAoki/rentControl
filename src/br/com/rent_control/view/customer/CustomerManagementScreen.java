@@ -33,7 +33,7 @@ public class CustomerManagementScreen extends JPanel {
 	
 	public CustomerManagementScreen(final RentControl frameRentControl) {
 		// TODO Auto-generated constructor stub
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setLayout(null);
 		setBackground(Color.white);
 		
 		this.frameRentControl = frameRentControl;
@@ -47,26 +47,11 @@ public class CustomerManagementScreen extends JPanel {
 		newButton.setBackground(ColorUtils.PRIMARY_LIGHT_COLOR);
 		newButton.setBorder(null);
 		
-//		imageIcon =  new ImageIcon("src/br/com/rent_control/view/images/tableHeader.png");
-//		JLabel label = new JLabel(imageIcon);
-//		label.setBounds(30, 100, 789, 43);
-//		add(label);
+		imageIcon =  new ImageIcon("src/br/com/rent_control/view/images/tableHeader.png");
+		JLabel label = new JLabel(imageIcon);
+		label.setBounds(30, 100, 789, 43);
+		add(label);
 		
-		JPanel panel = new JPanel(new GridLayout(2, 2));
-
-        // Create JLabels for each cell
-        JLabel label1 = new JLabel("Label 1");
-        JLabel label2 = new JLabel("Label 2");
-        JLabel label3 = new JLabel("Label 3");
-        JLabel label4 = new JLabel("Label 4");
-
-        // Add the labels to the panel
-        panel.add(label1);
-        panel.add(label2);
-        panel.add(label3);
-        panel.add(label4);
-        
-        add(panel);
 		
 		nameLabel = new JLabel("Paulo Ribeiro");
 		nameLabel.setBounds(49, 154, 165, 24);
@@ -88,13 +73,11 @@ public class CustomerManagementScreen extends JPanel {
 		validityCnhLabel.setBounds(450, 154, 114, 24);
 		validityCnhLabel.setFont(messagerLabel.getFont().deriveFont(Font.BOLD, 14));
 		
+		add(cnhLabel);
+		add(cpfLabel);
+		add(nameLabel);
 		
-		
-//		add(cnhLabel);
-//		add(cpfLabel);
-//		add(nameLabel);
-//		
-//		add(newButton);
+		add(newButton);
 		
 		add(messagerLabel);
 	}
