@@ -4,6 +4,7 @@ package br.com.rent_control.view.customer;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 
@@ -13,22 +14,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import br.com.rent_control.controller.RentControl;
 import br.com.rent_control.view.components.ColorUtils;
+import br.com.rent_control.view.components.CustomTable;
 
 public class CustomerManagementScreen extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private final RentControl frameRentControl;
 	private JLabel messagerLabel;
-	private JLabel nameLabel;
-	private JLabel cpfLabel;
-	private JLabel cnhLabel;
-	private JLabel validityCnhLabel;
 	private JButton newButton;
-	
-	private ImageIcon imageIcon;
 
 	
 	public CustomerManagementScreen(final RentControl frameRentControl) {
@@ -47,35 +44,15 @@ public class CustomerManagementScreen extends JPanel {
 		newButton.setBackground(ColorUtils.PRIMARY_LIGHT_COLOR);
 		newButton.setBorder(null);
 		
-		imageIcon =  new ImageIcon("src/br/com/rent_control/view/images/tableHeader.png");
-		JLabel label = new JLabel(imageIcon);
-		label.setBounds(30, 100, 789, 43);
-		add(label);
 		
 		
-		nameLabel = new JLabel("Paulo Ribeiro");
-		nameLabel.setBounds(49, 154, 165, 24);
-		nameLabel.setFont(messagerLabel.getFont().deriveFont(Font.BOLD, 14));
 		
-		cpfLabel = new JLabel("70214855228");
-		cpfLabel.setBounds(222, 154, 114, 24);
-		cpfLabel.setFont(messagerLabel.getFont().deriveFont(Font.BOLD, 14));
+		CustomTable customTable = new CustomTable();
+		JScrollPane scrollPane = new JScrollPane(customTable);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setBounds(30, 100, 789, 600);
 		
-		cnhLabel = new JLabel("70214855228");
-		cnhLabel.setBounds(378, 154, 114, 24);
-		cnhLabel.setFont(messagerLabel.getFont().deriveFont(Font.BOLD, 14));
-		
-		cnhLabel = new JLabel("70214855228");
-		cnhLabel.setBounds(450, 154, 114, 24);
-		cnhLabel.setFont(messagerLabel.getFont().deriveFont(Font.BOLD, 14));
-		
-		validityCnhLabel = new JLabel("17/06/2000");
-		validityCnhLabel.setBounds(450, 154, 114, 24);
-		validityCnhLabel.setFont(messagerLabel.getFont().deriveFont(Font.BOLD, 14));
-		
-		add(cnhLabel);
-		add(cpfLabel);
-		add(nameLabel);
+		add(scrollPane);
 		
 		add(newButton);
 		
