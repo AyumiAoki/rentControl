@@ -12,6 +12,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 
 import br.com.rent_control.view.*;
+import br.com.rent_control.view.components.OptionsMenuButton;
+import br.com.rent_control.view.customer.CustomerManagementScreen;
 
 /**
  * Class MenuPanelController - Represents the menu panel screen control in the
@@ -39,79 +41,45 @@ public class MenuPanelController {
 		COLOR_PRIMARY_DARK = new Color(0, 102, 51);
 		selectedButton = null;
 		
-		menuPanelScreen.getBooKCarButton().getButton().addActionListener(new ActionListener() {
+		changeScreen(menuPanelScreen.getBooKCarButton(), new RentalScreen());
+		changeScreen(menuPanelScreen.getAddCarButton(), new AddCarScreen(menuPanelScreen.getFrameRentControl()));
+		changeScreen(menuPanelScreen.getCustomerButton(), new CustomerManagementScreen(menuPanelScreen.getFrameRentControl()));
+		
+	}
+	
+	private void changeScreen(OptionsMenuButton button, Component component) {
+		button.getButton().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				menuPanelScreen.getContentPanel().removeAll();
-
-				RentalScreen rentalScreen = new RentalScreen();
-				menuPanelScreen.getContentPanel().add(rentalScreen);
-
+				menuPanelScreen.getContentPanel().add(component);
 				menuPanelScreen.getContentPanel().revalidate();
 				menuPanelScreen.getContentPanel().repaint();
-				
-				menuPanelScreen.getBooKCarButton().getButton().setBackground(COLOR_PRIMARY_DARK);
-				
-                if (selectedButton != null) {
-                    selectedButton.setBackground(COLOR_PRIMARY);
-                }
-
-                selectedButton = menuPanelScreen.getBooKCarButton().getButton();
+				button.getButton().setBackground(COLOR_PRIMARY_DARK);
+				if (selectedButton != null) {
+		            selectedButton.setBackground(COLOR_PRIMARY);
+		        }	
+				selectedButton = button.getButton();
 			}
 		});
 		
-		menuPanelScreen.getBooKCarButton().getButton().addMouseListener(new MouseAdapter() {
+		button.getButton().addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e) {
-				menuPanelScreen.getBooKCarButton().getButton().setBackground(COLOR_PRIMARY_DARK);
+				button.getButton().setBackground(COLOR_PRIMARY_DARK);
 			}
 			
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				menuPanelScreen.getBooKCarButton().getButton().setBackground(COLOR_PRIMARY_DARK);
+				button.getButton().setBackground(COLOR_PRIMARY_DARK);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (selectedButton != menuPanelScreen.getBooKCarButton().getButton()) {
-                    menuPanelScreen.getBooKCarButton().getButton().setBackground(COLOR_PRIMARY);
+				if (selectedButton != button.getButton()) {
+					button.getButton().setBackground(COLOR_PRIMARY);
                 }
 			}
 		});
-		
-//		menuPanelScreen.getAddCarButton().addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				menuPanelScreen.getContentPanel().removeAll();
-//
-//				AddCarScreen addCarScreen = new AddCarScreen(menuPanelScreen.getFrameRentControl());
-//				menuPanelScreen.getContentPanel().add(addCarScreen);
-//
-//				menuPanelScreen.getContentPanel().revalidate();
-//				menuPanelScreen.getContentPanel().repaint();
-//				
-//				menuPanelScreen.getAddCarButton().setBackground(COLOR_PRIMARY_DARK);
-//				
-//				if (selectedButton != null) {
-//                    selectedButton.setBackground(COLOR_PRIMARY);
-//                }
-//				
-//				selectedButton = menuPanelScreen.getAddCarButton();
-//			}
-//		});
-//		
-//		menuPanelScreen.getAddCarButton().addMouseListener(new MouseAdapter() {			
-//			@Override
-//			public void mouseEntered(MouseEvent e) {
-//				menuPanelScreen.getAddCarButton().setBackground(COLOR_PRIMARY_DARK);
-//			}
-//
-//			@Override
-//			public void mouseExited(MouseEvent e) {
-//				if (selectedButton != menuPanelScreen.getAddCarButton()) {
-//                    menuPanelScreen.getAddCarButton().setBackground(COLOR_PRIMARY);
-//                }
-//			}
-//		});
 		
 	}
 }

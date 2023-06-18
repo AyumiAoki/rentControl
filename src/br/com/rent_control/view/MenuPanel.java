@@ -47,6 +47,8 @@ public class MenuPanel extends JPanel {
 	private OptionsMenuLabel rentLabel;
 	private OptionsMenuLabel carLabel;
 	private OptionsMenuButton booKCarButton;
+	private OptionsMenuButton addCarButton;
+	private OptionsMenuButton CustomerButton;
 	
 	private final ImageIcon backgroundPanelMenu;
 	
@@ -68,10 +70,16 @@ public class MenuPanel extends JPanel {
 		booKCarButton = new OptionsMenuButton("Reservar veículo", 115);
 
 		carLabel = new OptionsMenuLabel("/br/com/rent_control/view/images/iconLabelCar.png", 150);
+		addCarButton = new OptionsMenuButton("Reservar veículo", 190);
+		
+		// TODO: Trocar a posição
+		CustomerButton = new OptionsMenuButton("Cliente", 230);
 
 		add(rentLabel.getLabel());
 		add(booKCarButton.getButton());
 		add(carLabel.getLabel());
+		add(addCarButton.getButton());
+		add(CustomerButton.getButton());
 		
 		menuPanelControl = new MenuPanelController(this);
 	}
@@ -81,6 +89,8 @@ public class MenuPanel extends JPanel {
 		g.drawImage(backgroundPanelMenu.getImage(), 0, 0, backgroundPanelMenu.getIconWidth(), backgroundPanelMenu.getIconHeight(), this);
 	}
 
+	
+	
 	/**
 	 * @return o frameRentControl
 	 */
@@ -105,22 +115,6 @@ public class MenuPanel extends JPanel {
 	/**
 	 * @return o booKCarButton
 	 */
-//	public JButton getBooKCarButton() {
-//		return booKCarButton;
-//	}
-	
-	
-
-	/**
-	 * @return o userLabel
-	 */
-//	public JLabel getUserLabel() {
-//		return userLabel;
-//	}
-
-	/**
-	 * @return o booKCarButton
-	 */
 	public OptionsMenuButton getBooKCarButton() {
 		return booKCarButton;
 	}
@@ -133,86 +127,24 @@ public class MenuPanel extends JPanel {
 	}
 
 	/**
-	 * @return o addCarButton
+	 * @return the addCarButton
 	 */
-//	public JButton getAddCarButton() {
-//		return addCarButton;
-//	}
+	public OptionsMenuButton getAddCarButton() {
+		return addCarButton;
+	}
 
 	/**
-	 * @return o updateCarButton
+	 * @param addCarButton the addCarButton to set
 	 */
-//	public JButton getUpdateCarButton() {
-//		return updateCarButton;
-//	}
-//
-//	/**
-//	 * @return o deleteCarButton
-//	 */
-//	public JButton getDeleteCarButton() {
-//		return deleteCarButton;
-//	}
-//
-//	/**
-//	 * @return o queryCarButton
-//	 */
-//	public JButton getQueryCarButton() {
-//		return queryCarButton;
-//	}
-//
-//	/**
-//	 * @return o addUserButton
-//	 */
-//	public JButton getAddUserButton() {
-//		return addUserButton;
-//	}
-//
-//	/**
-//	 * @return o updateUserButton
-//	 */
-//	public JButton getUpdateUserButton() {
-//		return updateUserButton;
-//	}
-//
-//	/**
-//	 * @return o deleteUserButton
-//	 */
-//	public JButton getDeleteUserButton() {
-//		return deleteUserButton;
-//	}
-//
-//	/**
-//	 * @return o queryUserButton
-//	 */
-//	public JButton getQueryUserButton() {
-//		return queryUserButton;
-//	}
-//
-//	/**
-//	 * @return o addEmployeeButton
-//	 */
-//	public JButton getAddEmployeeButton() {
-//		return addEmployeeButton;
-//	}
-//
-//	/**
-//	 * @return o updateEmployeeButton
-//	 */
-//	public JButton getUpdateEmployeeButton() {
-//		return updateEmployeeButton;
-//	}
-//
-//	/**
-//	 * @return o deleteEmployeeButton
-//	 */
-//	public JButton getDeleteEmployeeButton() {
-//		return deleteEmployeeButton;
-//	}
-//
-//	/**
-//	 * @return o queryEmployeeButton
-//	 */
-//	public JButton getQueryEmployeeButton() {
-//		return queryEmployeeButton;
-//	}
+	public void setAddCarButton(OptionsMenuButton addCarButton) {
+		this.addCarButton = addCarButton;
+	}
+	
+	public OptionsMenuButton getCustomerButton() {
+		return CustomerButton;
+	}
+	
+	public void setCustomerButton(OptionsMenuButton customerButton) {
+		CustomerButton = customerButton;
+	}
 }
