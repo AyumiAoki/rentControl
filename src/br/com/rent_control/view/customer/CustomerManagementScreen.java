@@ -20,6 +20,7 @@ import br.com.rent_control.controller.RentControl;
 import br.com.rent_control.view.components.ColorUtils;
 import br.com.rent_control.view.components.CustomTable;
 
+
 public class CustomerManagementScreen extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -27,6 +28,16 @@ public class CustomerManagementScreen extends JPanel {
 	private JLabel messagerLabel;
 	private JButton newButton;
 
+	public interface ActionButton {
+	    void action(String id, String type);
+	}
+	
+	private Object[][] data = {
+			{"Nome", "idade", "Pais", "Cep", "id"},
+            {"John Doe", 30, "New York", "1231", "1"},
+            {"John Doe", 30, "New York", "1231", "2"}
+    };
+	
 	
 	public CustomerManagementScreen(final RentControl frameRentControl) {
 		// TODO Auto-generated constructor stub
@@ -40,21 +51,18 @@ public class CustomerManagementScreen extends JPanel {
 		
 		newButton = new JButton("Novo");
 		newButton.setForeground(Color.WHITE);
-		newButton.setBounds(706, 34, 80, 34);
+		newButton.setBounds(750, 20, 80, 34);
 		newButton.setBackground(ColorUtils.PRIMARY_LIGHT_COLOR);
 		newButton.setBorder(null);
 		
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(30, 100, 789, 500);
-		panel.setBackground(Color.black);
-		
-		CustomTable customTable = new CustomTable();
+		ActionButton funcao1 = (id, type) -> System.out.println("Olá, mundo!" + id + type);
+		CustomTable customTable = new CustomTable(funcao1, data);
 		JScrollPane scrollPane = new JScrollPane(customTable);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.setBounds(30, 100, 789, 600);
+        scrollPane.setBounds(50, 100, 789, 500);
+        scrollPane.setBorder(null);
 		
-		add(panel);
+		add(scrollPane);
 		
 		add(newButton);
 		
