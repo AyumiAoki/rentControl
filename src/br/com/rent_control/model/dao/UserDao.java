@@ -107,4 +107,20 @@ public class UserDao extends ConnectionDB {
 			return false;
 		}
 	}
+	
+	public boolean deleteUserByCpf(String cpf) {
+		String sql = "delete from user where cpf = ?";
+
+		try (Connection connection = ConnectionDB.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+			preparedStatement.setString(1, cpf);
+
+			preparedStatement.executeUpdate();
+
+			return true;
+		} catch (SQLException e) {
+			System.err.println("Erro ao atualizar usuário: " + e.getMessage());
+			return false;
+		}
+	}
 }
