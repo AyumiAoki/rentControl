@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -18,6 +19,8 @@ import javax.swing.JScrollPane;
 
 import br.com.rent_control.controller.CustomerManagementController;
 import br.com.rent_control.controller.RentControl;
+import br.com.rent_control.model.dao.UserDao;
+import br.com.rent_control.model.vo.User;
 import br.com.rent_control.view.ContentPanel;
 import br.com.rent_control.view.MenuPanel;
 import br.com.rent_control.view.components.ColorUtils;
@@ -31,16 +34,13 @@ public class CustomerManagementScreen extends JPanel {
 	private JLabel messagerLabel;
 	private JButton newCustomer;
 	private MenuPanel menuPanel;
+	private List<User> users;
+	private UserDao userDao;
+	private JScrollPane scrollPane;
 
 	public interface ActionButton {
 	    void action(String id, String type);
 	}
-	
-	private Object[][] data = {
-			{"Nome", "idade", "Pais", "Cep", "id"},
-            {"John Doe", 30, "New York", "1231", "1"},
-            {"John Doe", 30, "New York", "1231", "2"}
-    };
 	
 	
 	public CustomerManagementScreen(final RentControl frameRentControl, MenuPanel menuPanel) {
@@ -59,20 +59,52 @@ public class CustomerManagementScreen extends JPanel {
 		newCustomer.setBounds(750, 20, 80, 34);
 		newCustomer.setBackground(ColorUtils.PRIMARY_LIGHT_COLOR);
 		newCustomer.setBorder(null);
+
+
+		userDao = new UserDao();
 		
-		ActionButton funcao1 = (id, type) -> System.out.println("Olá, mundo!" + id + type);
-		CustomTable customTable = new CustomTable(funcao1, data);
-		JScrollPane scrollPane = new JScrollPane(customTable);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.setBounds(50, 100, 789, 500);
-        scrollPane.setBorder(null);
+		tableSetup();
 		
-		add(scrollPane);
 		add(newCustomer);
 		add(messagerLabel);
 		
 		new CustomerManagementController(this);
 	}
+	
+	private ActionButton deleteOrEdit = (String id, String type) -> {
+		if(type.equals("edit")) {
+			System.out.println("Edição!");
+			return;
+		}
+		System.out.println("Exclusão!");
+		userDao.deleteUserByCpf(id);
+		this.remove(scrollPane);
+		tableSetup();
+		this.revalidate();
+		this.repaint();
+	};
+	
+	private void tableSetup() {
+		users = userDao.listUsers();
+		CustomTable customTable = new CustomTable(deleteOrEdit, getDataTable());
+		scrollPane = new JScrollPane(customTable);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setBounds(50, 100, 789, 500);
+        scrollPane.setBorder(null);
+        this.add(scrollPane);
+		
+	}
+	
+	private Object[][] getDataTable(){
+		Object[][] data = new Object[users.size() + 1][4];
+		data[0] = new Object[]{"Nome", "CPF", "CNH", "ID"};
+		for (int i = 0; i < users.size(); i++) {
+            User usuario = users.get(i);
+            data[i + 1] = new Object[]{usuario.getName(), usuario.getCpf(), usuario.getLicenseNumber(), usuario.getCpf()};
+        }
+		return data;
+	}
+	
 
 	/**
 	 * @return o frameRentControl
@@ -129,6 +161,20 @@ public class CustomerManagementScreen extends JPanel {
 	 */
 	public void setMenuPanel(MenuPanel menuPanel) {
 		this.menuPanel = menuPanel;
+	}
+
+	/**
+	 * @return the users
+	 */
+	public List<User> getUsers() {
+		return users;
+	}
+
+	/**
+	 * @param users the users to set
+	 */
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 	
