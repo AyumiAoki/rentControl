@@ -16,7 +16,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import br.com.rent_control.controller.CustomerManagementController;
 import br.com.rent_control.controller.RentControl;
+import br.com.rent_control.view.ContentPanel;
+import br.com.rent_control.view.MenuPanel;
 import br.com.rent_control.view.components.ColorUtils;
 import br.com.rent_control.view.components.CustomTable;
 
@@ -26,7 +29,8 @@ public class CustomerManagementScreen extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private final RentControl frameRentControl;
 	private JLabel messagerLabel;
-	private JButton newButton;
+	private JButton newCustomer;
+	private MenuPanel menuPanel;
 
 	public interface ActionButton {
 	    void action(String id, String type);
@@ -39,21 +43,22 @@ public class CustomerManagementScreen extends JPanel {
     };
 	
 	
-	public CustomerManagementScreen(final RentControl frameRentControl) {
+	public CustomerManagementScreen(final RentControl frameRentControl, MenuPanel menuPanel) {
 		// TODO Auto-generated constructor stub
 		setLayout(null);
 		setBackground(Color.white);
 		
+		this.menuPanel = menuPanel;
 		this.frameRentControl = frameRentControl;
 		messagerLabel = new JLabel("Clientes");
 		messagerLabel.setBounds(50, 24, 320, 15);
 		messagerLabel.setFont(messagerLabel.getFont().deriveFont(Font.BOLD, 16));
 		
-		newButton = new JButton("Novo");
-		newButton.setForeground(Color.WHITE);
-		newButton.setBounds(750, 20, 80, 34);
-		newButton.setBackground(ColorUtils.PRIMARY_LIGHT_COLOR);
-		newButton.setBorder(null);
+		newCustomer = new JButton("Novo");
+		newCustomer.setForeground(Color.WHITE);
+		newCustomer.setBounds(750, 20, 80, 34);
+		newCustomer.setBackground(ColorUtils.PRIMARY_LIGHT_COLOR);
+		newCustomer.setBorder(null);
 		
 		ActionButton funcao1 = (id, type) -> System.out.println("Olá, mundo!" + id + type);
 		CustomTable customTable = new CustomTable(funcao1, data);
@@ -63,13 +68,11 @@ public class CustomerManagementScreen extends JPanel {
         scrollPane.setBorder(null);
 		
 		add(scrollPane);
-		
-		add(newButton);
-		
+		add(newCustomer);
 		add(messagerLabel);
+		
+		new CustomerManagementController(this);
 	}
-	
-	
 
 	/**
 	 * @return o frameRentControl
@@ -77,4 +80,57 @@ public class CustomerManagementScreen extends JPanel {
 	public RentControl getFrameRentControl() {
 		return frameRentControl;
 	}
+
+
+
+	/**
+	 * @return the messagerLabel
+	 */
+	public JLabel getMessagerLabel() {
+		return messagerLabel;
+	}
+
+
+
+	/**
+	 * @param messagerLabel the messagerLabel to set
+	 */
+	public void setMessagerLabel(JLabel messagerLabel) {
+		this.messagerLabel = messagerLabel;
+	}
+
+
+
+	/**
+	 * @return the newCustomer
+	 */
+	public JButton getNewCustomer() {
+		return newCustomer;
+	}
+
+
+
+	/**
+	 * @param newCustomer the newCustomer to set
+	 */
+	public void setNewCustomer(JButton newCustomer) {
+		this.newCustomer = newCustomer;
+	}
+
+	/**
+	 * @return the menuPanel
+	 */
+	public MenuPanel getMenuPanel() {
+		return menuPanel;
+	}
+
+	/**
+	 * @param menuPanel the menuPanel to set
+	 */
+	public void setMenuPanel(MenuPanel menuPanel) {
+		this.menuPanel = menuPanel;
+	}
+
+	
+	
 }
