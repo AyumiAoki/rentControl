@@ -10,7 +10,6 @@ public class CreateCustomerScreen extends JPanel {
 	 private static final long serialVersionUID = 1L;
 	 private JLabel messagerLabel;
 	public CreateCustomerScreen() {
-		// TODO Auto-generated constructor stub
 		setLayout(null);
 		setBackground(Color.white);
 		

@@ -24,26 +24,23 @@ public class CustomField extends JLabel{
 	
 	public CustomField(String text) {
 		label = new JLabel(text);
-		label.setForeground(ColorUtils.PRIMARY_COLOR);
 		label.setBounds(111, 40, 320, 15);
 		label.setFont(label.getFont().deriveFont(Font.BOLD, 16));
 	}
 	
 	public CustomField(String text, int x, int y) {
 		label = new JLabel(text);
-		label.setForeground(ColorUtils.PRIMARY_COLOR);
 		label.setBounds(x, y, 320, 15);
 		
 		textField = new JTextField("");
 		textField.setBounds(x,y+23,320,35);
 		textField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
-		textField.setCaretColor(ColorUtils.SECUNDARY_COLOR);
+		textField.setCaretColor(Color.BLACK);
 		textField.setEditable(true);
 	}
 	
 	public CustomField(String text, int x, int y, String textValue) {
 		label = new JLabel(text);
-		label.setForeground(ColorUtils.PRIMARY_COLOR);
 		label.setBounds(x, y, 320, 15);
 		
 		textField = new JTextField(textValue);
@@ -55,7 +52,6 @@ public class CustomField extends JLabel{
 	
 	public CustomField(String text, int x, int y, String[] optionComboBox) {
 		label = new JLabel(text);
-		label.setForeground(ColorUtils.PRIMARY_COLOR);
 		label.setBounds(x, y, 320, 15);
 		
 		comboBox = new JComboBox<>(optionComboBox);

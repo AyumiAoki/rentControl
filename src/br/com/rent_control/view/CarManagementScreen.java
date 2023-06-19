@@ -1,46 +1,49 @@
-package br.com.rent_control.view.customer;
-
+/**
+ * 
+ */
+package br.com.rent_control.view;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import br.com.rent_control.controller.CustomerManagementController;
+
+import br.com.rent_control.controller.CarManagementController;
 import br.com.rent_control.controller.RentControl;
-import br.com.rent_control.model.dao.UserDao;
-import br.com.rent_control.model.vo.User;
-import br.com.rent_control.view.MenuPanel;
+import br.com.rent_control.model.dao.CarDao;
+import br.com.rent_control.model.vo.Car;
 import br.com.rent_control.view.components.ColorUtils;
-import br.com.rent_control.view.components.CustomTable;
 
+/**
+ * @author ayumi
+ *
+ */
+public class CarManagementScreen  extends JPanel {
 
-public class CustomerManagementScreen extends JPanel {
-
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -3655302663513376093L;
 	private final RentControl frameRentControl;
 	private JLabel messagerLabel;
-	private JButton newCustomer;
 	private MenuPanel menuPanel;
-	private List<User> users;
-	private UserDao userDao;
+	private JButton newCustomer;
+	private List<Car> cars;
+	private CarDao carDao;
 	private JScrollPane scrollPane;
 
 	public interface ActionButton {
 	    void action(String id, String type);
 	}
-	
-	
-	public CustomerManagementScreen(final RentControl frameRentControl, MenuPanel menuPanel) {
-		// TODO Auto-generated constructor stub
+
+	public CarManagementScreen(final RentControl frameRentControl, MenuPanel menuPanel) {
 		setLayout(null);
-		setBackground(Color.white);
-		
+		setBackground(Color.WHITE);
+
 		this.menuPanel = menuPanel;
 		this.frameRentControl = frameRentControl;
-		messagerLabel = new JLabel("Clientes");
+		messagerLabel = new JLabel("Veículos");
 		messagerLabel.setBounds(50, 24, 320, 15);
 		messagerLabel.setFont(messagerLabel.getFont().deriveFont(Font.BOLD, 16));
 		
@@ -51,14 +54,14 @@ public class CustomerManagementScreen extends JPanel {
 		newCustomer.setBorder(null);
 
 
-		userDao = new UserDao();
+		carDao = new CarDao();
 		
-		tableSetup();
+		//tableSetup();
 		
 		add(newCustomer);
 		add(messagerLabel);
 		
-		new CustomerManagementController(this);
+		new CarManagementController(this);
 	}
 	
 	private ActionButton deleteOrEdit = (String id, String type) -> {
@@ -67,17 +70,17 @@ public class CustomerManagementScreen extends JPanel {
 			return;
 		}
 		System.out.println("Exclusão!");
-		userDao.deleteUserByCpf(id);
+		//carDao.deleteUserByCpf(id);
 		this.remove(scrollPane);
-		tableSetup();
+		//tableSetup();
 		this.revalidate();
 		this.repaint();
 	};
 	
 	private void tableSetup() {
-		users = userDao.listUsers();
-		CustomTable customTable = new CustomTable(deleteOrEdit, getDataTable());
-		scrollPane = new JScrollPane(customTable);
+		cars = carDao.listCars();
+		//CustomTable customTable = new CustomTable(deleteOrEdit, getDataTable());
+		//scrollPane = new JScrollPane(customTable);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setBounds(50, 100, 789, 500);
         scrollPane.setBorder(null);
@@ -86,11 +89,11 @@ public class CustomerManagementScreen extends JPanel {
 	}
 	
 	private Object[][] getDataTable(){
-		Object[][] data = new Object[users.size() + 1][4];
-		data[0] = new Object[]{"Nome", "CPF", "CNH", "ID"};
-		for (int i = 0; i < users.size(); i++) {
-            User usuario = users.get(i);
-            data[i + 1] = new Object[]{usuario.getName(), usuario.getCpf(), usuario.getLicenseNumber(), usuario.getCpf()};
+		Object[][] data = new Object[cars.size() + 1][4];
+		data[0] = new Object[]{"Categoria", "Modelo", "Quantidade de passageiros", "Tipo de câmbio"};
+		for (int i = 0; i < cars.size(); i++) {
+            Car car = cars.get(i);
+            data[i + 1] = new Object[]{car.getCategory(), car.getModelCar(), car.getMaxPassengers(), car.getTransmissionType()};
         }
 		return data;
 	}
@@ -129,7 +132,7 @@ public class CustomerManagementScreen extends JPanel {
 	public void setNewCustomer(JButton newCustomer) {
 		this.newCustomer = newCustomer;
 	}
-
+	
 	/**
 	 * @return the menuPanel
 	 */
@@ -147,14 +150,14 @@ public class CustomerManagementScreen extends JPanel {
 	/**
 	 * @return the users
 	 */
-	public List<User> getUsers() {
-		return users;
+	public List<Car> getUsers() {
+		return cars;
 	}
 
 	/**
 	 * @param users the users to set
 	 */
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setUsers(List<Car> cars) {
+		this.cars = cars;
 	}	
 }

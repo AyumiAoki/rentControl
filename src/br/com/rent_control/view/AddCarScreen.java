@@ -31,13 +31,15 @@ public class AddCarScreen extends JPanel{
     
     private AddCarController addCarController;
     private final RentControl frameRentControl;
+    private final MenuPanel menuPanel;
 		
-	public AddCarScreen(final RentControl frameRentControl) {
+	public AddCarScreen(final RentControl frameRentControl, final MenuPanel menuPanel) {
 		setLayout(null);
 		setBackground(Color.white);
 		setBorder(new EmptyBorder(10, 10, 10, 10));
 		
 		addCarController = new AddCarController(this);
+		this.menuPanel = menuPanel;
 		this.frameRentControl = frameRentControl;
 		
 		messagerField = new CustomField("Cadastro de veículo");
@@ -90,6 +92,7 @@ public class AddCarScreen extends JPanel{
 		addCarButton.addActionListener(e -> addCarController.addCarButtonClicked());
 	}
 	
+	/**************Options ComboBox**************/
 	private String[] getCategoryOptions() {
         List<String> options = Arrays.asList("Compacto", "Standard", "Grande", "Econômico", "Premium", "Minivan");
         return options.toArray(new String[0]);
@@ -114,4 +117,218 @@ public class AddCarScreen extends JPanel{
         List<String> options = Arrays.asList("Sim", "Não");
         return options.toArray(new String[0]);
     }
+	/**************End Options ComboBox**************/
+	
+	/**************Getters e setters**************/
+	/**
+	 * @return o messagerField
+	 */
+	public CustomField getMessagerField() {
+		return messagerField;
+	}
+
+	/**
+	 * @param messagerField o messagerField a ser configurado
+	 */
+	public void setMessagerField(CustomField messagerField) {
+		this.messagerField = messagerField;
+	}
+
+	/**
+	 * @return o categoryField
+	 */
+	public CustomField getCategoryField() {
+		return categoryField;
+	}
+
+	/**
+	 * @param categoryField o categoryField a ser configurado
+	 */
+	public void setCategoryField(CustomField categoryField) {
+		this.categoryField = categoryField;
+	}
+
+	/**
+	 * @return o modelCarField
+	 */
+	public CustomField getModelCarField() {
+		return modelCarField;
+	}
+
+	/**
+	 * @param modelCarField o modelCarField a ser configurado
+	 */
+	public void setModelCarField(CustomField modelCarField) {
+		this.modelCarField = modelCarField;
+	}
+
+	/**
+	 * @return o maxPassengersField
+	 */
+	public CustomField getMaxPassengersField() {
+		return maxPassengersField;
+	}
+
+	/**
+	 * @param maxPassengersField o maxPassengersField a ser configurado
+	 */
+	public void setMaxPassengersField(CustomField maxPassengersField) {
+		this.maxPassengersField = maxPassengersField;
+	}
+
+	/**
+	 * @return o trunkSizeField
+	 */
+	public CustomField getTrunkSizeField() {
+		return trunkSizeField;
+	}
+
+	/**
+	 * @param trunkSizeField o trunkSizeField a ser configurado
+	 */
+	public void setTrunkSizeField(CustomField trunkSizeField) {
+		this.trunkSizeField = trunkSizeField;
+	}
+
+	/**
+	 * @return o transmissionTypeField
+	 */
+	public CustomField getTransmissionTypeField() {
+		return transmissionTypeField;
+	}
+
+	/**
+	 * @param transmissionTypeField o transmissionTypeField a ser configurado
+	 */
+	public void setTransmissionTypeField(CustomField transmissionTypeField) {
+		this.transmissionTypeField = transmissionTypeField;
+	}
+
+	/**
+	 * @return o fuelTypeField
+	 */
+	public CustomField getFuelTypeField() {
+		return fuelTypeField;
+	}
+
+	/**
+	 * @param fuelTypeField o fuelTypeField a ser configurado
+	 */
+	public void setFuelTypeField(CustomField fuelTypeField) {
+		this.fuelTypeField = fuelTypeField;
+	}
+
+	/**
+	 * @return o consumptionAverageField
+	 */
+	public CustomField getConsumptionAverageField() {
+		return consumptionAverageField;
+	}
+
+	/**
+	 * @param consumptionAverageField o consumptionAverageField a ser configurado
+	 */
+	public void setConsumptionAverageField(CustomField consumptionAverageField) {
+		this.consumptionAverageField = consumptionAverageField;
+	}
+
+	/**
+	 * @return o dailyCostField
+	 */
+	public CustomField getDailyCostField() {
+		return dailyCostField;
+	}
+
+	/**
+	 * @param dailyCostField o dailyCostField a ser configurado
+	 */
+	public void setDailyCostField(CustomField dailyCostField) {
+		this.dailyCostField = dailyCostField;
+	}
+
+	/**
+	 * @return o hasAcField
+	 */
+	public CustomField getHasAcField() {
+		return hasAcField;
+	}
+
+	/**
+	 * @param hasAcField o hasAcField a ser configurado
+	 */
+	public void setHasAcField(CustomField hasAcField) {
+		this.hasAcField = hasAcField;
+	}
+
+	/**
+	 * @return o hasAirbagField
+	 */
+	public CustomField getHasAirbagField() {
+		return hasAirbagField;
+	}
+
+	/**
+	 * @param hasAirbagField o hasAirbagField a ser configurado
+	 */
+	public void setHasAirbagField(CustomField hasAirbagField) {
+		this.hasAirbagField = hasAirbagField;
+	}
+
+	/**
+	 * @return o hasAbsBrakesField
+	 */
+	public CustomField getHasAbsBrakesField() {
+		return hasAbsBrakesField;
+	}
+
+	/**
+	 * @param hasAbsBrakesField o hasAbsBrakesField a ser configurado
+	 */
+	public void setHasAbsBrakesField(CustomField hasAbsBrakesField) {
+		this.hasAbsBrakesField = hasAbsBrakesField;
+	}
+
+	/**
+	 * @return o hasDvdPlayerField
+	 */
+	public CustomField getHasDvdPlayerField() {
+		return hasDvdPlayerField;
+	}
+
+	/**
+	 * @param hasDvdPlayerField o hasDvdPlayerField a ser configurado
+	 */
+	public void setHasDvdPlayerField(CustomField hasDvdPlayerField) {
+		this.hasDvdPlayerField = hasDvdPlayerField;
+	}
+
+	/**
+	 * @return o addCarButton
+	 */
+	public JButton getAddCarButton() {
+		return addCarButton;
+	}
+
+	/**
+	 * @param addCarButton o addCarButton a ser configurado
+	 */
+	public void setAddCarButton(JButton addCarButton) {
+		this.addCarButton = addCarButton;
+	}
+
+	/**
+	 * @return o frameRentControl
+	 */
+	public RentControl getFrameRentControl() {
+		return frameRentControl;
+	}
+
+	/**
+	 * @return o menuPanel
+	 */
+	public MenuPanel getMenuPanel() {
+		return menuPanel;
+	}
+	
+	/**************End Getters e setters**************/	
 }

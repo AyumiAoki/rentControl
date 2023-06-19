@@ -39,7 +39,7 @@ public class MenuPanelController {
 		selectedButton = null;
 		
 		changeScreen(menuPanelScreen.getBooKCarButton(), new RentalScreen());
-		changeScreen(menuPanelScreen.getAddCarButton(), new AddCarScreen(menuPanelScreen.getFrameRentControl()));
+		changeScreen(menuPanelScreen.getAddCarButton(), new CarManagementScreen(menuPanelScreen.getFrameRentControl(), menuPanelScreen));
 		changeScreen(menuPanelScreen.getCustomerButton(), new CustomerManagementScreen(menuPanelScreen.getFrameRentControl(), menuPanelScreen));
 		
 	}
