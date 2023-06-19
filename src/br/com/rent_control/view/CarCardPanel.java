@@ -128,7 +128,7 @@ public class CarCardPanel extends JPanel {
 		hasAbsBrakesLabel.setForeground(COLOR_PRIMARY);
 		hasAbsBrakesLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 12));
 
-		hasDvdPlayerLabel = new JLabel("          DVD: " + (car.isHasDvdPlayer() ? "Sim" : "Não" + "              "));
+		hasDvdPlayerLabel = new JLabel("            DVD: " + (car.isHasDvdPlayer() ? "Sim" : "Não" + "              "));
 		hasDvdPlayerLabel.setForeground(COLOR_PRIMARY);
 		hasDvdPlayerLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 12));
 		

@@ -8,7 +8,7 @@ import javax.swing.border.EmptyBorder;
 import br.com.rent_control.controller.AddCarController;
 import br.com.rent_control.controller.RentControl;
 import br.com.rent_control.view.components.ColorUtils;
-import br.com.rent_control.view.components.CustomField;
+import br.com.rent_control.view.components.*;
 
 public class AddCarScreen extends JPanel{
 	private static final long serialVersionUID = 6407486089823829922L;
