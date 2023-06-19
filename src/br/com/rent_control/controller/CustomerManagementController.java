@@ -13,7 +13,7 @@ public class CustomerManagementController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				customerManagementScreen.getMenuPanel().getContentPanel().removeAll();
-				customerManagementScreen.getMenuPanel().getContentPanel().add(new CreateCustomerScreen());
+				customerManagementScreen.getMenuPanel().getContentPanel().add(new CreateCustomerScreen(customerManagementScreen.getFrameRentControl(), customerManagementScreen.getMenuPanel()));
 				customerManagementScreen.getMenuPanel().getContentPanel().revalidate();
 				customerManagementScreen.getMenuPanel().getContentPanel().repaint();
 			}

@@ -43,7 +43,7 @@ public class CarCardPanel extends JPanel {
 	private final Color COLOR_PRIMARY = new Color(38, 135, 78);
 	private final Color COLOR_SECUNDARY = new Color(236, 238, 244);
 
-	public CarCardPanel(Car car, String nameCategory, String imagePath) {
+	public CarCardPanel(Car car) {
 		setLayout(new BorderLayout());
 		setBackground(COLOR_SECUNDARY);
 		setPreferredSize(new Dimension(200, 350));		
@@ -51,15 +51,15 @@ public class CarCardPanel extends JPanel {
 
 		// Elementos do painel de informações
 		//groupLabel = new JLabel(car.getCategory());
-		groupLabel = new JLabel("HBCXDSHBCVJHDFN DVCHDJHBV");
+		groupLabel = new JLabel(car.getCategory());
 		groupLabel.setForeground(COLOR_PRIMARY);
 		groupLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 14));
 
-		imageCarLabel = new JLabel(imagePath);
+		imageCarLabel = new JLabel("");
 		imageCarLabel.setPreferredSize(new Dimension(186, 120));
 		imageCarLabel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
 
-		carNameLabel = new JLabel(nameCategory);
+		carNameLabel = new JLabel(car.getModelCar());
 		carNameLabel.setForeground(COLOR_PRIMARY);
 		carNameLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 14));
 
@@ -120,15 +120,15 @@ public class CarCardPanel extends JPanel {
 		hasAcLabel.setForeground(COLOR_PRIMARY);
 		hasAcLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 12));
 
-		hasAirbagLabel = new JLabel("              Airbag: " + (car.isHasAirbag() ? "Sim" : "Não") + "              ");
+		hasAirbagLabel = new JLabel("              Airbag: " + (car.isHasAirbag() ? "Sim" : "Não") + "                 ");
 		hasAirbagLabel.setForeground(COLOR_PRIMARY);
 		hasAirbagLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 12));
 
-		hasAbsBrakesLabel = new JLabel("Freio ABS: " + (car.isHasAbsBrakes() ? "Sim" : "Não"));
+		hasAbsBrakesLabel = new JLabel("          Freio ABS: " + (car.isHasAbsBrakes() ? "Sim" : "Não" + "              "));
 		hasAbsBrakesLabel.setForeground(COLOR_PRIMARY);
 		hasAbsBrakesLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 12));
 
-		hasDvdPlayerLabel = new JLabel("DVD: " + (car.isHasDvdPlayer() ? "Sim" : "Não"));
+		hasDvdPlayerLabel = new JLabel("          DVD: " + (car.isHasDvdPlayer() ? "Sim" : "Não" + "              "));
 		hasDvdPlayerLabel.setForeground(COLOR_PRIMARY);
 		hasDvdPlayerLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 12));
 		

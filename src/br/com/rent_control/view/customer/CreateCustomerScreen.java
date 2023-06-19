@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import br.com.rent_control.controller.CreateCustomerController;
+import br.com.rent_control.controller.RentControl;
+import br.com.rent_control.view.MenuPanel;
 import br.com.rent_control.view.components.ColorUtils;
 import br.com.rent_control.view.components.CustomField;
 
@@ -21,15 +23,21 @@ public class CreateCustomerScreen extends JPanel {
 	private CustomField cnhField;
 	private JButton addButton;
 	
-	public CreateCustomerScreen() {
+    private final RentControl frameRentControl;
+    private final MenuPanel menuPanel;
+	
+	public CreateCustomerScreen(final RentControl frameRentControl, final MenuPanel menuPanel) {
 		setLayout(null);
 		setBackground(Color.white);
+	
+		this.menuPanel = menuPanel;
+		this.frameRentControl = frameRentControl;
 		
 		messagerField = new CustomField("Cadastro de cliente");
 		nameField = new CustomField("Nome", 111, 92);
 		cpfField = new CustomField("CPF", 455, 92);
 		dateOfBirthField = new CustomField("Data de nascimento", 455, 182);
-		cnhField = new CustomField("Data de nascimento", 111, 182);
+		cnhField = new CustomField("Número da licensa de motorista", 111, 182);
 		
 		
 		addButton = new JButton("Cadastrar");
@@ -121,7 +129,18 @@ public class CreateCustomerScreen extends JPanel {
 	public void setAddButton(JButton addButton) {
 		this.addButton = addButton;
 	}
-	
-	
-	
+
+	/**
+	 * @return the frameRentControl
+	 */
+	public RentControl getFrameRentControl() {
+		return frameRentControl;
+	}
+
+	/**
+	 * @return the menuPanel
+	 */
+	public MenuPanel getMenuPanel() {
+		return menuPanel;
+	}
 }

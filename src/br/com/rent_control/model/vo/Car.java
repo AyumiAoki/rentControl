@@ -26,6 +26,15 @@ public class Car {
 	public static final String COLUMN_CATEGORY = "category";
 	public static final String COLUMN_MODEL = "model";
 	public static final String COLUMN_MAXPASSENGERS = "maxPassengers";
+	public static final String COLUMN_TRUNKSIZE = "trunkSize";
+	public static final String COLUMN_TRANSMISSIONTYPE = "transmissionType";
+	public static final String COLUMN_FUELTYPE = "fuelType";
+	public static final String COLUMN_CONSUMPTIONAVARAGE = "consumptionAverage";
+	public static final String COLUMN_DAILY = "dailyCost";
+	public static final String COLUMN_HASAC = "hasAc";
+	public static final String COLUMN_HASAIRBAG = "hasAirbag";
+	public static final String COLUMN_HASABS = "hasAbsBrakes";
+	public static final String COLUMN_HASDVD = "hasDvdPlayer";
 
 	/**
 	 * Parameterless class constructor.

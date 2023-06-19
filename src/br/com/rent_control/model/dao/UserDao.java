@@ -15,15 +15,14 @@ import br.com.rent_control.model.vo.User;
 public class UserDao extends ConnectionDB {    
 
 	public boolean addUser(User user) {
-		String sql = "insert into user VALUES (?,?,?,?,?)";
+		String sql = "insert into user VALUES (?,?,?,?)";
 
 		try (Connection connection = ConnectionDB.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 			preparedStatement.setString(1, user.getName());
 			preparedStatement.setString(2, user.getCpf());
 			preparedStatement.setLong(3, user.getLicenseNumber());
-			preparedStatement.setInt(4, user.getIDNumber());
-			preparedStatement.setString(5, user.getDateOfBirth());
+			preparedStatement.setString(4, user.getDateOfBirth());
 
 			preparedStatement.executeUpdate();
 
@@ -48,6 +47,8 @@ public class UserDao extends ConnectionDB {
 
 				user.setName(rs.getString(User.COLUMN_NAME));
 			    user.setCpf(rs.getString(User.COLUMN_CPF));
+			    user.setLicenseNumber(Integer.parseInt(rs.getString(User.COLUMN_LICENSENUMBER)));
+			    user.setDateOfBirth(rs.getString(User.COLUMN_DDN));
 				users.add(user);
 			}
 			return users;
@@ -58,16 +59,15 @@ public class UserDao extends ConnectionDB {
 	}
 	
 	public boolean updateUser(User user, String cpf) {
-		String sql = "update user set name = ?, cpf = ?, licenseNumber = ?, idNumber = ?, dateOfBirth = ? where cpf = ?";
+		String sql = "update user set name = ?, cpf = ?, idNumber = ?, dateOfBirth = ? where cpf = ?";
 
 		try (Connection connection = ConnectionDB.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 			preparedStatement.setString(1, user.getName());
 			preparedStatement.setString(2, user.getCpf());
-			preparedStatement.setLong(3, user.getLicenseNumber());
-			preparedStatement.setInt(4, user.getIDNumber());
-			preparedStatement.setString(5, user.getDateOfBirth());
-			preparedStatement.setString(6, cpf);
+			preparedStatement.setInt(3, user.getIDNumber());
+			preparedStatement.setString(4, user.getDateOfBirth());
+			preparedStatement.setString(5, cpf);
 
 			preparedStatement.executeUpdate();
 

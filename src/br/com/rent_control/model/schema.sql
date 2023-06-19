@@ -12,7 +12,6 @@ create table user(
     name varchar(50) not null,
     cpf varchar(11) not null unique,
     licenseNumber bigint not null unique,
-    idNumber int not null unique,
     dateOfBirth varchar(8) not null,
     primary key (cpf)
 );

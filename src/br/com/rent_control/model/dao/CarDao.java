@@ -60,7 +60,16 @@ public class CarDao {
 
 				car.setCategory(rs.getString(Car.COLUMN_CATEGORY));
 			    car.setModelCar(rs.getString(Car.COLUMN_MODEL));
-			    car.setMaxPassengers(Integer.parseInt(rs.getString(Car.COLUMN_MAXPASSENGERS)));
+			    car.setMaxPassengers(rs.getInt(Car.COLUMN_MAXPASSENGERS));
+			    car.setTrunkSize(rs.getDouble(Car.COLUMN_TRUNKSIZE));
+			    car.setTransmissionType(rs.getString(Car.COLUMN_TRANSMISSIONTYPE));
+			    car.setFuelType(rs.getString(Car.COLUMN_FUELTYPE));
+			    car.setConsumptionAverage(rs.getDouble(Car.COLUMN_CONSUMPTIONAVARAGE));
+			    car.setDailyCost(rs.getDouble(Car.COLUMN_DAILY));
+			    car.setHasAc(rs.getBoolean(Car.COLUMN_HASAC));
+			    car.setHasAirbag(rs.getBoolean(Car.COLUMN_HASAIRBAG));
+			    car.setHasAbsBrakes(rs.getBoolean(Car.COLUMN_HASABS));
+			    car.setHasDvdPlayer(rs.getBoolean(Car.COLUMN_HASDVD));
 				cars.add(car);
 			}
 			return cars;
@@ -68,13 +77,5 @@ public class CarDao {
 			System.err.println("Erro ao listar carros: " + e.getMessage());
 		}
 		return null;
-	}
-	
-	public static void main(String[] args) {
-		CarDao c = new CarDao ();
-		
-		for (Car car : c.listCars()) {
-			System.out.println(car.getCategory());
-		}
 	}
 }

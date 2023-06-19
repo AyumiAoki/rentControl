@@ -17,6 +17,8 @@ public class User {
 	//Constants with column names
 	public static final String COLUMN_NAME = "name";
 	public static final String COLUMN_CPF = "cpf";
+	public static final String COLUMN_LICENSENUMBER = "licenseNumber";
+	public static final String COLUMN_DDN = "dateOfBirth";
 	
 	/**
 	 * Parameterless class constructor.
