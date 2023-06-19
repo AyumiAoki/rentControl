@@ -32,9 +32,7 @@ public class CustomerManagementScreen extends JPanel {
 	    void action(String id, String type);
 	}
 	
-	
 	public CustomerManagementScreen(final RentControl frameRentControl, MenuPanel menuPanel) {
-		// TODO Auto-generated constructor stub
 		setLayout(null);
 		setBackground(Color.white);
 		

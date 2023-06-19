@@ -1,9 +1,6 @@
 package br.com.rent_control.model.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,6 +58,7 @@ public class CarDao {
 				car.setCategory(rs.getString(Car.COLUMN_CATEGORY));
 			    car.setModelCar(rs.getString(Car.COLUMN_MODEL));
 			    car.setMaxPassengers(Integer.parseInt(rs.getString(Car.COLUMN_MAXPASSENGERS)));
+			    car.setId(Integer.parseInt(rs.getString(Car.ID)));
 				cars.add(car);
 			}
 			return cars;
@@ -68,6 +66,22 @@ public class CarDao {
 			System.err.println("Erro ao listar carros: " + e.getMessage());
 		}
 		return null;
+	}
+	
+	public boolean deleteCarById(int id) {
+		String sql = "delete from car where id = ?";
+
+		try (Connection connection = ConnectionDB.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+			preparedStatement.setInt(1, id);
+
+			preparedStatement.executeUpdate();
+
+			return true;
+		} catch (SQLException e) {
+			System.err.println("Erro ao excluir carro: " + e.getMessage());
+			return false;
+		}
 	}
 	
 	public static void main(String[] args) {

@@ -9,6 +9,7 @@ package br.com.rent_control.model.vo;
 
 public class Car {
 
+	private int id;
 	private String category;
 	private String modelCar;
 	private int maxPassengers;
@@ -21,11 +22,13 @@ public class Car {
 	private boolean hasAirbag;
 	private boolean hasAbsBrakes;
 	private boolean hasDvdPlayer;
+	
 
 	// Constants with column names
 	public static final String COLUMN_CATEGORY = "category";
 	public static final String COLUMN_MODEL = "model";
 	public static final String COLUMN_MAXPASSENGERS = "maxPassengers";
+	public static final String ID = "id";
 
 	/**
 	 * Parameterless class constructor.
@@ -272,4 +275,20 @@ public class Car {
 	public void setHasDvdPlayer(boolean hasDvdPlayer) {
 		this.hasDvdPlayer = hasDvdPlayer;
 	}
+
+	/**
+	 * @return o id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id o id a ser configurado
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
 }

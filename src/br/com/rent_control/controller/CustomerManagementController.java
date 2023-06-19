@@ -7,8 +7,6 @@ import br.com.rent_control.view.customer.CustomerManagementScreen;
 
 public class CustomerManagementController {
 	public CustomerManagementController(CustomerManagementScreen customerManagementScreen) {
-		// TODO Auto-generated constructor stub
-		
 		customerManagementScreen.getNewCustomer().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

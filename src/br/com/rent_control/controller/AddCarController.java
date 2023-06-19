@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import br.com.rent_control.model.bo.CarBo;
 import br.com.rent_control.view.AddCarScreen;
+import br.com.rent_control.view.CarManagementScreen;
 import br.com.rent_control.view.ContentPanel;
 
 /**
@@ -51,7 +52,7 @@ public class AddCarController {
 				addCarScreen.getModelCarField().setText("");
 
 				addCarScreen.getMenuPanel().getContentPanel().removeAll();
-				addCarScreen.getMenuPanel().getContentPanel().add(new ContentPanel());
+				addCarScreen.getMenuPanel().getContentPanel().add( new CarManagementScreen(addCarScreen.getFrameRentControl(), addCarScreen.getMenuPanel()));
 				addCarScreen.getMenuPanel().getContentPanel().revalidate();
 				addCarScreen.getMenuPanel().getContentPanel().repaint();
 			} else {
