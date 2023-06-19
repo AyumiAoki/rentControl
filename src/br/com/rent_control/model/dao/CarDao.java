@@ -1,9 +1,6 @@
 package br.com.rent_control.model.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +17,7 @@ import br.com.rent_control.model.vo.Car;
 public class CarDao {
 
 	public boolean addCar(Car Car) {
-		String sql = "INSERT INTO Car (category, model, maxPassengers, trunkSize, transmissionType, fuelType, consumptionAverage, dailyCost, hasAc, hasAirbag, hasAbsBrakes, hasDvdPlayer) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO car (category, model, maxPassengers, trunkSize, transmissionType, fuelType, consumptionAverage, dailyCost, hasAc, hasAirbag, hasAbsBrakes, hasDvdPlayer) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		try (Connection connection = ConnectionDB.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -70,6 +67,7 @@ public class CarDao {
 			    car.setHasAirbag(rs.getBoolean(Car.COLUMN_HASAIRBAG));
 			    car.setHasAbsBrakes(rs.getBoolean(Car.COLUMN_HASABS));
 			    car.setHasDvdPlayer(rs.getBoolean(Car.COLUMN_HASDVD));
+			    car.setId(Integer.parseInt(rs.getString(Car.ID)));
 				cars.add(car);
 			}
 			return cars;
@@ -77,5 +75,28 @@ public class CarDao {
 			System.err.println("Erro ao listar carros: " + e.getMessage());
 		}
 		return null;
+	}
+	
+	public boolean deleteCarById(int id) {
+		String sql = "delete from car where id = ?";
+
+		try (Connection connection = ConnectionDB.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+			preparedStatement.setInt(1, id);
+
+			preparedStatement.executeUpdate();
+
+			return true;
+		} catch (SQLException e) {
+			System.err.println("Erro ao excluir carro: " + e.getMessage());
+			return false;
+		}
+	}
+	
+	public static void main(String[] args) {
+		CarDao c = new CarDao();
+		for (Car car : c.listCars()) {
+			System.out.println(car.getCategory());
+		}
 	}
 }
