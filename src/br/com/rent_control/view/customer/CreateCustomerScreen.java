@@ -3,19 +3,125 @@ package br.com.rent_control.view.customer;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import br.com.rent_control.controller.CreateCustomerController;
+import br.com.rent_control.view.components.ColorUtils;
+import br.com.rent_control.view.components.CustomField;
+
 public class CreateCustomerScreen extends JPanel {
-	 private static final long serialVersionUID = 1L;
-	 private JLabel messagerLabel;
+	private static final long serialVersionUID = 1L;
+	 
+	private CustomField messagerField;
+	private CustomField nameField;
+	private CustomField cpfField;
+	private CustomField dateOfBirthField;
+	private CustomField cnhField;
+	private JButton addButton;
+	
 	public CreateCustomerScreen() {
 		setLayout(null);
 		setBackground(Color.white);
 		
-		messagerLabel = new JLabel("Clientes");
-		messagerLabel.setBounds(50, 24, 320, 15);
-		messagerLabel.setFont(messagerLabel.getFont().deriveFont(Font.BOLD, 16));
-		add(messagerLabel);
+		messagerField = new CustomField("Cadastro de cliente");
+		nameField = new CustomField("Nome", 111, 92);
+		cpfField = new CustomField("CPF", 455, 92);
+		dateOfBirthField = new CustomField("Data de nascimento", 455, 182);
+		cnhField = new CustomField("Data de nascimento", 111, 182);
+		
+		
+		addButton = new JButton("Cadastrar");
+		addButton.setForeground(Color.WHITE);
+		addButton.setBounds(323, 300, 240, 35);
+		addButton.setBackground(ColorUtils.PRIMARY_COLOR);
+		addButton.setBorder(null);
+		
+		add(messagerField.getLabel());
+		add(nameField.getLabel());
+		add(nameField.getTextField());
+		add(cpfField.getLabel());
+		add(cpfField.getTextField());
+		add(dateOfBirthField.getLabel());
+		add(dateOfBirthField.getTextField());
+		add(cnhField.getLabel());
+		add(cnhField.getTextField());
+		add(addButton);
+		
+		new CreateCustomerController(this);
 	}
+
+	/**
+	 * @return the nameField
+	 */
+	public CustomField getNameField() {
+		return nameField;
+	}
+
+	/**
+	 * @param nameField the nameField to set
+	 */
+	public void setNameField(CustomField nameField) {
+		this.nameField = nameField;
+	}
+
+	/**
+	 * @return the cpfField
+	 */
+	public CustomField getCpfField() {
+		return cpfField;
+	}
+
+	/**
+	 * @param cpfField the cpfField to set
+	 */
+	public void setCpfField(CustomField cpfField) {
+		this.cpfField = cpfField;
+	}
+
+	/**
+	 * @return the dateOfBirthField
+	 */
+	public CustomField getDateOfBirthField() {
+		return dateOfBirthField;
+	}
+
+	/**
+	 * @param dateOfBirthField the dateOfBirthField to set
+	 */
+	public void setDateOfBirthField(CustomField dateOfBirthField) {
+		this.dateOfBirthField = dateOfBirthField;
+	}
+
+	/**
+	 * @return the cnhField
+	 */
+	public CustomField getCnhField() {
+		return cnhField;
+	}
+
+	/**
+	 * @param cnhField the cnhField to set
+	 */
+	public void setCnhField(CustomField cnhField) {
+		this.cnhField = cnhField;
+	}
+
+	/**
+	 * @return the addButton
+	 */
+	public JButton getAddButton() {
+		return addButton;
+	}
+
+	/**
+	 * @param addButton the addButton to set
+	 */
+	public void setAddButton(JButton addButton) {
+		this.addButton = addButton;
+	}
+	
+	
+	
 }
