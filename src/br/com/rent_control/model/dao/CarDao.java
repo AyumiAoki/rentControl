@@ -20,7 +20,7 @@ import br.com.rent_control.model.vo.Car;
 public class CarDao {
 
 	public boolean addCar(Car Car) {
-		String sql = "INSERT INTO Car (category, model, maxPassengers, trunkSize, transmissionType, fuelType, consumptionAverage, dailyCost, hasAc, hasAirbag, hasAbsBrakes, hasDvdPlayer) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO car (category, model, maxPassengers, trunkSize, transmissionType, fuelType, consumptionAverage, dailyCost, hasAc, hasAirbag, hasAbsBrakes, hasDvdPlayer) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		try (Connection connection = ConnectionDB.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -71,8 +71,7 @@ public class CarDao {
 	}
 	
 	public static void main(String[] args) {
-		CarDao c = new CarDao ();
-		
+		CarDao c = new CarDao();
 		for (Car car : c.listCars()) {
 			System.out.println(car.getCategory());
 		}

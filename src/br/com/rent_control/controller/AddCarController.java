@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 import br.com.rent_control.model.bo.CarBo;
 import br.com.rent_control.view.AddCarScreen;
 import br.com.rent_control.view.ContentPanel;
-import br.com.rent_control.view.customer.CreateCustomerScreen;
 
 /**
  * @author ayumi
@@ -48,8 +47,8 @@ public class AddCarController {
 			
 			if(carBo.addCar(listCar.toArray(new String[0]))) {
 				JOptionPane.showMessageDialog(null, "Veículo cadastrado com sucesso!");
-
-				addCarScreen.setVisible(false);
+				
+				addCarScreen.getModelCarField().setText("");
 
 				addCarScreen.getMenuPanel().getContentPanel().removeAll();
 				addCarScreen.getMenuPanel().getContentPanel().add(new ContentPanel());

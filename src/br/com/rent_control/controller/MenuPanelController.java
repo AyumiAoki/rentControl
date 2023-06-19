@@ -6,8 +6,6 @@ package br.com.rent_control.controller;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -39,7 +37,7 @@ public class MenuPanelController {
 		selectedButton = null;
 		
 		changeScreen(menuPanelScreen.getBooKCarButton(), new RentalScreen());
-		changeScreen(menuPanelScreen.getAddCarButton(), new CarManagementScreen(menuPanelScreen.getFrameRentControl(), menuPanelScreen));
+		changeScreen(menuPanelScreen.getAddCarButton(), new AddCarScreen(menuPanelScreen.getFrameRentControl(), menuPanelScreen));
 		changeScreen(menuPanelScreen.getCustomerButton(), new CustomerManagementScreen(menuPanelScreen.getFrameRentControl(), menuPanelScreen));
 		
 	}
