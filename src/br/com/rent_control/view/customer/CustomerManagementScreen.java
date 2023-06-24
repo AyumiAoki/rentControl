@@ -1,32 +1,26 @@
 package br.com.rent_control.view.customer;
 
-
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
+import javax.swing.*;
 import java.util.List;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import br.com.rent_control.controller.CustomerManagementController;
 import br.com.rent_control.controller.RentControl;
-import br.com.rent_control.model.dao.UserDao;
-import br.com.rent_control.model.vo.User;
+import br.com.rent_control.controller.customer.CustomerManagementController;
+import br.com.rent_control.model.dao.CustomerDao;
+import br.com.rent_control.model.vo.Customer;
 import br.com.rent_control.view.MenuPanel;
 import br.com.rent_control.view.components.ColorUtils;
 import br.com.rent_control.view.components.CustomTable;
-
 
 public class CustomerManagementScreen extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private final RentControl frameRentControl;
+	private MenuPanel menuPanel;
+	private JScrollPane scrollPane;
 	private JLabel messagerLabel;
 	private JButton newCustomer;
-	private MenuPanel menuPanel;
-	private List<User> users;
-	private UserDao userDao;
-	private JScrollPane scrollPane;
+	private List<Customer> customers;
+	private CustomerDao customerDao;
 
 	public interface ActionButton {
 	    void action(String id, String type);
@@ -36,8 +30,8 @@ public class CustomerManagementScreen extends JPanel {
 		setLayout(null);
 		setBackground(Color.white);
 		
-		this.menuPanel = menuPanel;
 		this.frameRentControl = frameRentControl;
+		this.menuPanel = menuPanel;
 		messagerLabel = new JLabel("Clientes");
 		messagerLabel.setBounds(50, 24, 320, 15);
 		messagerLabel.setFont(messagerLabel.getFont().deriveFont(Font.BOLD, 16));
@@ -48,8 +42,7 @@ public class CustomerManagementScreen extends JPanel {
 		newCustomer.setBackground(ColorUtils.PRIMARY_LIGHT_COLOR);
 		newCustomer.setBorder(null);
 
-
-		userDao = new UserDao();
+		customerDao = new CustomerDao();
 		
 		tableSetup();
 		
@@ -63,17 +56,21 @@ public class CustomerManagementScreen extends JPanel {
 		if(type.equals("edit")) {
 			System.out.println("Edição!");
 			return;
+		} else {
+			if(customerDao.deleteCustomerByCpf(id)) {
+				JOptionPane.showMessageDialog(null, "Cliente excluido com sucesso!");
+				this.remove(scrollPane);
+				tableSetup();
+				this.revalidate();
+				this.repaint();
+			} else {
+				JOptionPane.showMessageDialog(null, "Erro ao excluir cliente!");
+			}			
 		}
-		System.out.println("Exclusão!");
-		userDao.deleteUserByCpf(id);
-		this.remove(scrollPane);
-		tableSetup();
-		this.revalidate();
-		this.repaint();
 	};
 	
 	private void tableSetup() {
-		users = userDao.listUsers();
+		customers = customerDao.listCustomer();
 		CustomTable customTable = new CustomTable(deleteOrEdit, getDataTable());
 		scrollPane = new JScrollPane(customTable);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -84,10 +81,10 @@ public class CustomerManagementScreen extends JPanel {
 	}
 	
 	private Object[][] getDataTable(){
-		Object[][] data = new Object[users.size() + 1][4];
+		Object[][] data = new Object[customers.size() + 1][4];
 		data[0] = new Object[]{"Nome", "CPF", "CNH", "ID"};
-		for (int i = 0; i < users.size(); i++) {
-            User usuario = users.get(i);
+		for (int i = 0; i < customers.size(); i++) {
+            Customer usuario = customers.get(i);
             data[i + 1] = new Object[]{usuario.getName(), usuario.getCpf(), usuario.getLicenseNumber(), usuario.getCpf()};
         }
 		return data;
@@ -100,6 +97,20 @@ public class CustomerManagementScreen extends JPanel {
 		return frameRentControl;
 	}
 
+	/**
+	 * @return the menuPanel
+	 */
+	public MenuPanel getMenuPanel() {
+		return menuPanel;
+	}
+	
+	/**
+	 * @param menuPanel the menuPanel to set
+	 */
+	public void setMenuPanel(MenuPanel menuPanel) {
+		this.menuPanel = menuPanel;
+	}
+	
 	/**
 	 * @return the messagerLabel
 	 */
@@ -129,30 +140,16 @@ public class CustomerManagementScreen extends JPanel {
 	}
 
 	/**
-	 * @return the menuPanel
+	 * @return the customers
 	 */
-	public MenuPanel getMenuPanel() {
-		return menuPanel;
+	public List<Customer> getUsers() {
+		return customers;
 	}
 
 	/**
-	 * @param menuPanel the menuPanel to set
+	 * @param customers the customers to set
 	 */
-	public void setMenuPanel(MenuPanel menuPanel) {
-		this.menuPanel = menuPanel;
-	}
-
-	/**
-	 * @return the users
-	 */
-	public List<User> getUsers() {
-		return users;
-	}
-
-	/**
-	 * @param users the users to set
-	 */
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setUsers(List<Customer> customers) {
+		this.customers = customers;
 	}	
 }

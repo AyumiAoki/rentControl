@@ -8,7 +8,7 @@ create table employee(
     primary key (cpf)
 );
 
-create table user(
+create table customer(
     name varchar(50) not null,
     cpf varchar(11) not null unique,
     licenseNumber bigint not null unique,
@@ -35,18 +35,18 @@ create table car(
 create table rent(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     withdrawalDate varchar(8) not null,
-    pickUpLocation varchar(50) not null,
+    withdrawalTime varchar(4) not null,
     deliveryDate varchar(8) not null,
-    deliveryLocation varchar(50) not null,
+    deliveryTime varchar(4) not null,
     carProtection boolean not null,
     gps boolean not null,
     cleaning boolean not null,
     drinkComfort boolean not null,
     babyChair boolean not null,
     boosterSeat boolean not null,
-    cpfUser varchar(11) not null unique,
-    idCar INT NOT NULL,
-    foreign key (cpfUser) references user(cpf),
+    cpfCustomer varchar(11) not null,
+    idCar int not null,
+    foreign key (cpfCustomer) references customer(cpf),
     foreign key (idCar) references car(id)
 );
 

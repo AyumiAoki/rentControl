@@ -1,7 +1,7 @@
 package br.com.rent_control.model.vo;
 
 /**
- * Class User - Represents a user in the application
+ * Class Customer - Represents a user in the application
  * 
  * @author Ayumi Aoki &lt;ayumi.santana@icomp.ufam.edu.br&gt;
  * @version 1.0, 2023-06-07

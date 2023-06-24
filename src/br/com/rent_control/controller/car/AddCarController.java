@@ -1,15 +1,15 @@
 /**
  * 
  */
-package br.com.rent_control.controller;
+package br.com.rent_control.controller.car;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import br.com.rent_control.view.*;
+import br.com.rent_control.view.car.AddCarScreen;
+import br.com.rent_control.view.car.CarManagementScreen;
+
 import javax.swing.JOptionPane;
 import br.com.rent_control.model.bo.CarBo;
-import br.com.rent_control.view.AddCarScreen;
-import br.com.rent_control.view.CarManagementScreen;
-import br.com.rent_control.view.ContentPanel;
 
 /**
  * @author ayumi

@@ -1,15 +1,15 @@
 /**
  * 
  */
-package br.com.rent_control.view;
+package br.com.rent_control.view.rent;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
+import java.awt.event.*;
 import javax.swing.*;
-
+import javax.swing.border.LineBorder;
 import br.com.rent_control.model.vo.Car;
+import br.com.rent_control.view.MenuPanel;
+import br.com.rent_control.view.components.ColorUtils;
 
 /**
  * @author ayumi
@@ -19,6 +19,7 @@ import br.com.rent_control.model.vo.Car;
 public class CarCardPanel extends JPanel {
 
 	private static final long serialVersionUID = 3127568446943655484L;
+	private MenuPanel menuPanel;
 
 	private JLabel groupLabel;
 	private JLabel imageCarLabel;
@@ -40,50 +41,58 @@ public class CarCardPanel extends JPanel {
 	private JPanel infoPanel;
 	private JPanel detailsPanel;
 
-	private final Color COLOR_PRIMARY = new Color(38, 135, 78);
 	private final Color COLOR_SECUNDARY = new Color(236, 238, 244);
 
-	public CarCardPanel(Car car) {
-		setLayout(new BorderLayout());
-		setBackground(COLOR_SECUNDARY);
-		setPreferredSize(new Dimension(200, 350));		
-		setBorder(BorderFactory.createLineBorder(Color.GRAY));
+	public CarCardPanel(Car car, MenuPanel menuPanel) {
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setBackground(ColorUtils.SECUNDARY_COLOR);
+		setBorder(new LineBorder(ColorUtils.SECUNDARY_DARK_COLOR, 2));
+
+		this.menuPanel = menuPanel;
 
 		// Elementos do painel de informações
-		//groupLabel = new JLabel(car.getCategory());
 		groupLabel = new JLabel(car.getCategory());
-		groupLabel.setForeground(COLOR_PRIMARY);
+		groupLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		groupLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 14));
+		groupLabel.setBounds(0, 8, 270, 25);
+		groupLabel.setHorizontalAlignment(JLabel.CENTER);
 
-		imageCarLabel = new JLabel("");
-		imageCarLabel.setPreferredSize(new Dimension(186, 120));
-		imageCarLabel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
+		imageCarLabel = new JLabel(new ImageIcon("src/br/com/rent_control/view/images/iconCar.png"));
+		imageCarLabel.setBounds(45, 41, 180, 120);
+		imageCarLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		carNameLabel = new JLabel(car.getModelCar());
-		carNameLabel.setForeground(COLOR_PRIMARY);
+		carNameLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		carNameLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 14));
+		carNameLabel.setBounds(0, 169, 270, 25);
+		carNameLabel.setHorizontalAlignment(JLabel.CENTER);
 
-		carValueLabel = new JLabel("              R$ " + Double.toString(car.getDailyCost()) + "              ");
-		carValueLabel.setForeground(COLOR_PRIMARY);
+		carValueLabel = new JLabel("R$ " + Double.toString(car.getDailyCost()));
+		carValueLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		carValueLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 14));
+		carValueLabel.setBounds(0, 202, 270, 25);
+		carValueLabel.setHorizontalAlignment(JLabel.CENTER);
 
 		selectCarButton = new JButton("Escolher este grupo");
-		selectCarButton.setPreferredSize(new Dimension(190, 25));
-		selectCarButton.setFont(selectCarButton.getFont().deriveFont(Font.BOLD, 14));
 		selectCarButton.setForeground(Color.WHITE);
+		selectCarButton.setFont(selectCarButton.getFont().deriveFont(Font.BOLD, 14));
 		selectCarButton.setBorder(null);
-		selectCarButton.setBackground(COLOR_PRIMARY);
+		selectCarButton.setBackground(ColorUtils.PRIMARY_COLOR);
+		selectCarButton.setBounds(35, 235, 200, 35);
+		selectCarButton.setHorizontalAlignment(JButton.CENTER);
 
 		detailsCarButton = new JButton("<html><u>Mais informações</u></html>");
 		detailsCarButton.setFont(detailsCarButton.getFont().deriveFont(Font.BOLD, 14));
-		detailsCarButton.setForeground(COLOR_PRIMARY);
+		detailsCarButton.setForeground(ColorUtils.PRIMARY_COLOR);
 		detailsCarButton.setContentAreaFilled(false);
 		detailsCarButton.setBorder(null);
+		detailsCarButton.setBounds(35, 278, 200, 35);
+		detailsCarButton.setHorizontalAlignment(JButton.CENTER);
 		// Fim dos elementos do painel de informações
 
 		// Painel para as informações iniciais
 		infoPanel = new JPanel();
-		infoPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 8, 16));
+		infoPanel.setLayout(null);
 		infoPanel.setBackground(COLOR_SECUNDARY);
 
 		// Adicionar as informações ao painel
@@ -96,47 +105,65 @@ public class CarCardPanel extends JPanel {
 
 		// Painel para as informações adicionais
 		detailsPanel = new JPanel();
-		detailsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 8, 16));
-		detailsPanel.setBackground(COLOR_SECUNDARY);
+		detailsPanel.setLayout(null);
+		detailsPanel.setBackground(ColorUtils.SECUNDARY_COLOR);
 
 		// Elementos do painel de mais informações
 		maxPassengersLabel = new JLabel("Quantidade de passageiros: " + Integer.toString(car.getMaxPassengers()));
-		maxPassengersLabel.setForeground(COLOR_PRIMARY);
+		maxPassengersLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		maxPassengersLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 12));
+		maxPassengersLabel.setBounds(0, 8, 270, 25);
+		maxPassengersLabel.setHorizontalAlignment(JLabel.CENTER);
 
 		trunkSizeLabel = new JLabel("Volume do bagageiro: " + Double.toString(car.getTrunkSize()));
-		trunkSizeLabel.setForeground(COLOR_PRIMARY);
+		trunkSizeLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		trunkSizeLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 12));
+		trunkSizeLabel.setBounds(0, 41, 270, 25);
+		trunkSizeLabel.setHorizontalAlignment(JLabel.CENTER);
 
 		transmissionTypeLabel = new JLabel("Tipo de câmbio: " + car.getTransmissionType());
-		transmissionTypeLabel.setForeground(COLOR_PRIMARY);
+		transmissionTypeLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		transmissionTypeLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 12));
+		transmissionTypeLabel.setBounds(0, 74, 270, 25);
+		transmissionTypeLabel.setHorizontalAlignment(JLabel.CENTER);
 
 		fuelTypeLabel = new JLabel("Tipo de combustível: " + car.getFuelType());
-		fuelTypeLabel.setForeground(COLOR_PRIMARY);
+		fuelTypeLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		fuelTypeLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 12));
+		fuelTypeLabel.setBounds(0, 107, 270, 25);
+		fuelTypeLabel.setHorizontalAlignment(JLabel.CENTER);
 
 		hasAcLabel = new JLabel("Ar condicionado: " + (car.isHasAc() ? "Sim" : "Não"));
-		hasAcLabel.setForeground(COLOR_PRIMARY);
+		hasAcLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		hasAcLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 12));
+		hasAcLabel.setBounds(0, 140, 270, 25);
+		hasAcLabel.setHorizontalAlignment(JLabel.CENTER);
 
-		hasAirbagLabel = new JLabel("              Airbag: " + (car.isHasAirbag() ? "Sim" : "Não") + "                 ");
-		hasAirbagLabel.setForeground(COLOR_PRIMARY);
+		hasAirbagLabel = new JLabel("Airbag: " + (car.isHasAirbag() ? "Sim" : "Não"));
+		hasAirbagLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		hasAirbagLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 12));
+		hasAirbagLabel.setBounds(0, 173, 270, 25);
+		hasAirbagLabel.setHorizontalAlignment(JLabel.CENTER);
 
-		hasAbsBrakesLabel = new JLabel("          Freio ABS: " + (car.isHasAbsBrakes() ? "Sim" : "Não" + "              "));
-		hasAbsBrakesLabel.setForeground(COLOR_PRIMARY);
+		hasAbsBrakesLabel = new JLabel("Freio ABS: " + (car.isHasAbsBrakes() ? "Sim" : "Não"));
+		hasAbsBrakesLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		hasAbsBrakesLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 12));
+		hasAbsBrakesLabel.setBounds(0, 206, 270, 25);
+		hasAbsBrakesLabel.setHorizontalAlignment(JLabel.CENTER);
 
-		hasDvdPlayerLabel = new JLabel("            DVD: " + (car.isHasDvdPlayer() ? "Sim" : "Não" + "              "));
-		hasDvdPlayerLabel.setForeground(COLOR_PRIMARY);
+		hasDvdPlayerLabel = new JLabel("DVD: " + (car.isHasDvdPlayer() ? "Sim" : "Não"));
+		hasDvdPlayerLabel.setForeground(ColorUtils.PRIMARY_COLOR);
 		hasDvdPlayerLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 12));
+		hasDvdPlayerLabel.setBounds(0, 239, 270, 25);
+		hasDvdPlayerLabel.setHorizontalAlignment(JLabel.CENTER);
 		
 		hideInformationButton = new JButton("<html><u>Esconder informações</u></html>");
+		hideInformationButton.setForeground(ColorUtils.PRIMARY_COLOR);
 		hideInformationButton.setFont(detailsCarButton.getFont().deriveFont(Font.BOLD, 14));
-		hideInformationButton.setForeground(COLOR_PRIMARY);
 		hideInformationButton.setContentAreaFilled(false);
 		hideInformationButton.setBorder(null);
+		hideInformationButton.setBounds(0, 272, 270, 25);
+		hideInformationButton.setHorizontalAlignment(JButton.CENTER);
 		// Fim dos elementos do painel de mais informações
 
 		// Adicionar as informações ao painel
@@ -155,11 +182,11 @@ public class CarCardPanel extends JPanel {
 		
 		addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseEntered(java.awt.event.MouseEvent evt) {
-				setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
+				setBorder(BorderFactory.createLineBorder(ColorUtils.SECUNDARY_DARK_COLOR, 2));
 			}
 
 			public void mouseExited(java.awt.event.MouseEvent evt) {
-				setBorder(BorderFactory.createLineBorder(Color.GRAY));
+				setBorder(BorderFactory.createLineBorder(ColorUtils.SECUNDARY_DARK_COLOR));
 			}
 		});
 
@@ -189,5 +216,33 @@ public class CarCardPanel extends JPanel {
 				
 			}
 		});
+	}
+	
+	/**
+	 * @return the menuPanel
+	 */
+	public MenuPanel getMenuPanel() {
+		return menuPanel;
+	}
+	
+	/**
+	 * @param menuPanel the menuPanel to set
+	 */
+	public void setMenuPanel(MenuPanel menuPanel) {
+		this.menuPanel = menuPanel;
+	}
+
+	/**
+	 * @return o selectCarButton
+	 */
+	public JButton getSelectCarButton() {
+		return selectCarButton;
+	}
+
+	/**
+	 * @param selectCarButton o selectCarButton a ser configurado
+	 */
+	public void setSelectCarButton(JButton selectCarButton) {
+		this.selectCarButton = selectCarButton;
 	}
 }

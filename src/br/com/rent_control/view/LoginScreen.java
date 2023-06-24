@@ -5,6 +5,7 @@ import javax.swing.*;
 
 import br.com.rent_control.controller.LoginController;
 import br.com.rent_control.controller.RentControl;
+import br.com.rent_control.view.components.ColorUtils;
 
 /**
  * Class LoginScreen - Represents a screen the login in the application
@@ -27,9 +28,6 @@ public class LoginScreen extends JPanel {
 	private JTextField nameField;
 	private JPasswordField passwordField;
 
-	private final Color COLOR_SECUNDARY = new Color(48, 46, 37);
-	private final Color COLOR_PRIMARY = new Color(38, 135, 78);
-
 	private LoginController loginController;
 
 	/**
@@ -44,26 +42,26 @@ public class LoginScreen extends JPanel {
 		this.frameRentControl = frameRenteControl;
 
 		nameLabel = new JLabel("Nome");
-		nameLabel.setBounds(590, 208, 40, 14);
+		nameLabel.setBounds(630, 230, 40, 14);
 		passwordLabel = new JLabel("Senha");
-		passwordLabel.setBounds(590, 281, 45, 14);
+		passwordLabel.setBounds(630, 319, 45, 14);
 
 		nameField = new JTextField();
-		nameField.setBounds(590, 230, 320, 35);
-		nameField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
-		nameField.setCaretColor(COLOR_SECUNDARY);
+		nameField.setBounds(630, 252, 400, 35);
+		nameField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
+		nameField.setCaretColor(Color.black);
 		nameField.setEditable(true);
 
 		passwordField = new JPasswordField();
-		passwordField.setBounds(590, 303, 320, 35);
-		passwordField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, COLOR_SECUNDARY));
-		passwordField.setCaretColor(COLOR_SECUNDARY);
+		passwordField.setBounds(630, 341, 400, 35);
+		passwordField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
+		passwordField.setCaretColor(Color.black);
 		passwordField.setEditable(true);
 
 		signInButton = new JButton("Entrar");
 		signInButton.setForeground(Color.WHITE);
-		signInButton.setBounds(630, 516, 240, 35);
-		signInButton.setBackground(COLOR_PRIMARY);
+		signInButton.setBounds(720, 544, 240, 35);
+		signInButton.setBackground(ColorUtils.PRIMARY_COLOR);
 		signInButton.setBorder(null);
 
 		add(nameLabel);

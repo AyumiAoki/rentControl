@@ -1,12 +1,12 @@
 package br.com.rent_control.model.vo;
 
 /**
- * Class User - Represents a user in the application
+ * Class Customer - Represents a user in the application
  * @author Ayumi Aoki &lt;ayumi.santana@icomp.ufam.edu.br&gt;
  * @version 1.0, 2023-06-06
  */
 
-public class User {
+public class Customer {
 	
 	private String name;
 	private String cpf;
@@ -23,7 +23,7 @@ public class User {
 	/**
 	 * Parameterless class constructor.
 	 */	
-	public User() {}
+	public Customer() {}
 	
 	/**
 	 * Class constructor with parameters.
@@ -33,7 +33,7 @@ public class User {
 	 * @param iDNumber
 	 * @param dateOfBirth
 	 */
-	public User(String name, String cpf, long licenseNumber, int idNumber, String dateOfBirth) {
+	public Customer(String name, String cpf, long licenseNumber, int idNumber, String dateOfBirth) {
 		this.name = name;
 		this.cpf = cpf;
 		this.licenseNumber = licenseNumber;

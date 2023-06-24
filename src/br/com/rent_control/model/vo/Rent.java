@@ -12,7 +12,7 @@ public class Rent {
 	private String pickUpLocation;
 	private String deliveryDate;
 	private String deliveryLocation;
-	private User user;
+	private Customer customer;
 	private Car car;
 	private boolean carProtection;
 	private boolean gps;
@@ -32,7 +32,7 @@ public class Rent {
 	 * @param pickUpLocation
 	 * @param deliveryDate
 	 * @param deliveryLocation
-	 * @param user
+	 * @param customer
 	 * @param car
 	 * @param carProtection
 	 * @param gps
@@ -41,14 +41,14 @@ public class Rent {
 	 * @param babyChair
 	 * @param boosterSeat
 	 */
-	public Rent(String withdrawalDate, String pickUpLocation, String deliveryDate, String deliveryLocation, User user,
+	public Rent(String withdrawalDate, String pickUpLocation, String deliveryDate, String deliveryLocation, Customer customer,
 			Car car, boolean carProtection, boolean gps, boolean cleaning, boolean drinkComfort, boolean babyChair,
 			boolean boosterSeat) {
 		this.withdrawalDate = withdrawalDate;
 		this.pickUpLocation = pickUpLocation;
 		this.deliveryDate = deliveryDate;
 		this.deliveryLocation = deliveryLocation;
-		this.user = user;
+		this.customer = customer;
 		this.car = car;
 		this.carProtection = carProtection;
 		this.gps = gps;
@@ -117,17 +117,17 @@ public class Rent {
 	}
 
 	/**
-	 * @return o user
+	 * @return o customer
 	 */
-	public User getUser() {
-		return user;
+	public Customer getUser() {
+		return customer;
 	}
 
 	/**
-	 * @param user o user a ser configurado
+	 * @param customer o customer a ser configurado
 	 */
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(Customer customer) {
+		this.customer = customer;
 	}
 
 	/**

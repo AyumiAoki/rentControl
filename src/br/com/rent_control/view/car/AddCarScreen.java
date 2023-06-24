@@ -1,13 +1,15 @@
-package br.com.rent_control.view;
+package br.com.rent_control.view.car;
 
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import br.com.rent_control.controller.AddCarController;
+
 import br.com.rent_control.controller.RentControl;
+import br.com.rent_control.controller.car.AddCarController;
 import br.com.rent_control.view.components.ColorUtils;
+import br.com.rent_control.view.MenuPanel;
 import br.com.rent_control.view.components.*;
 
 public class AddCarScreen extends JPanel{
