@@ -12,8 +12,8 @@ public class Rent {
 	private String pickUpLocation;
 	private String deliveryDate;
 	private String deliveryLocation;
-	private User user;
-	private Car car;
+	private String cpfCustomer;
+	private int idCar;
 	private boolean carProtection;
 	private boolean gps;
 	private boolean cleaning;
@@ -32,7 +32,7 @@ public class Rent {
 	 * @param pickUpLocation
 	 * @param deliveryDate
 	 * @param deliveryLocation
-	 * @param user
+	 * @param customer
 	 * @param car
 	 * @param carProtection
 	 * @param gps
@@ -41,15 +41,15 @@ public class Rent {
 	 * @param babyChair
 	 * @param boosterSeat
 	 */
-	public Rent(String withdrawalDate, String pickUpLocation, String deliveryDate, String deliveryLocation, User user,
-			Car car, boolean carProtection, boolean gps, boolean cleaning, boolean drinkComfort, boolean babyChair,
+	public Rent(String withdrawalDate, String pickUpLocation, String deliveryDate, String deliveryLocation, String cpfCustomer,
+			int idCar, boolean carProtection, boolean gps, boolean cleaning, boolean drinkComfort, boolean babyChair,
 			boolean boosterSeat) {
 		this.withdrawalDate = withdrawalDate;
 		this.pickUpLocation = pickUpLocation;
 		this.deliveryDate = deliveryDate;
 		this.deliveryLocation = deliveryLocation;
-		this.user = user;
-		this.car = car;
+		this.cpfCustomer = cpfCustomer;
+		this.idCar = idCar;
 		this.carProtection = carProtection;
 		this.gps = gps;
 		this.cleaning = cleaning;
@@ -117,31 +117,31 @@ public class Rent {
 	}
 
 	/**
-	 * @return o user
+	 * @return o customer
 	 */
-	public User getUser() {
-		return user;
+	public String getCpfCustomer() {
+		return cpfCustomer;
 	}
 
 	/**
-	 * @param user o user a ser configurado
+	 * @param customer o customer a ser configurado
 	 */
-	public void setUser(User user) {
-		this.user = user;
+	public void setCpfCustomer(String cpfCustomer) {
+		this.cpfCustomer = cpfCustomer;
 	}
 
 	/**
 	 * @return o car
 	 */
-	public Car getCar() {
-		return car;
+	public int getIdCar() {
+		return idCar;
 	}
 
 	/**
 	 * @param car o car a ser configurado
 	 */
-	public void setCar(Car car) {
-		this.car = car;
+	public void setIdCar(int idCar) {
+		this.idCar = idCar;
 	}
 
 	/**
@@ -227,6 +227,4 @@ public class Rent {
 	public void setBoosterSeat(boolean boosterSeat) {
 		this.boosterSeat = boosterSeat;
 	}
-	
-	
 }

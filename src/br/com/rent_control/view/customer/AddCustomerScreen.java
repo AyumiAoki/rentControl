@@ -1,17 +1,14 @@
 package br.com.rent_control.view.customer;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
+import javax.swing.*;
+import br.com.rent_control.view.MenuPanel;
+import br.com.rent_control.controller.*;
+import br.com.rent_control.controller.customer.AddCustomerController;
+import br.com.rent_control.view.components.*;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import br.com.rent_control.controller.CreateCustomerController;
-import br.com.rent_control.view.components.ColorUtils;
-import br.com.rent_control.view.components.CustomField;
-
-public class CreateCustomerScreen extends JPanel {
+public class AddCustomerScreen extends JPanel {
+	
 	private static final long serialVersionUID = 1L;
 	 
 	private CustomField messagerField;
@@ -21,16 +18,21 @@ public class CreateCustomerScreen extends JPanel {
 	private CustomField cnhField;
 	private JButton addButton;
 	
-	public CreateCustomerScreen() {
+    private final RentControl frameRentControl;
+    private final MenuPanel menuPanel;
+	
+	public AddCustomerScreen(final RentControl frameRentControl, final MenuPanel menuPanel) {
 		setLayout(null);
 		setBackground(Color.white);
+	
+		this.menuPanel = menuPanel;
+		this.frameRentControl = frameRentControl;
 		
-		messagerField = new CustomField("Cadastro de cliente");
+		messagerField = new CustomField("Cadastro de cliente", 40);
 		nameField = new CustomField("Nome", 111, 92);
 		cpfField = new CustomField("CPF", 455, 92);
-		dateOfBirthField = new CustomField("Data de nascimento", 455, 182);
-		cnhField = new CustomField("Data de nascimento", 111, 182);
-		
+		dateOfBirthField = new CustomField("CheckDate de nascimento", 455, 179);
+		cnhField = new CustomField("Número da licensa de motorista", 111, 179);
 		
 		addButton = new JButton("Cadastrar");
 		addButton.setForeground(Color.WHITE);
@@ -49,7 +51,7 @@ public class CreateCustomerScreen extends JPanel {
 		add(cnhField.getTextField());
 		add(addButton);
 		
-		new CreateCustomerController(this);
+		new AddCustomerController(this);
 	}
 
 	/**
@@ -121,7 +123,18 @@ public class CreateCustomerScreen extends JPanel {
 	public void setAddButton(JButton addButton) {
 		this.addButton = addButton;
 	}
-	
-	
-	
+
+	/**
+	 * @return the frameRentControl
+	 */
+	public RentControl getFrameRentControl() {
+		return frameRentControl;
+	}
+
+	/**
+	 * @return the menuPanel
+	 */
+	public MenuPanel getMenuPanel() {
+		return menuPanel;
+	}
 }

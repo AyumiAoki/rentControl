@@ -20,7 +20,7 @@ public class CarBo {
 	 * Parameterless class constructor.
 	 */
 	public CarBo() {
-		this.carDao = new CarDao();
+		carDao = new CarDao();
 	}
 
 	public boolean addCar(String[] listCar) {

@@ -57,7 +57,16 @@ public class CarDao {
 
 				car.setCategory(rs.getString(Car.COLUMN_CATEGORY));
 			    car.setModelCar(rs.getString(Car.COLUMN_MODEL));
-			    car.setMaxPassengers(Integer.parseInt(rs.getString(Car.COLUMN_MAXPASSENGERS)));
+			    car.setMaxPassengers(rs.getInt(Car.COLUMN_MAXPASSENGERS));
+			    car.setTrunkSize(rs.getDouble(Car.COLUMN_TRUNKSIZE));
+			    car.setTransmissionType(rs.getString(Car.COLUMN_TRANSMISSIONTYPE));
+			    car.setFuelType(rs.getString(Car.COLUMN_FUELTYPE));
+			    car.setConsumptionAverage(rs.getDouble(Car.COLUMN_CONSUMPTIONAVARAGE));
+			    car.setDailyCost(rs.getDouble(Car.COLUMN_DAILY));
+			    car.setHasAc(rs.getBoolean(Car.COLUMN_HASAC));
+			    car.setHasAirbag(rs.getBoolean(Car.COLUMN_HASAIRBAG));
+			    car.setHasAbsBrakes(rs.getBoolean(Car.COLUMN_HASABS));
+			    car.setHasDvdPlayer(rs.getBoolean(Car.COLUMN_HASDVD));
 			    car.setId(Integer.parseInt(rs.getString(Car.ID)));
 				cars.add(car);
 			}
@@ -67,7 +76,7 @@ public class CarDao {
 		}
 		return null;
 	}
-	
+		
 	public boolean deleteCarById(int id) {
 		String sql = "delete from car where id = ?";
 
@@ -81,13 +90,6 @@ public class CarDao {
 		} catch (SQLException e) {
 			System.err.println("Erro ao excluir carro: " + e.getMessage());
 			return false;
-		}
-	}
-	
-	public static void main(String[] args) {
-		CarDao c = new CarDao();
-		for (Car car : c.listCars()) {
-			System.out.println(car.getCategory());
 		}
 	}
 }

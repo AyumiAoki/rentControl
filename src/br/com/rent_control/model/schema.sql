@@ -8,11 +8,10 @@ create table employee(
     primary key (cpf)
 );
 
-create table user(
+create table customer(
     name varchar(50) not null,
     cpf varchar(11) not null unique,
     licenseNumber bigint not null unique,
-    idNumber int not null unique,
     dateOfBirth varchar(8) not null,
     primary key (cpf)
 );
@@ -38,17 +37,25 @@ create table rent(
     withdrawalDate varchar(8) not null,
     pickUpLocation varchar(50) not null,
     deliveryDate varchar(8) not null,
-    deliveryLocation varchar(50) not null,
+    returnLocation varchar(50) not null,
     carProtection boolean not null,
     gps boolean not null,
     cleaning boolean not null,
     drinkComfort boolean not null,
     babyChair boolean not null,
     boosterSeat boolean not null,
-    cpfUser varchar(11) not null unique,
-    idCar INT NOT NULL,
-    foreign key (cpfUser) references user(cpf),
+    cpfCustomer varchar(11) not null,
+    idCar int not null,
+    foreign key (cpfCustomer) references customer(cpf),
     foreign key (idCar) references car(id)
 );
 
+create table rentalAddresses(
+    address varchar(50) not null,
+    primary key (address)
+);
+
 insert into employee values ("Ayumi Aoki", "04761241233", "ayumi", "123");
+insert into rentalAddresses values ("Agencia aeroporto");
+insert into rentalAddresses values ("Agencia carrefur adrianopolis");
+insert into rentalAddresses values ("Agencia carrefur centro");

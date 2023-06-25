@@ -1,97 +1,90 @@
-/**
- * 
- */
-package br.com.rent_control.view;
+package br.com.rent_control.view.car;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.util.List;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-
-import br.com.rent_control.controller.CarManagementController;
-import br.com.rent_control.controller.RentControl;
-import br.com.rent_control.model.dao.CarDao;
+import java.awt.*;
+import javax.swing.*;
 import br.com.rent_control.model.vo.Car;
-import br.com.rent_control.model.vo.User;
-import br.com.rent_control.view.components.ColorUtils;
-import br.com.rent_control.view.components.CustomTable;
+import br.com.rent_control.model.dao.CarDao;
+import br.com.rent_control.controller.*;
+import br.com.rent_control.controller.car.CarManagementController;
+import br.com.rent_control.view.MenuPanel;
+import br.com.rent_control.view.components.*;
 import br.com.rent_control.view.customer.CustomerManagementScreen.ActionButton;
 
 /**
  * @author ayumi
  *
  */
+
 public class CarManagementScreen extends JPanel {
+
+	private static final long serialVersionUID = -1189731144824553401L;
 	private JButton newCar;
 	private CarDao carDao;
 	private List<Car> cars;
 	private JScrollPane scrollPane;
 	private MenuPanel menuPanel;
 	private final RentControl frameRentControl;
-	/**
-	 * 
-	 */
+
 	public CarManagementScreen(final RentControl frameRentControl, MenuPanel menuPanel) {
-		// TODO Stub de construtor gerado automaticamente
 		setLayout(null);
 		setBackground(Color.white);
-		
+
 		this.menuPanel = menuPanel;
 		this.frameRentControl = frameRentControl;
-		
+
 		JLabel messagerLabel = new JLabel("Veículos");
 		messagerLabel.setBounds(50, 24, 320, 15);
 		messagerLabel.setFont(messagerLabel.getFont().deriveFont(Font.BOLD, 16));
-		
+
 		newCar = new JButton("Novo");
 		newCar.setForeground(Color.WHITE);
 		newCar.setBounds(750, 20, 80, 34);
 		newCar.setBackground(ColorUtils.PRIMARY_LIGHT_COLOR);
 		newCar.setBorder(null);
-		
+
 		add(newCar);
 		add(messagerLabel);
 		carDao = new CarDao();
 		tableSetup();
-		
+
 		new CarManagementController(this);
 	}
-	
+
 	private ActionButton deleteOrEdit = (String id, String type) -> {
-		if(type.equals("edit")) {
+		if (type.equals("edit")) {
 			System.out.println("Edição!");
 			return;
+		} else {
+			if(carDao.deleteCarById(Integer.parseInt(id))) {
+				JOptionPane.showMessageDialog(null, "Veículo excluido com sucesso!");
+				this.remove(scrollPane);
+				tableSetup();
+				this.revalidate();
+				this.repaint();
+			} else {
+				JOptionPane.showMessageDialog(null, "Erro ao excluir veículo!");
+			}		
 		}
-		System.out.println("Exclusão! " + id);
-		carDao.deleteCarById(Integer.parseInt(id));
-		this.remove(scrollPane);
-		tableSetup();
-		this.revalidate();
-		this.repaint();
 	};
-	
+
 	private void tableSetup() {
 		cars = carDao.listCars();
 		CustomTable customTable = new CustomTable(deleteOrEdit, getDataTable());
 		scrollPane = new JScrollPane(customTable);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.setBounds(50, 100, 789, 500);
-        scrollPane.setBorder(null);
-        this.add(scrollPane);
-		
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setBounds(50, 100, 789, 500);
+		scrollPane.setBorder(null);
+		this.add(scrollPane);
 	}
-	
-	private Object[][] getDataTable(){
+
+	private Object[][] getDataTable() {
 		Object[][] data = new Object[cars.size() + 1][4];
-		data[0] = new Object[]{"Categoria", "Modelo", "Qtd", "ID"};
+		data[0] = new Object[] { "Categoria", "Modelo", "Qtd", "ID" };
 		for (int i = 0; i < cars.size(); i++) {
-            Car car = cars.get(i);
-            data[i + 1] = new Object[]{car.getCategory(), car.getModelCar(), car.getMaxPassengers(), car.getId()};
-        }
+			Car car = cars.get(i);
+			data[i + 1] = new Object[] { car.getCategory(), car.getModelCar(), car.getMaxPassengers(), car.getId() };
+		}
 		return data;
 	}
 
@@ -143,5 +136,4 @@ public class CarManagementScreen extends JPanel {
 	public RentControl getFrameRentControl() {
 		return frameRentControl;
 	}
-	
 }
