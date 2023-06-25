@@ -3,6 +3,7 @@ package br.com.rent_control.controller.rent;
 import javax.swing.JOptionPane;
 import br.com.rent_control.model.dao.CustomerDao;
 import br.com.rent_control.model.vo.Customer;
+import br.com.rent_control.model.vo.Rent;
 import br.com.rent_control.view.components.CheckDate;
 import br.com.rent_control.view.rent.*;
 
@@ -66,6 +67,8 @@ public class StepOneRentController {
 				int deliveryDay = Integer.parseInt(deliveryDate.substring(0, 2));
 				int deliveryMonth = Integer.parseInt(deliveryDate.substring(2, 4));
 				int deliveryYear = Integer.parseInt(deliveryDate.substring(4, 8));
+				
+				int dailyAmount = new CheckDate().calculateDifferenceDays(withdrawalDay, withdrawalMonth, withdrawalYear, deliveryDay, deliveryMonth, deliveryYear);
 
 				if (!checkDate.checkDate(withdrawalDay, withdrawalMonth, withdrawalYear)) {
 					JOptionPane.showMessageDialog(null, "Data de retirada inválida");
@@ -75,8 +78,16 @@ public class StepOneRentController {
 						deliveryMonth, deliveryYear)) {
 					JOptionPane.showMessageDialog(null, "A data de devolução tem que ser maior que a de retirada");
 				} else {
+					Rent rent = new Rent();
+					rent.setIdCar(stepOneRentScreen.getIdCar());
+					rent.setCpfCustomer(stepOneRentScreen.getCustomer().getCpf());
+					rent.setWithdrawalDate(withdrawalDate);
+					rent.setPickUpLocation(stepOneRentScreen.getPickUpLocation().getComboBox().getSelectedItem().toString());
+					rent.setDeliveryDate(deliveryDate);
+					rent.setDeliveryLocation(stepOneRentScreen.getReturnLocation().getComboBox().getSelectedItem().toString());
+					
 					stepOneRentScreen.getMenuPanel().getContentPanel().removeAll();
-					stepOneRentScreen.getMenuPanel().getContentPanel().add(new StepTwoRentScreen(stepOneRentScreen.getFrameRentControl(), stepOneRentScreen.getMenuPanel(), stepOneRentScreen.getIdCar(), stepOneRentScreen.getCpfFieldDisable().getTextField().getText()));
+					stepOneRentScreen.getMenuPanel().getContentPanel().add(new StepTwoRentScreen(stepOneRentScreen.getFrameRentControl(), stepOneRentScreen.getMenuPanel(), rent, dailyAmount, stepOneRentScreen.getDailyCost()));
 					stepOneRentScreen.getMenuPanel().getContentPanel().revalidate();
 					stepOneRentScreen.getMenuPanel().getContentPanel().repaint();
 				}

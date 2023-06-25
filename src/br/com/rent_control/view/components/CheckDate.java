@@ -1,5 +1,8 @@
 package br.com.rent_control.view.components;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 /**
  * 
  * @author Ayumi Aoki Santana
@@ -41,6 +44,17 @@ public class CheckDate {
 		}
 
 		return false;
+	}
+	
+	public int calculateDifferenceDays(int dia1, int mes1, int ano1, int dia2, int mes2, int ano2) {
+	    if (!ehDataValida(dia1, mes1, ano1) || !ehDataValida(dia2, mes2, ano2)) {
+	        return -1; 
+	    }
+	    
+	    LocalDate data1 = LocalDate.of(ano1, mes1, dia1);
+	    LocalDate data2 = LocalDate.of(ano2, mes2, dia2);
+	    
+	    return (int) ChronoUnit.DAYS.between(data1, data2);
 	}
 
 	private boolean ehDataValida(int dia, int mes, int ano) {

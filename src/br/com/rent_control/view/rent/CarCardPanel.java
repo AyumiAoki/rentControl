@@ -46,8 +46,9 @@ public class CarCardPanel extends JPanel {
 	private JPanel detailsPanel;
 	
 	private int idCar;
+	private double dailyCost;
 
-	public CarCardPanel(Car car, final RentControl frameRentControl, MenuPanel menuPanel, int idCar) {
+	public CarCardPanel(Car car, final RentControl frameRentControl, MenuPanel menuPanel, int idCar, double dailyCost) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setBackground(ColorUtils.SECUNDARY_COLOR);
 		setBorder(new LineBorder(ColorUtils.SECUNDARY_DARK_COLOR, 2));
@@ -55,6 +56,7 @@ public class CarCardPanel extends JPanel {
 		this.frameRentControl = frameRentControl;
 		this.menuPanel = menuPanel;
 		this.idCar = idCar;
+		this.dailyCost = dailyCost;
 
 		// Elementos do painel de informações
 		groupLabel = new JLabel(car.getCategory());
@@ -266,5 +268,19 @@ public class CarCardPanel extends JPanel {
 	 */
 	public void setIdCar(int idCar) {
 		this.idCar = idCar;
+	}
+
+	/**
+	 * @return o dailyCost
+	 */
+	public double getDailyCost() {
+		return dailyCost;
+	}
+
+	/**
+	 * @param dailyCost o dailyCost a ser configurado
+	 */
+	public void setDailyCost(double dailyCost) {
+		this.dailyCost = dailyCost;
 	}
 }

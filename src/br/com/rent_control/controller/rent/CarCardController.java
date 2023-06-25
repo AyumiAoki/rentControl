@@ -15,7 +15,7 @@ public class CarCardController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				carCardPanel.getMenuPanel().getContentPanel().removeAll();
-				carCardPanel.getMenuPanel().getContentPanel().add(new StepOneRentScreen(carCardPanel.getFrameRentControl(), carCardPanel.getMenuPanel(), carCardPanel.getIdCar()));
+				carCardPanel.getMenuPanel().getContentPanel().add(new StepOneRentScreen(carCardPanel.getFrameRentControl(), carCardPanel.getMenuPanel(), carCardPanel.getIdCar(), carCardPanel.getDailyCost()));
 				carCardPanel.getMenuPanel().getContentPanel().revalidate();
 				carCardPanel.getMenuPanel().getContentPanel().repaint();
 			}

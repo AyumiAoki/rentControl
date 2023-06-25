@@ -6,6 +6,7 @@ import javax.swing.event.*;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.metal.MetalButtonUI;
 import br.com.rent_control.view.components.ColorUtils;
+import br.com.rent_control.view.rent.RentClosing;
 import br.com.rent_control.view.rent.StepTwoRentScreen;
 
 /**
@@ -25,6 +26,7 @@ public class StepTwoRentController {
 		eventsButton(stepTwoRentScreen.getAdditionalButtonThree());
 		eventsButton(stepTwoRentScreen.getAdditionalButtonFour());
 		eventsButton(stepTwoRentScreen.getAdditionalButtonFive());
+		eventsButton(stepTwoRentScreen.getAdditionalButtonSix());
 	}
 	
 	public void eventsButton(JToggleButton toggleButton) {
@@ -55,27 +57,18 @@ public class StepTwoRentController {
 		boolean additionalThree = stepTwoRentScreen.getAdditionalButtonThree().isSelected();
 		boolean additionalFour = stepTwoRentScreen.getAdditionalButtonFour().isSelected();
 		boolean additionalFive = stepTwoRentScreen.getAdditionalButtonFive().isSelected();
+		boolean additionalSix = stepTwoRentScreen.getAdditionalButtonSix().isSelected();
 		
-//		if (!category.equals("") && !maxPassengers.equals("") && !trunkSize.equals("") && !transmissionType.equals("")
-//				&& !fuelType.equals("") && !dailyCost.equals("") && !hasAbsBrakes.equals("") && !hasAc.equals("")
-//				&& !hasAirbag.equals("") && !hasAbsBrakes.equals("") && !hasDvdPlayer.equals("")) {
-//			List<String> listCar = Arrays.asList(category, modelCar, maxPassengers, trunkSize, transmissionType,
-//					fuelType, consumptionAverage, dailyCost, hasAc, hasAirbag, hasAbsBrakes, hasDvdPlayer);
-//			
-//			if(carBo.addCar(listCar.toArray(new String[0]))) {
-//				JOptionPane.showMessageDialog(null, "Veículo cadastrado com sucesso!");
-//				
-//				addCarScreen.getModelCarField().setText("");
-//
-//				addCarScreen.getMenuPanel().getContentPanel().removeAll();
-//				addCarScreen.getMenuPanel().getContentPanel().add( new CarManagementScreen(addCarScreen.getFrameRentControl(), addCarScreen.getMenuPanel()));
-//				addCarScreen.getMenuPanel().getContentPanel().revalidate();
-//				addCarScreen.getMenuPanel().getContentPanel().repaint();
-//			} else {
-//				JOptionPane.showMessageDialog(null, "Erro ao cadastrar veículo!");
-//			}
-//		} else {
-//			JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
-//		}
+		stepTwoRentScreen.getRent().setCarProtection(additionalOne);
+		stepTwoRentScreen.getRent().setGps(additionalTwo);
+		stepTwoRentScreen.getRent().setCleaning(additionalThree);
+		stepTwoRentScreen.getRent().setDrinkComfort(additionalFour);
+		stepTwoRentScreen.getRent().setBabyChair(additionalFive);
+		stepTwoRentScreen.getRent().setBoosterSeat(additionalSix);
+		
+		stepTwoRentScreen.getMenuPanel().getContentPanel().removeAll();
+		stepTwoRentScreen.getMenuPanel().getContentPanel().add(new RentClosing(stepTwoRentScreen.getFrameRentControl(), stepTwoRentScreen.getMenuPanel(), stepTwoRentScreen.getRent(), stepTwoRentScreen.getDailyAmount(), stepTwoRentScreen.getDailyCost()));
+		stepTwoRentScreen.getMenuPanel().getContentPanel().revalidate();
+		stepTwoRentScreen.getMenuPanel().getContentPanel().repaint();
 	}
 }
