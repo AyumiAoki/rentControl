@@ -9,6 +9,8 @@ import br.com.rent_control.view.car.CarManagementScreen;
 
 import javax.swing.JOptionPane;
 import br.com.rent_control.model.bo.CarBo;
+import br.com.rent_control.model.dao.CarDao;
+import br.com.rent_control.model.vo.Car;
 
 /**
  * @author ayumi
@@ -45,20 +47,43 @@ public class AddCarController {
 			List<String> listCar = Arrays.asList(category, modelCar, maxPassengers, trunkSize, transmissionType,
 					fuelType, consumptionAverage, dailyCost, hasAc, hasAirbag, hasAbsBrakes, hasDvdPlayer);
 			
-			if(carBo.addCar(listCar.toArray(new String[0]))) {
-				JOptionPane.showMessageDialog(null, "Veículo cadastrado com sucesso!");
+			if(addCarScreen.getAddCarButton().getText().equals("Salvar")) {
 				
-				addCarScreen.getModelCarField().setText("");
-
-				addCarScreen.getMenuPanel().getContentPanel().removeAll();
-				addCarScreen.getMenuPanel().getContentPanel().add( new CarManagementScreen(addCarScreen.getFrameRentControl(), addCarScreen.getMenuPanel()));
-				addCarScreen.getMenuPanel().getContentPanel().revalidate();
-				addCarScreen.getMenuPanel().getContentPanel().repaint();
-			} else {
-				JOptionPane.showMessageDialog(null, "Erro ao cadastrar veículo!");
+				updateCar(listCar);		
+			}else {
+				
+				addCar(listCar);
 			}
+			
 		} else {
 			JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
 		}
+	}
+	
+	private void updateCar(List<String> listCar) {
+		if(carBo.updateCar(listCar.toArray(new String[0]), addCarScreen.getCar().getId())) {
+			JOptionPane.showMessageDialog(null, "Veículo atualizado com sucesso!");
+			openCarManagementScreen();
+		} else {
+			JOptionPane.showMessageDialog(null, "Erro ao cadastrar veículo!");
+		}
+	}
+	
+	private void addCar(List<String> listCar) {
+		if(carBo.addCar(listCar.toArray(new String[0]))) {
+			JOptionPane.showMessageDialog(null, "Veículo cadastrado com sucesso!");
+			openCarManagementScreen();
+		} else {
+			JOptionPane.showMessageDialog(null, "Erro ao cadastrar veículo!");
+		}
+	}
+	
+	private void openCarManagementScreen() {
+		addCarScreen.getModelCarField().setText("");
+
+		addCarScreen.getMenuPanel().getContentPanel().removeAll();
+		addCarScreen.getMenuPanel().getContentPanel().add( new CarManagementScreen(addCarScreen.getFrameRentControl(), addCarScreen.getMenuPanel()));
+		addCarScreen.getMenuPanel().getContentPanel().revalidate();
+		addCarScreen.getMenuPanel().getContentPanel().repaint();
 	}
 }

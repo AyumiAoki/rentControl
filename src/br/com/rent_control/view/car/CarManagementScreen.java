@@ -4,11 +4,13 @@ import java.util.List;
 import java.awt.*;
 import javax.swing.*;
 import br.com.rent_control.model.vo.Car;
+import br.com.rent_control.model.vo.Customer;
 import br.com.rent_control.model.dao.CarDao;
 import br.com.rent_control.controller.*;
 import br.com.rent_control.controller.car.CarManagementController;
 import br.com.rent_control.view.MenuPanel;
 import br.com.rent_control.view.components.*;
+import br.com.rent_control.view.customer.AddCustomerScreen;
 import br.com.rent_control.view.customer.CustomerManagementScreen.ActionButton;
 
 /**
@@ -53,7 +55,11 @@ public class CarManagementScreen extends JPanel {
 
 	private ActionButton deleteOrEdit = (String id, String type) -> {
 		if (type.equals("edit")) {
-			System.out.println("Edição!");
+			Car car = carDao.getCarById(id);
+			menuPanel.getContentPanel().removeAll();
+			menuPanel.getContentPanel().add(new AddCarScreen(getFrameRentControl(), menuPanel, car));
+			menuPanel.getContentPanel().revalidate();
+			menuPanel.getContentPanel().repaint();
 			return;
 		} else {
 			if(carDao.deleteCarById(Integer.parseInt(id))) {
