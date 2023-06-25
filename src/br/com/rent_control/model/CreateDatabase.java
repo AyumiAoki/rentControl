@@ -8,7 +8,6 @@ import java.sql.*;
  * Class CreateDatabase - Used to create the database and tables application
  * 
  * @author Ayumi Aoki &lt;ayumi.santana@icomp.ufam.edu.br&gt;
- * @version 1.0, 2023-06-08
  */
 
 public class CreateDatabase {
@@ -25,6 +24,9 @@ public class CreateDatabase {
 	public CreateDatabase() {
 	}
 
+	/**
+	 * Method that creates the database and tables.
+	 */
 	public void createDbTables() {
 		try (Connection connection = DriverManager.getConnection(url, username, password);
 				Statement statement = connection.createStatement()) {

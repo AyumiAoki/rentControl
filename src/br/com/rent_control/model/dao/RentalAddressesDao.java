@@ -6,15 +6,23 @@ import br.com.rent_control.model.ConnectionDB;
 import br.com.rent_control.model.vo.RentalAddresses;
 
 /**
- * @author ayumi
- *
+ * Class RentalAddressesDao - Represents the data of the rental company
+ * addresses in the application
+ * 
+ * @author Ayumi Aoki &lt;ayumi.santana@icomp.ufam.edu.br&gt;
  */
 
 public class RentalAddressesDao {
-	
+
+	/**
+	 * Method that returns a list of all rental company addresses registered in the
+	 * database.
+	 * 
+	 * @return mailing list
+	 */
 	public List<RentalAddresses> listLocations() {
 		List<RentalAddresses> locations = new ArrayList<RentalAddresses>();
-		
+
 		String sql = "SELECT * FROM rentalAddresses";
 
 		try (Connection connection = ConnectionDB.getConnection();

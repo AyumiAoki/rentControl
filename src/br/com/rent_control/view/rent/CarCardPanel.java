@@ -1,13 +1,9 @@
-/**
- * 
- */
 package br.com.rent_control.view.rent;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-
 import br.com.rent_control.controller.RentControl;
 import br.com.rent_control.controller.rent.CarCardController;
 import br.com.rent_control.model.vo.Car;
@@ -15,8 +11,9 @@ import br.com.rent_control.view.MenuPanel;
 import br.com.rent_control.view.components.ColorUtils;
 
 /**
- * @author ayumi
- *
+ * Class CarCardPanel - Represents cards with information about rental cars
+ * 
+ * @author Ayumi Aoki &lt;ayumi.santana@icomp.ufam.edu.br&gt;
  */
 
 public class CarCardPanel extends JPanel {
@@ -44,10 +41,19 @@ public class CarCardPanel extends JPanel {
 
 	private JPanel infoPanel;
 	private JPanel detailsPanel;
-	
+
 	private int idCar;
 	private double dailyCost;
 
+	/**
+	 * Class constructor with parameter.
+	 * 
+	 * @param car
+	 * @param frameRentControl
+	 * @param menuPanel
+	 * @param idCar
+	 * @param dailyCost
+	 */
 	public CarCardPanel(Car car, final RentControl frameRentControl, MenuPanel menuPanel, int idCar, double dailyCost) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setBackground(ColorUtils.SECUNDARY_COLOR);
@@ -164,7 +170,7 @@ public class CarCardPanel extends JPanel {
 		hasDvdPlayerLabel.setFont(groupLabel.getFont().deriveFont(Font.BOLD, 12));
 		hasDvdPlayerLabel.setBounds(0, 239, 270, 25);
 		hasDvdPlayerLabel.setHorizontalAlignment(JLabel.CENTER);
-		
+
 		hideInformationButton = new JButton("<html><u>Esconder informações</u></html>");
 		hideInformationButton.setForeground(ColorUtils.PRIMARY_COLOR);
 		hideInformationButton.setFont(detailsCarButton.getFont().deriveFont(Font.BOLD, 14));
@@ -187,7 +193,7 @@ public class CarCardPanel extends JPanel {
 
 		// Adicionar os componentes aos painéis
 		add(infoPanel);
-		
+
 		addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseEntered(java.awt.event.MouseEvent evt) {
 				setBorder(BorderFactory.createLineBorder(ColorUtils.SECUNDARY_DARK_COLOR, 2));
@@ -207,7 +213,7 @@ public class CarCardPanel extends JPanel {
 				detailsPanel.setVisible(true);
 			}
 		});
-		
+
 		hideInformationButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -217,68 +223,68 @@ public class CarCardPanel extends JPanel {
 				detailsPanel.setVisible(false);
 			}
 		});
-		
+
 		new CarCardController(this);
 	}
-	
+
 	/**
-	 * @return o frameRentControl
+	 * Returns the Jframe of the application.
+	 * 
+	 * @return RentControl containing the application frame instance.
 	 */
 	public RentControl getFrameRentControl() {
 		return frameRentControl;
 	}
 
 	/**
-	 * @return the menuPanel
+	 * Returns the application's options menu
+	 * 
+	 * @return MenuPanel containing the application menu
 	 */
 	public MenuPanel getMenuPanel() {
 		return menuPanel;
 	}
-	
-	/**
-	 * @param menuPanel the menuPanel to set
-	 */
-	public void setMenuPanel(MenuPanel menuPanel) {
-		this.menuPanel = menuPanel;
-	}
 
 	/**
-	 * @return o selectCarButton
+	 * Returns a button
+	 * 
+	 * @return JButtono containing the button instance
 	 */
 	public JButton getSelectCarButton() {
 		return selectCarButton;
 	}
 
 	/**
-	 * @param selectCarButton o selectCarButton a ser configurado
-	 */
-	public void setSelectCarButton(JButton selectCarButton) {
-		this.selectCarButton = selectCarButton;
-	}
-
-	/**
-	 * @return o idCar
+	 * Returns the vehicle id.
+	 * 
+	 * @return int containing the vehicle id.
 	 */
 	public int getIdCar() {
 		return idCar;
 	}
 
 	/**
-	 * @param idCar o idCar a ser configurado
+	 * Defines the vehicle id.
+	 * 
+	 * @param idCar The id to set.
 	 */
 	public void setIdCar(int idCar) {
 		this.idCar = idCar;
 	}
 
 	/**
-	 * @return o dailyCost
+	 * Returns the daily Cost.
+	 * 
+	 * @return double containing the daily Cost.
 	 */
 	public double getDailyCost() {
 		return dailyCost;
 	}
 
 	/**
-	 * @param dailyCost o dailyCost a ser configurado
+	 * Defines the daily Cost.
+	 * 
+	 * @param dailyCost The daily Cost to set.
 	 */
 	public void setDailyCost(double dailyCost) {
 		this.dailyCost = dailyCost;

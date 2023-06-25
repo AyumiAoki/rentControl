@@ -21,42 +21,51 @@ import br.com.rent_control.view.MenuPanel;
 import br.com.rent_control.view.components.ColorUtils;
 
 /**
- * @author ayumi
- *
+ * Class RentalScreen - Represents the vehicle rental screen in the application
+ * 
+ * @author Ayumi Aoki &lt;ayumi.santana@icomp.ufam.edu.br&gt;
  */
 
-public class RentalScreen extends JPanel{
+public class RentalScreen extends JPanel {
 
 	private static final long serialVersionUID = 711225098574938352L;
 	private final RentControl frameRentControl;
 	private MenuPanel menuPanel;
 	private JLabel mensage;
 
+	/**
+	 * Class constructor with parameter.
+	 * 
+	 * @param frameRentControl
+	 * @param menuPanel
+	 */
 	public RentalScreen(final RentControl frameRentControl, MenuPanel menuPanel) {
 		setLayout(null);
 		setBackground(Color.WHITE);
-		
+
 		this.frameRentControl = frameRentControl;
 		this.menuPanel = menuPanel;
-		
-		JPanel jp = new JPanel(new GridLayout(0,3, 10, 10));
-		jp.setBorder(BorderFactory.createCompoundBorder(new LineBorder(Color.WHITE, 0), new EmptyBorder(15, 15, 15, 10)));
-        
-        CarDao carDao = new CarDao();
-        
-        if(carDao.listCars().size() == 0) {
-        	mensage = new JLabel("Nenhum carro disponível para aluguel!");
-        	mensage.setForeground(ColorUtils.PRIMARY_COLOR);
-        	mensage.setFont(mensage.getFont().deriveFont(Font.BOLD, 18));
-        	mensage.setBounds(0, 322, 886, 25);
-        	mensage.setHorizontalAlignment(JLabel.CENTER);
-    		add(mensage);
-        } else {
-        	for (Car car : carDao.listCars()) {
-    			CarCardPanel card = new CarCardPanel(car, this.getFrameRentControl(), this.getMenuPanel(), car.getId(), car.getDailyCost());
-    			jp.add(card);
-    		}
-        }
+
+		JPanel jp = new JPanel(new GridLayout(0, 3, 10, 10));
+		jp.setBorder(
+				BorderFactory.createCompoundBorder(new LineBorder(Color.WHITE, 0), new EmptyBorder(15, 15, 15, 10)));
+
+		CarDao carDao = new CarDao();
+
+		if (carDao.listCars().size() == 0) {
+			mensage = new JLabel("Nenhum carro disponível para aluguel!");
+			mensage.setForeground(ColorUtils.PRIMARY_COLOR);
+			mensage.setFont(mensage.getFont().deriveFont(Font.BOLD, 18));
+			mensage.setBounds(0, 322, 886, 25);
+			mensage.setHorizontalAlignment(JLabel.CENTER);
+			add(mensage);
+		} else {
+			for (Car car : carDao.listCars()) {
+				CarCardPanel card = new CarCardPanel(car, this.getFrameRentControl(), this.getMenuPanel(), car.getId(),
+						car.getDailyCost());
+				jp.add(card);
+			}
+		}
 
 		JScrollPane js = new JScrollPane(jp);
 		jp.setBackground(Color.WHITE);
@@ -65,25 +74,22 @@ public class RentalScreen extends JPanel{
 		js.setBounds(0, 0, 886, 670);
 		add(js);
 	}
-	
+
 	/**
-	 * @return o frameRentControl
+	 * Returns the Jframe of the application.
+	 * 
+	 * @return RentControl containing the application frame instance.
 	 */
 	public RentControl getFrameRentControl() {
 		return frameRentControl;
 	}
 
 	/**
-	 * @return the menuPanel
+	 * Returns the application's options menu
+	 * 
+	 * @return MenuPanel containing the application menu
 	 */
 	public MenuPanel getMenuPanel() {
 		return menuPanel;
-	}
-	
-	/**
-	 * @param menuPanel the menuPanel to set
-	 */
-	public void setMenuPanel(MenuPanel menuPanel) {
-		this.menuPanel = menuPanel;
 	}
 }

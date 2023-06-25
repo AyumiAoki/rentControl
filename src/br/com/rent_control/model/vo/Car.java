@@ -4,7 +4,6 @@ package br.com.rent_control.model.vo;
  * Class Car - Represents a car in the application
  * 
  * @author Ayumi Aoki &lt;ayumi.santana@icomp.ufam.edu.br&gt;
- * @version 1.0, 2023-06-06
  */
 
 public class Car {
@@ -22,7 +21,6 @@ public class Car {
 	private boolean hasAirbag;
 	private boolean hasAbsBrakes;
 	private boolean hasDvdPlayer;
-	
 
 	// Constants with column names
 	public static final String COLUMN_CATEGORY = "category";
@@ -95,14 +93,18 @@ public class Car {
 	}
 
 	/**
-	 * @return o modelCar
+	 * Returns the vehicle model.
+	 * 
+	 * @return String containing the vehicle model.
 	 */
 	public String getModelCar() {
 		return modelCar;
 	}
 
 	/**
-	 * @param modelCar o modelCar a ser configurado
+	 * Defines the vehicle model.
+	 * 
+	 * @param modelCar The vehicle model to set.
 	 */
 	public void setModelCar(String modelCar) {
 		this.modelCar = modelCar;
@@ -181,14 +183,18 @@ public class Car {
 	}
 
 	/**
-	 * @return o consumptionAverage
+	 * Returns the vehicle's average consumption km/L.
+	 * 
+	 * @return double containing the average consumption.
 	 */
 	public double getConsumptionAverage() {
 		return consumptionAverage;
 	}
 
 	/**
-	 * @param consumptionAverage o consumptionAverage a ser configurado
+	 * Defines the average consumption of the vehicle.
+	 * 
+	 * @param consumptionAverage The consumption average to be defined.
 	 */
 	public void setConsumptionAverage(double consumptionAverage) {
 		this.consumptionAverage = consumptionAverage;
@@ -286,18 +292,20 @@ public class Car {
 	}
 
 	/**
-	 * @return o id
+	 * Returns the vehicle id.
+	 * 
+	 * @return int containing the vehicle id.
 	 */
 	public int getId() {
 		return id;
 	}
 
 	/**
-	 * @param id o id a ser configurado
+	 * Defines the vehicle id.
+	 * 
+	 * @param id The id to set.
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	
 }

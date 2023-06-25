@@ -11,6 +11,12 @@ import br.com.rent_control.view.MenuPanel;
 import br.com.rent_control.view.components.ColorUtils;
 import br.com.rent_control.view.components.CustomTable;
 
+/**
+ * Class CustomerManagementScreen - Represents the client management screen
+ * 
+ * @author Ayumi Aoki &lt;ayumi.santana@icomp.ufam.edu.br&gt;
+ */
+
 public class CustomerManagementScreen extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -22,10 +28,20 @@ public class CustomerManagementScreen extends JPanel {
 	private List<Customer> customers;
 	private CustomerDao customerDao;
 
+	/**
+	 * Interface that represents the action of the button
+	 *
+	 */
 	public interface ActionButton {
 		void action(String id, String type);
 	}
 
+	/**
+	 * Class constructor with parameter.
+	 * 
+	 * @param frameRentControl
+	 * @param menuPanel
+	 */
 	public CustomerManagementScreen(final RentControl frameRentControl, MenuPanel menuPanel) {
 		setLayout(null);
 		setBackground(Color.white);
@@ -52,6 +68,9 @@ public class CustomerManagementScreen extends JPanel {
 		new CustomerManagementController(this);
 	}
 
+	/**
+	 * Method that has the action to delete or edit
+	 */
 	private ActionButton deleteOrEdit = (String id, String type) -> {
 		if (type.equals("edit")) {
 			Customer customer = customerDao.getCustomerByCpf(id);
@@ -73,6 +92,9 @@ public class CustomerManagementScreen extends JPanel {
 
 	};
 
+	/**
+	 * Method that updates the screen with the table
+	 */
 	private void tableSetup() {
 		customers = customerDao.listCustomer();
 		CustomTable customTable = new CustomTable(deleteOrEdit, getDataTable());
@@ -84,6 +106,11 @@ public class CustomerManagementScreen extends JPanel {
 
 	}
 
+	/**
+	 * Method with the table object
+	 * 
+	 * @return Object[][]
+	 */
 	private Object[][] getDataTable() {
 		Object[][] data = new Object[customers.size() + 1][4];
 		data[0] = new Object[] { "Nome", "CPF", "CNH", "ID" };
@@ -96,63 +123,73 @@ public class CustomerManagementScreen extends JPanel {
 	}
 
 	/**
-	 * @return o frameRentControl
+	 * Returns the Jframe of the application.
+	 * 
+	 * @return RentControl containing the application frame instance.
 	 */
 	public RentControl getFrameRentControl() {
 		return frameRentControl;
 	}
 
 	/**
-	 * @return the menuPanel
+	 * Returns the application's options menu
+	 * 
+	 * @return MenuPanel containing the application menu
 	 */
 	public MenuPanel getMenuPanel() {
 		return menuPanel;
 	}
 
 	/**
-	 * @param menuPanel the menuPanel to set
-	 */
-	public void setMenuPanel(MenuPanel menuPanel) {
-		this.menuPanel = menuPanel;
-	}
-
-	/**
-	 * @return the messagerLabel
+	 * Returns a label
+	 * 
+	 * @return JLabel containing the button instance
 	 */
 	public JLabel getMessagerLabel() {
 		return messagerLabel;
 	}
 
 	/**
-	 * @param messagerLabel the messagerLabel to set
+	 * Define label changes
+	 * 
+	 * @param messagerLabel The label to be set
 	 */
 	public void setMessagerLabel(JLabel messagerLabel) {
 		this.messagerLabel = messagerLabel;
 	}
 
 	/**
-	 * @return the newCustomer
+	 * Returns a button
+	 * 
+	 * @return JButtono containing the button instance
 	 */
 	public JButton getNewCustomer() {
 		return newCustomer;
 	}
 
 	/**
-	 * @param newCustomer the newCustomer to set
+	 * Define button changes
+	 * 
+	 * @param newCustomer The button to be set
 	 */
 	public void setNewCustomer(JButton newCustomer) {
 		this.newCustomer = newCustomer;
 	}
 
 	/**
-	 * @return the customers
+	 * Returns a list of customers
+	 * 
+	 * @return customer list
+	 * 
 	 */
 	public List<Customer> getUsers() {
 		return customers;
 	}
 
 	/**
-	 * @param customers the customers to set
+	 * Define the customer list
+	 * 
+	 * @param customers The list of customers to be defined
 	 */
 	public void setUsers(List<Customer> customers) {
 		this.customers = customers;

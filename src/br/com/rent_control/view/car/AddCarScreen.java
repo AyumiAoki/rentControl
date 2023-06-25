@@ -1,7 +1,7 @@
 package br.com.rent_control.view.car;
 
 import java.awt.*;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -13,7 +13,12 @@ import br.com.rent_control.view.components.ColorUtils;
 import br.com.rent_control.view.MenuPanel;
 import br.com.rent_control.view.components.*;
 
-public class AddCarScreen extends JPanel{
+/**
+ * @author ayumi
+ *
+ */
+
+public class AddCarScreen extends JPanel {
 	private static final long serialVersionUID = 6407486089823829922L;
 
 	private Car car;
@@ -30,42 +35,42 @@ public class AddCarScreen extends JPanel{
 	private CustomField hasAirbagField;
 	private CustomField hasAbsBrakesField;
 	private CustomField hasDvdPlayerField;
-	
-    private JButton addCarButton;
-    
-    private AddCarController addCarController;
-    private final RentControl frameRentControl;
-    private final MenuPanel menuPanel;
-		
+
+	private JButton addCarButton;
+
+	private AddCarController addCarController;
+	private final RentControl frameRentControl;
+	private final MenuPanel menuPanel;
+
 	public AddCarScreen(final RentControl frameRentControl, final MenuPanel menuPanel) {
 		setLayout(null);
 		setBackground(Color.white);
 		setBorder(new EmptyBorder(10, 10, 10, 10));
-		
+
 		addCarController = new AddCarController(this);
 		this.menuPanel = menuPanel;
 		this.frameRentControl = frameRentControl;
-		
+
 		messagerField = new CustomField("Cadastro de veículo", 40);
 		categoryField = new CustomField("Categoria", 111, 92, getCategoryOptions());
 		modelCarField = new CustomField("Modelo", 455, 92);
 		maxPassengersField = new CustomField("Quantidade de passageiros", 111, 179, getMaxPassengersOptions());
 		trunkSizeField = new CustomField("Volume do porta malas (L)", 455, 179);
 		transmissionTypeField = new CustomField("Tipo de câmbio", 111, 266, getTransmissionTypeOptions());
-		fuelTypeField = new CustomField("Tipo de combustível", 455, 266, getFuelTypeOptions()); 
-		consumptionAverageField = new CustomField("Média de consumo (Km/L)", 111, 353); 
-		dailyCostField = new CustomField("Custo diário", 455, 353); 
-		hasAcField = new CustomField("Possui ar condicionado?", 111, 440, getHasOptions()); 
-		hasAirbagField = new CustomField("Possui airbag?", 455, 440, getHasOptions()); 
-		hasAbsBrakesField = new CustomField("Possui freio abs?", 111, 527, getHasOptions()); 
-		hasDvdPlayerField = new CustomField("Possui dvd ?", 455, 527, getHasOptions()); 
-		
+		fuelTypeField = new CustomField("Tipo de combustível", 455, 266, getFuelTypeOptions());
+		consumptionAverageField = new CustomField("Média de consumo (Km/L)", 111, 353);
+		dailyCostField = new CustomField("Custo diário", 455, 353);
+		hasAcField = new CustomField("Possui ar condicionado?", 111, 440, getHasOptions());
+		hasAirbagField = new CustomField("Possui airbag?", 455, 440, getHasOptions());
+		hasAbsBrakesField = new CustomField("Possui freio abs?", 111, 527, getHasOptions());
+		hasDvdPlayerField = new CustomField("Possui dvd ?", 455, 527, getHasOptions());
+
 		addCarButton = new JButton("Cadastrar");
 		addCarButton.setForeground(Color.WHITE);
 		addCarButton.setBounds(323, 617, 240, 35);
 		addCarButton.setBackground(ColorUtils.PRIMARY_COLOR);
 		addCarButton.setBorder(null);
-		
+
 		add(messagerField.getLabel());
 		add(categoryField.getLabel());
 		add(categoryField.getComboBox());
@@ -92,41 +97,44 @@ public class AddCarScreen extends JPanel{
 		add(hasDvdPlayerField.getLabel());
 		add(hasDvdPlayerField.getComboBox());
 		add(addCarButton);
-		
+
 		addCarButton.addActionListener(e -> addCarController.addCarButtonClicked());
 	}
-	
+
 	public AddCarScreen(final RentControl frameRentControl, final MenuPanel menuPanel, Car car) {
 		setLayout(null);
 		setBackground(Color.white);
 		setBorder(new EmptyBorder(10, 10, 10, 10));
-		
+
 		addCarController = new AddCarController(this);
 		this.menuPanel = menuPanel;
 		this.frameRentControl = frameRentControl;
-		
+
 		setCar(car);
-		
+
 		messagerField = new CustomField("Atualizar veículo", 40);
-		categoryField = new CustomField("Categoria", 111, 92, getCategoryOptions(), car.getCategory());	
+		categoryField = new CustomField("Categoria", 111, 92, getCategoryOptions(), car.getCategory());
 		modelCarField = new CustomField("Modelo", 455, 92, car.getModelCar(), true);
-		maxPassengersField = new CustomField("Quantidade de passageiros", 111, 179, getMaxPassengersOptions(), car.getMaxPassengers() + "");
+		maxPassengersField = new CustomField("Quantidade de passageiros", 111, 179, getMaxPassengersOptions(),
+				car.getMaxPassengers() + "");
 		trunkSizeField = new CustomField("Volume do porta malas (L)", 455, 179, car.getTrunkSize() + "", true);
-		transmissionTypeField = new CustomField("Tipo de câmbio", 111, 266, getTransmissionTypeOptions(), car.getTransmissionType());
-		fuelTypeField = new CustomField("Tipo de combustível", 455, 266, getFuelTypeOptions(), car.getFuelType()); 
-		consumptionAverageField = new CustomField("Média de consumo (Km/L)", 111, 353, car.getConsumptionAverage() + "", true); 
-		dailyCostField = new CustomField("Custo diário", 455, 353, car.getDailyCost() + "", true); 
-		hasAcField = new CustomField("Possui ar condicionado?", 111, 440, getHasOptions(), car.isHasAc()); 
-		hasAirbagField = new CustomField("Possui airbag?", 455, 440, getHasOptions(), car.isHasAirbag()); 
-		hasAbsBrakesField = new CustomField("Possui freio abs?", 111, 527, getHasOptions(),car.isHasAbsBrakes()); 
-		hasDvdPlayerField = new CustomField("Possui dvd ?", 455, 527, getHasOptions(), car.isHasDvdPlayer()); 
-		
+		transmissionTypeField = new CustomField("Tipo de câmbio", 111, 266, getTransmissionTypeOptions(),
+				car.getTransmissionType());
+		fuelTypeField = new CustomField("Tipo de combustível", 455, 266, getFuelTypeOptions(), car.getFuelType());
+		consumptionAverageField = new CustomField("Média de consumo (Km/L)", 111, 353, car.getConsumptionAverage() + "",
+				true);
+		dailyCostField = new CustomField("Custo diário", 455, 353, car.getDailyCost() + "", true);
+		hasAcField = new CustomField("Possui ar condicionado?", 111, 440, getHasOptions(), car.isHasAc());
+		hasAirbagField = new CustomField("Possui airbag?", 455, 440, getHasOptions(), car.isHasAirbag());
+		hasAbsBrakesField = new CustomField("Possui freio abs?", 111, 527, getHasOptions(), car.isHasAbsBrakes());
+		hasDvdPlayerField = new CustomField("Possui dvd ?", 455, 527, getHasOptions(), car.isHasDvdPlayer());
+
 		addCarButton = new JButton("Salvar");
 		addCarButton.setForeground(Color.WHITE);
 		addCarButton.setBounds(323, 617, 240, 35);
 		addCarButton.setBackground(ColorUtils.PRIMARY_COLOR);
 		addCarButton.setBorder(null);
-		
+
 		add(messagerField.getLabel());
 		add(categoryField.getLabel());
 		add(categoryField.getComboBox());
@@ -153,39 +161,40 @@ public class AddCarScreen extends JPanel{
 		add(hasDvdPlayerField.getLabel());
 		add(hasDvdPlayerField.getComboBox());
 		add(addCarButton);
-		
+
 		addCarButton.addActionListener(e -> addCarController.addCarButtonClicked());
 	}
-	
-	/**************Options ComboBox**************/
-	
+
+	/************** Options ComboBox **************/
+
 	private String[] getCategoryOptions() {
-        List<String> options = Arrays.asList("Compacto", "Standard", "Grande", "Econômico", "Premium", "Minivan");
-        return options.toArray(new String[0]);
-    }
-	
+		List<String> options = Arrays.asList("Compacto", "Standard", "Grande", "Econômico", "Premium", "Minivan");
+		return options.toArray(new String[0]);
+	}
+
 	private String[] getMaxPassengersOptions() {
-        List<String> options = Arrays.asList("2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
-        return options.toArray(new String[0]);
-    }
-	
+		List<String> options = Arrays.asList("2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
+		return options.toArray(new String[0]);
+	}
+
 	private String[] getTransmissionTypeOptions() {
-        List<String> options = Arrays.asList("Manual", "Automático");
-        return options.toArray(new String[0]);
-    }
-	
+		List<String> options = Arrays.asList("Manual", "Automático");
+		return options.toArray(new String[0]);
+	}
+
 	private String[] getFuelTypeOptions() {
-        List<String> options = Arrays.asList("Gasolina", "Diesel", "Etanol", "Hibrido");
-        return options.toArray(new String[0]);
-    }
-	
+		List<String> options = Arrays.asList("Gasolina", "Diesel", "Etanol", "Hibrido");
+		return options.toArray(new String[0]);
+	}
+
 	private String[] getHasOptions() {
-        List<String> options = Arrays.asList("Sim", "Não");
-        return options.toArray(new String[0]);
-    }
-	/**************End Options ComboBox**************/
-	
-	/**************Getters e setters**************/
+		List<String> options = Arrays.asList("Sim", "Não");
+		return options.toArray(new String[0]);
+	}
+
+	/************** End Options ComboBox **************/
+
+	/************** Getters e setters **************/
 	/**
 	 * @return o messagerField
 	 */
@@ -409,8 +418,6 @@ public class AddCarScreen extends JPanel{
 	public void setCar(Car car) {
 		this.car = car;
 	}
-	
-	
-	
-	/**************End Getters e setters**************/	
+
+	/************** End Getters e setters **************/
 }

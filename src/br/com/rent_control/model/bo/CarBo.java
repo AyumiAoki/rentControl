@@ -8,7 +8,6 @@ import br.com.rent_control.model.vo.Car;
  * application
  * 
  * @author Ayumi Aoki &lt;ayumi.santana@icomp.ufam.edu.br&gt;
- * @version 1.0, 2023-06-08
  */
 
 public class CarBo {
@@ -23,6 +22,13 @@ public class CarBo {
 		carDao = new CarDao();
 	}
 
+	/**
+	 * Method that receives data from the view and forwards it to the dao to be
+	 * added to the database.
+	 * 
+	 * @param listCar A list of car data that will be passed to dao.
+	 * @return boolean true or false if it was possible to add a car.
+	 */
 	public boolean addCar(String[] listCar) {
 		car = new Car();
 		car.setCategory(listCar[0]);
@@ -43,7 +49,15 @@ public class CarBo {
 		else
 			return false;
 	}
-	
+
+	/**
+	 * Method that receives data from the view and forwards it to the dao to be
+	 * updated to the database.
+	 * 
+	 * @param listCar A list of car data that will be passed to dao.
+	 * @param id      The id of the car that will be updated.
+	 * @return boolean true or false if it was possible to update a car.
+	 */
 	public boolean updateCar(String[] listCar, int id) {
 		car = new Car();
 		car.setCategory(listCar[0]);
@@ -59,7 +73,7 @@ public class CarBo {
 		car.setHasAbsBrakes((listCar[10].equals("Sim") ? true : false));
 		car.setHasDvdPlayer((listCar[11].equals("Sim") ? true : false));
 		car.setId(id);
-		
+
 		if (carDao.updateCar(car))
 			return true;
 		else

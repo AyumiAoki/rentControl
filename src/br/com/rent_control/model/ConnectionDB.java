@@ -5,8 +5,8 @@ import java.sql.*;
 /**
  * Class ConnectionDB - Represents the connection to the database in the
  * application
+ * 
  * @author Ayumi Aoki &lt;ayumi.santana@icomp.ufam.edu.br&gt;
- * @version 1.0, 2023-06-08
  */
 
 public class ConnectionDB {
@@ -18,24 +18,30 @@ public class ConnectionDB {
 
 	/**
 	 * Parameterless class constructor.
-	 * @throws SQLException 
+	 * 
+	 * @throws SQLException
 	 */
 	public static Connection getConnection() throws SQLException {
 		try {
 			return DriverManager.getConnection(url, user, pass);
 		} catch (SQLException e) {
 			System.err.println("Falha ao conectar ao banco de dados: " + e.getMessage());
-		    throw e;
+			throw e;
 		}
-    }
-    
-    public static void closeConnection(Connection conexao) {
-        try {
-            if (conexao != null && !conexao.isClosed()) {
-                conexao.close();
-            }
-        } catch (SQLException e) {
-            System.err.println("Erro ao fechar a conexão com o banco de dados: " + e.getMessage());
-        }
-    }
+	}
+
+	/**
+	 * Method to close database connection
+	 * 
+	 * @param conexao
+	 */
+	public static void closeConnection(Connection conexao) {
+		try {
+			if (conexao != null && !conexao.isClosed()) {
+				conexao.close();
+			}
+		} catch (SQLException e) {
+			System.err.println("Erro ao fechar a conexão com o banco de dados: " + e.getMessage());
+		}
+	}
 }

@@ -6,12 +6,18 @@ import br.com.rent_control.model.vo.Rent;
 
 /**
  * Class RentDao - Represents the dao of the rent in the application
+ * 
  * @author Ayumi Aoki &lt;ayumi.santana@icomp.ufam.edu.br&gt;
- * @version 1.0, 2023-06-08
  */
 
 public class RentDao {
-	
+
+	/**
+	 * Method that adds a location to a table in the database.
+	 * 
+	 * @param rent The lease to be added
+	 * @return boolean containing true or false if insertion is successful
+	 */
 	public boolean rentVehicle(Rent rent) {
 		String sql = "INSERT INTO rent (withdrawalDate, pickUpLocation, deliveryDate, returnLocation, carProtection, gps, cleaning, drinkComfort, babyChair, boosterSeat, cpfCustomer, idCar) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 

@@ -2,9 +2,7 @@ package br.com.rent_control.view;
 
 import java.awt.*;
 import javax.swing.*;
-
-import br.com.rent_control.controller.LoginController;
-import br.com.rent_control.controller.RentControl;
+import br.com.rent_control.controller.*;
 import br.com.rent_control.view.components.ColorUtils;
 
 /**
@@ -69,62 +67,50 @@ public class LoginScreen extends JPanel {
 		add(passwordLabel);
 		add(passwordField);
 		add(signInButton);
-		
+
 		loginController = new LoginController(this);
 		signInButton.addActionListener(e -> loginController.signInButtonClicked());
 	}
 
 	/**
-	 * @return o frameRentControl
+	 * Returns the Jframe of the application.
+	 * 
+	 * @return RentControl containing the application frame instance.
 	 */
 	public RentControl getFrameRentControl() {
 		return frameRentControl;
 	}
 
 	/**
-	 * @return o signInButton
+	 * Returns a button
+	 * 
+	 * @return JButtono containing the button instance
 	 */
 	public JButton getSignInButton() {
 		return signInButton;
 	}
 
 	/**
-	 * @param signInButton o signInButton a ser configurado
-	 */
-	public void setSignInButton(JButton signInButton) {
-		this.signInButton = signInButton;
-	}
-
-	/**
-	 * @return o nameField
+	 * Returns a text field
+	 * 
+	 * @return JTextField containing the text field instance
 	 */
 	public JTextField getNameField() {
 		return nameField;
 	}
 
 	/**
-	 * @param nameField o nameField a ser configurado
-	 */
-	public void setNameField(JTextField nameField) {
-		this.nameField = nameField;
-	}
-
-	/**
-	 * @return o passwordField
+	 * Returns the password field
+	 * 
+	 * @return JPasswordField containing the instance of the password field
 	 */
 	public JPasswordField getPasswordField() {
 		return passwordField;
 	}
 
-	/**
-	 * @param passwordField o passwordField a ser configurado
-	 */
-	public void setPasswordField(JPasswordField passwordField) {
-		this.passwordField = passwordField;
-	}
-
 	@Override
 	public void paintComponent(Graphics g) {
-		g.drawImage(backgroundPanel.getImage(), 0, 0, backgroundPanel.getIconWidth(), backgroundPanel.getIconHeight(), this);
+		g.drawImage(backgroundPanel.getImage(), 0, 0, backgroundPanel.getIconWidth(), backgroundPanel.getIconHeight(),
+				this);
 	}
 }

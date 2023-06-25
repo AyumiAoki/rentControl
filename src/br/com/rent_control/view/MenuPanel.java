@@ -13,6 +13,7 @@ import br.com.rent_control.view.rent.RentalScreen;
  * Class MenuPanel - Represents the menu panel containing the buttons with the
  * application's functionalitiesRepresents the menu panel containing the buttons
  * with the application's functionalities
+ * 
  * @author Ayumi Aoki &lt;ayumi.santana@icomp.ufam.edu.br&gt;
  */
 
@@ -21,18 +22,17 @@ public class MenuPanel extends JPanel {
 
 	private RentControl frameRentControl;
 	private ContentPanel contentPanel;
-	@SuppressWarnings("unused")
 	private MenuPanelController menuPanelControl;
 
-	
 	private OptionsMenuButton booKCarButton;
 	private OptionsMenuButton addCarButton;
 	private OptionsMenuButton customerButton;
-	
+
 	private final ImageIcon backgroundPanelMenu;
-	
+
 	/**
 	 * Class constructor with parameters.
+	 * 
 	 * @param frameRentControl
 	 * @param contentPanel
 	 */
@@ -42,9 +42,10 @@ public class MenuPanel extends JPanel {
 
 		this.frameRentControl = frameRentControl;
 		this.contentPanel = contentPanel;
-		
-		backgroundPanelMenu = new ImageIcon(getClass().getResource("/br/com/rent_control/view/images/backgroundPanelMenu.png"));
-		
+
+		backgroundPanelMenu = new ImageIcon(
+				getClass().getResource("/br/com/rent_control/view/images/backgroundPanelMenu.png"));
+
 		booKCarButton = new OptionsMenuButton("iconRentalButton.png", 75);
 		customerButton = new OptionsMenuButton("iconUserButton.png", 115);
 		addCarButton = new OptionsMenuButton("iconCarButton.png", 155);
@@ -52,72 +53,65 @@ public class MenuPanel extends JPanel {
 		add(booKCarButton.getButton());
 		add(customerButton.getButton());
 		add(addCarButton.getButton());
-		
+
 		menuPanelControl = new MenuPanelController(this);
-		booKCarButton.getButton().addActionListener(e -> menuPanelControl.changeScreen(booKCarButton,new RentalScreen(this.frameRentControl, this)));
-		customerButton.getButton().addActionListener(e -> menuPanelControl.changeScreen(customerButton,new CustomerManagementScreen(this.frameRentControl, this)));
-		addCarButton.getButton().addActionListener(e -> menuPanelControl.changeScreen(addCarButton,new CarManagementScreen(this.frameRentControl, this)));
+		booKCarButton.getButton().addActionListener(
+				e -> menuPanelControl.changeScreen(booKCarButton, new RentalScreen(this.frameRentControl, this)));
+		customerButton.getButton().addActionListener(e -> menuPanelControl.changeScreen(customerButton,
+				new CustomerManagementScreen(this.frameRentControl, this)));
+		addCarButton.getButton().addActionListener(
+				e -> menuPanelControl.changeScreen(addCarButton, new CarManagementScreen(this.frameRentControl, this)));
 	}
-	
-	@Override
-	public void paintComponent(Graphics g) {
-		g.drawImage(backgroundPanelMenu.getImage(), 0, 0, backgroundPanelMenu.getIconWidth(), backgroundPanelMenu.getIconHeight(), this);
-	}
-	
+
 	/**
-	 * @return o frameRentControl
+	 * Returns the Jframe of the application.
+	 * 
+	 * @return RentControl containing the application frame instance.
 	 */
 	public RentControl getFrameRentControl() {
 		return frameRentControl;
 	}
 
 	/**
-	 * @return o contentPanel
+	 * Returns an instance of contentPane, the main panel that contains the
+	 * application's contents
+	 * 
+	 * @return ContentPanel containing an instance of contentPanel
 	 */
 	public ContentPanel getContentPanel() {
 		return contentPanel;
 	}
 
 	/**
-	 * @param contentPanel o contentPanel a ser configurado
-	 */
-	public void setContentPanel(ContentPanel contentPanel) {
-		this.contentPanel = contentPanel;
-	}
-
-	/**
-	 * @return o booKCarButton
+	 * Returns the custom menu button component.
+	 * 
+	 * @return OptionsMenuButton a custom menu button
 	 */
 	public OptionsMenuButton getBooKCarButton() {
 		return booKCarButton;
 	}
 
 	/**
-	 * @param booKCarButton o booKCarButton a ser configurado
-	 */
-	public void setBooKCarButton(OptionsMenuButton booKCarButton) {
-		this.booKCarButton = booKCarButton;
-	}
-
-	/**
-	 * @return the addCarButton
+	 * Returns the custom menu button component.
+	 * 
+	 * @return OptionsMenuButton a custom menu button
 	 */
 	public OptionsMenuButton getAddCarButton() {
 		return addCarButton;
 	}
 
 	/**
-	 * @param addCarButton the addCarButton to set
+	 * Returns the custom menu button component.
+	 * 
+	 * @return OptionsMenuButton a custom menu button
 	 */
-	public void setAddCarButton(OptionsMenuButton addCarButton) {
-		this.addCarButton = addCarButton;
-	}
-	
 	public OptionsMenuButton getCustomerButton() {
 		return customerButton;
 	}
-	
-	public void setCustomerButton(OptionsMenuButton customerButton) {
-		this.customerButton = customerButton;
+
+	@Override
+	public void paintComponent(Graphics g) {
+		g.drawImage(backgroundPanelMenu.getImage(), 0, 0, backgroundPanelMenu.getIconWidth(),
+				backgroundPanelMenu.getIconHeight(), this);
 	}
 }

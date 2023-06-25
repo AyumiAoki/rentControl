@@ -4,30 +4,43 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 /**
+ * Class that performs checks on dates
  * 
- * @author Ayumi Aoki Santana
+ * @author Ayumi Aoki &lt;ayumi.santana@icomp.ufam.edu.br&gt;
  * @author Marcos William Cardoso dos Santos
- *
+ * @see <a href="https://chat.openai.com/">Operações com data</a>
  */
 
 public class CheckDate {
 
-	private int dia;
-	private int mes;
-	private int ano;
-
+	/**
+	 * Method that returns date validation.
+	 * 
+	 * @param dia The date day.
+	 * @param mes The month of date.
+	 * @param ano The year of date.
+	 * @return boolean true if the date is valid and false if not.
+	 */
 	public boolean checkDate(int dia, int mes, int ano) {
 		if (ehDataValida(dia, mes, ano)) {
-			this.dia = dia;
-			this.mes = mes;
-			this.ano = ano;
-
 			return true;
 		} else {
 			return false;
 		}
 	}
 
+	/**
+	 * Method that checks if the withdrawal date is less than the return date.
+	 * 
+	 * @param dia1 The date withdrawal day.
+	 * @param mes1 The month of withdrawal of the date.
+	 * @param ano1 The date withdrawal year.
+	 * @param dia2 The date return day.
+	 * @param mes2 The date return month.
+	 * @param ano2 The date return year.
+	 * @return boolean true or false if the withdrawal date is less than the return
+	 *         date.
+	 */
 	public boolean checkBiggerDate(int dia1, int mes1, int ano1, int dia2, int mes2, int ano2) {
 		if (!ehDataValida(dia1, mes1, ano1) || !ehDataValida(dia2, mes2, ano2)) {
 			return false;
@@ -45,18 +58,38 @@ public class CheckDate {
 
 		return false;
 	}
-	
+
+	/**
+	 * Method that calculates the difference or day between the withdrawal and
+	 * return date.
+	 * 
+	 * @param dia1 The date withdrawal day.
+	 * @param mes1 The month of withdrawal of the date.
+	 * @param ano1 The date withdrawal year.
+	 * @param dia2 The date return day.
+	 * @param mes2 The date return month.
+	 * @param ano2 The date return year.
+	 * @return int containing the amount of rental days.
+	 */
 	public int calculateDifferenceDays(int dia1, int mes1, int ano1, int dia2, int mes2, int ano2) {
-	    if (!ehDataValida(dia1, mes1, ano1) || !ehDataValida(dia2, mes2, ano2)) {
-	        return -1; 
-	    }
-	    
-	    LocalDate data1 = LocalDate.of(ano1, mes1, dia1);
-	    LocalDate data2 = LocalDate.of(ano2, mes2, dia2);
-	    
-	    return (int) ChronoUnit.DAYS.between(data1, data2);
+		if (!ehDataValida(dia1, mes1, ano1) || !ehDataValida(dia2, mes2, ano2)) {
+			return -1;
+		}
+
+		LocalDate data1 = LocalDate.of(ano1, mes1, dia1);
+		LocalDate data2 = LocalDate.of(ano2, mes2, dia2);
+
+		return (int) ChronoUnit.DAYS.between(data1, data2);
 	}
 
+	/**
+	 * Method that checks if the given date is valid.
+	 * 
+	 * @param dia The date day.
+	 * @param mes The month of date.
+	 * @param ano The year of date.
+	 * @return boolean true if the date is valid and false if not.
+	 */
 	private boolean ehDataValida(int dia, int mes, int ano) {
 		if (ano < 1 || mes < 1 || mes > 12 || dia < 1) {
 			return false;
@@ -77,16 +110,20 @@ public class CheckDate {
 
 		return dia <= ultimoDiaMes;
 	}
+	
+	/**
+	 * Method that checks if the given date is greater than 18 years.
+	 *
+	 * @param dia The date day.
+	 * @param mes The month of date.
+	 * @param ano The year of date.
+	 * @return boolean true if the date is greater than 18 years and false if not.
+	 */
+	public boolean checkAdultAge(int dia, int mes, int ano) {
+	    LocalDate dataAtual = LocalDate.now();
+	    LocalDate dataNascimento = LocalDate.of(ano, mes, dia);
+	    LocalDate dataMaioridade = dataAtual.minusYears(18);
 
-	public void proximoDia() {
-		dia++;
-		if (!ehDataValida(dia, mes, ano)) {
-			dia = 1;
-			mes++;
-			if (!ehDataValida(1, mes, ano)) {
-				mes = 1;
-				ano++;
-			}
-		}
+	    return dataNascimento.isBefore(dataMaioridade);
 	}
 }

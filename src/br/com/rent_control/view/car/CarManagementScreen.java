@@ -4,13 +4,11 @@ import java.util.List;
 import java.awt.*;
 import javax.swing.*;
 import br.com.rent_control.model.vo.Car;
-import br.com.rent_control.model.vo.Customer;
 import br.com.rent_control.model.dao.CarDao;
 import br.com.rent_control.controller.*;
 import br.com.rent_control.controller.car.CarManagementController;
 import br.com.rent_control.view.MenuPanel;
 import br.com.rent_control.view.components.*;
-import br.com.rent_control.view.customer.AddCustomerScreen;
 import br.com.rent_control.view.customer.CustomerManagementScreen.ActionButton;
 
 /**
