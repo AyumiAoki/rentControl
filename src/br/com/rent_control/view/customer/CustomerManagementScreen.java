@@ -39,7 +39,7 @@ public class CustomerManagementScreen extends JPanel {
 		newCustomer = new JButton("Novo");
 		newCustomer.setForeground(Color.WHITE);
 		newCustomer.setBounds(750, 20, 80, 34);
-		newCustomer.setBackground(ColorUtils.PRIMARY_LIGHT_COLOR);
+		newCustomer.setBackground(ColorUtils.PRIMARY_COLOR);
 		newCustomer.setBorder(null);
 
 		customerDao = new CustomerDao();

@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import br.com.rent_control.controller.RentControl;
 import br.com.rent_control.controller.car.AddCarController;
+import br.com.rent_control.model.vo.Car;
 import br.com.rent_control.view.components.ColorUtils;
 import br.com.rent_control.view.MenuPanel;
 import br.com.rent_control.view.components.*;
@@ -15,6 +16,7 @@ import br.com.rent_control.view.components.*;
 public class AddCarScreen extends JPanel{
 	private static final long serialVersionUID = 6407486089823829922L;
 
+	private Car car;
 	private CustomField messagerField;
 	private CustomField categoryField;
 	private CustomField modelCarField;
@@ -94,7 +96,69 @@ public class AddCarScreen extends JPanel{
 		addCarButton.addActionListener(e -> addCarController.addCarButtonClicked());
 	}
 	
+	public AddCarScreen(final RentControl frameRentControl, final MenuPanel menuPanel, Car car) {
+		setLayout(null);
+		setBackground(Color.white);
+		setBorder(new EmptyBorder(10, 10, 10, 10));
+		
+		addCarController = new AddCarController(this);
+		this.menuPanel = menuPanel;
+		this.frameRentControl = frameRentControl;
+		
+		setCar(car);
+		
+		messagerField = new CustomField("Atualizar veículo", 40);
+		categoryField = new CustomField("Categoria", 111, 92, getCategoryOptions(), car.getCategory());	
+		modelCarField = new CustomField("Modelo", 455, 92, car.getModelCar(), true);
+		maxPassengersField = new CustomField("Quantidade de passageiros", 111, 179, getMaxPassengersOptions(), car.getMaxPassengers() + "");
+		trunkSizeField = new CustomField("Volume do porta malas (L)", 455, 179, car.getTrunkSize() + "", true);
+		transmissionTypeField = new CustomField("Tipo de câmbio", 111, 266, getTransmissionTypeOptions(), car.getTransmissionType());
+		fuelTypeField = new CustomField("Tipo de combustível", 455, 266, getFuelTypeOptions(), car.getFuelType()); 
+		consumptionAverageField = new CustomField("Média de consumo (Km/L)", 111, 353, car.getConsumptionAverage() + "", true); 
+		dailyCostField = new CustomField("Custo diário", 455, 353, car.getDailyCost() + "", true); 
+		hasAcField = new CustomField("Possui ar condicionado?", 111, 440, getHasOptions(), car.isHasAc()); 
+		hasAirbagField = new CustomField("Possui airbag?", 455, 440, getHasOptions(), car.isHasAirbag()); 
+		hasAbsBrakesField = new CustomField("Possui freio abs?", 111, 527, getHasOptions(),car.isHasAbsBrakes()); 
+		hasDvdPlayerField = new CustomField("Possui dvd ?", 455, 527, getHasOptions(), car.isHasDvdPlayer()); 
+		
+		addCarButton = new JButton("Salvar");
+		addCarButton.setForeground(Color.WHITE);
+		addCarButton.setBounds(323, 617, 240, 35);
+		addCarButton.setBackground(ColorUtils.PRIMARY_COLOR);
+		addCarButton.setBorder(null);
+		
+		add(messagerField.getLabel());
+		add(categoryField.getLabel());
+		add(categoryField.getComboBox());
+		add(modelCarField.getLabel());
+		add(modelCarField.getTextField());
+		add(maxPassengersField.getLabel());
+		add(maxPassengersField.getComboBox());
+		add(trunkSizeField.getLabel());
+		add(trunkSizeField.getTextField());
+		add(transmissionTypeField.getLabel());
+		add(transmissionTypeField.getComboBox());
+		add(fuelTypeField.getLabel());
+		add(fuelTypeField.getComboBox());
+		add(consumptionAverageField.getLabel());
+		add(consumptionAverageField.getTextField());
+		add(dailyCostField.getLabel());
+		add(dailyCostField.getTextField());
+		add(hasAcField.getLabel());
+		add(hasAcField.getComboBox());
+		add(hasAirbagField.getLabel());
+		add(hasAirbagField.getComboBox());
+		add(hasAbsBrakesField.getLabel());
+		add(hasAbsBrakesField.getComboBox());
+		add(hasDvdPlayerField.getLabel());
+		add(hasDvdPlayerField.getComboBox());
+		add(addCarButton);
+		
+		addCarButton.addActionListener(e -> addCarController.addCarButtonClicked());
+	}
+	
 	/**************Options ComboBox**************/
+	
 	private String[] getCategoryOptions() {
         List<String> options = Arrays.asList("Compacto", "Standard", "Grande", "Econômico", "Premium", "Minivan");
         return options.toArray(new String[0]);
@@ -331,6 +395,22 @@ public class AddCarScreen extends JPanel{
 	public MenuPanel getMenuPanel() {
 		return menuPanel;
 	}
+
+	/**
+	 * @return the car
+	 */
+	public Car getCar() {
+		return car;
+	}
+
+	/**
+	 * @param car the car to set
+	 */
+	public void setCar(Car car) {
+		this.car = car;
+	}
+	
+	
 	
 	/**************End Getters e setters**************/	
 }

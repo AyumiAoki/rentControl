@@ -73,6 +73,44 @@ public class CustomField extends JLabel{
 		comboBox.setFocusable(false);
 		comboBox.setForeground(Color.BLACK);
 	}
+	
+	public CustomField(String text, int x, int y, String[] optionComboBox, String value) {
+		label = new JLabel(text);
+		label.setBounds(x, y, 320, 20);
+		
+		comboBox = new JComboBox<>(optionComboBox);
+		comboBox.setSelectedIndex(getIndexByValue(optionComboBox, value));
+		comboBox.setBackground(Color.WHITE);
+		comboBox.setBounds(x,y+28,320,35);
+		comboBox.setBorder(null);
+		comboBox.setEditable(false);
+		comboBox.setFocusable(false);
+		comboBox.setForeground(Color.BLACK);
+	}
+	
+	public CustomField(String text, int x, int y, String[] optionComboBox, boolean value) {
+		label = new JLabel(text);
+		label.setBounds(x, y, 320, 20);
+		
+		comboBox = new JComboBox<>(optionComboBox);
+		comboBox.setSelectedIndex(getIndexByValue(optionComboBox, value	 ? "Sim" : "Não"));
+		comboBox.setBackground(Color.WHITE);
+		comboBox.setBounds(x,y+28,320,35);
+		comboBox.setBorder(null);
+		comboBox.setEditable(false);
+		comboBox.setFocusable(false);
+		comboBox.setForeground(Color.BLACK);
+	}
+	
+	private int getIndexByValue(String[] array, String value) {
+	    for (int i = 0; i < array.length; i++) {
+	        if (array[i].equals(value)) {
+	            return i;
+	        }
+	    }
+	    return -1;  // Retorna -1 se o valor não for encontrado no array
+	}
+	
 
 	/**
 	 * @return o label

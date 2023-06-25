@@ -6,6 +6,7 @@ import java.util.List;
 
 import br.com.rent_control.model.ConnectionDB;
 import br.com.rent_control.model.vo.Car;
+import br.com.rent_control.model.vo.Customer;
 
 /**
  * Class CarDao - Represents the dao of the Car in the application
@@ -39,6 +40,35 @@ public class CarDao {
 			return true;
 		} catch (SQLException e) {
 			System.err.println("Erro ao adicionar funcionário: " + e.getMessage());
+			return false;
+		}
+	}
+	
+	public boolean updateCar(Car Car) {
+		String sql = "update car set category = ?, model = ?, maxPassengers = ?, trunkSize = ?, transmissionType = ?, fuelType = ?, consumptionAverage = ?, dailyCost = ?, hasAc = ?, hasAirbag = ?, hasAbsBrakes = ?, hasDvdPlayer = ? where id = ?";
+
+		try (Connection connection = ConnectionDB.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+			System.out.println("Car.getModelCar()" + Car.getModelCar());
+			preparedStatement.setString(1, Car.getCategory());
+			preparedStatement.setString(2, Car.getModelCar());
+			preparedStatement.setInt(3, Car.getMaxPassengers());
+			preparedStatement.setDouble(4, Car.getTrunkSize());
+			preparedStatement.setString(5, Car.getTransmissionType());
+			preparedStatement.setString(6, Car.getFuelType());
+			preparedStatement.setDouble(7, Car.getConsumptionAverage());
+			preparedStatement.setDouble(8, Car.getDailyCost());
+			preparedStatement.setBoolean(9, Car.isHasAc());
+			preparedStatement.setBoolean(10, Car.isHasAirbag());
+			preparedStatement.setBoolean(11, Car.isHasAbsBrakes());
+			preparedStatement.setBoolean(12, Car.isHasDvdPlayer());
+			preparedStatement.setInt(13, Car.getId());
+			
+			preparedStatement.executeUpdate();
+
+			return true;
+		} catch (SQLException e) {
+			System.err.println("Erro ao atualizar carro: " + e.getMessage());
 			return false;
 		}
 	}
@@ -91,5 +121,40 @@ public class CarDao {
 			System.err.println("Erro ao excluir carro: " + e.getMessage());
 			return false;
 		}
+	}
+	
+	public Car getCarById(String id) {
+		String sql = "SELECT * FROM car WHERE id = ?";
+
+		try (Connection connection = ConnectionDB.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+			preparedStatement.setString(1, id);
+
+			try (ResultSet rs = preparedStatement.executeQuery()) {
+				if (rs.next()) {
+					Car car = new Car();
+					car.setCategory(rs.getString(Car.COLUMN_CATEGORY));
+				    car.setModelCar(rs.getString(Car.COLUMN_MODEL));
+				    car.setMaxPassengers(rs.getInt(Car.COLUMN_MAXPASSENGERS));
+				    car.setTrunkSize(rs.getDouble(Car.COLUMN_TRUNKSIZE));
+				    car.setTransmissionType(rs.getString(Car.COLUMN_TRANSMISSIONTYPE));
+				    car.setFuelType(rs.getString(Car.COLUMN_FUELTYPE));
+				    car.setConsumptionAverage(rs.getDouble(Car.COLUMN_CONSUMPTIONAVARAGE));
+				    car.setDailyCost(rs.getDouble(Car.COLUMN_DAILY));
+				    car.setHasAc(rs.getBoolean(Car.COLUMN_HASAC));
+				    car.setHasAirbag(rs.getBoolean(Car.COLUMN_HASAIRBAG));
+				    car.setHasAbsBrakes(rs.getBoolean(Car.COLUMN_HASABS));
+				    car.setHasDvdPlayer(rs.getBoolean(Car.COLUMN_HASDVD));
+				    car.setId(Integer.parseInt(rs.getString(Car.ID)));
+
+					return car;
+				}
+			}
+		} catch (SQLException e) {
+			System.err.println("Erro ao buscar o cliente: " + e.getMessage());
+		}
+
+		return null;
 	}
 }

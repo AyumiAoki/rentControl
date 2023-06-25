@@ -43,4 +43,26 @@ public class CarBo {
 		else
 			return false;
 	}
+	
+	public boolean updateCar(String[] listCar, int id) {
+		car = new Car();
+		car.setCategory(listCar[0]);
+		car.setModelCar(listCar[1]);
+		car.setMaxPassengers(Integer.parseInt(listCar[2]));
+		car.setTrunkSize(Double.parseDouble(listCar[3].replace(",", ".")));
+		car.setTransmissionType(listCar[4]);
+		car.setFuelType(listCar[5]);
+		car.setConsumptionAverage(Double.parseDouble(listCar[6].replace(",", ".")));
+		car.setDailyCost(Double.parseDouble(listCar[7].replace(",", ".")));
+		car.setHasAc((listCar[8].equals("Sim") ? true : false));
+		car.setHasAirbag((listCar[9].equals("Sim") ? true : false));
+		car.setHasAbsBrakes((listCar[10].equals("Sim") ? true : false));
+		car.setHasDvdPlayer((listCar[11].equals("Sim") ? true : false));
+		car.setId(id);
+		
+		if (carDao.updateCar(car))
+			return true;
+		else
+			return false;
+	}
 }
