@@ -76,7 +76,7 @@ public class CarDao {
 		}
 		return null;
 	}
-	
+		
 	public boolean deleteCarById(int id) {
 		String sql = "delete from car where id = ?";
 
@@ -90,13 +90,6 @@ public class CarDao {
 		} catch (SQLException e) {
 			System.err.println("Erro ao excluir carro: " + e.getMessage());
 			return false;
-		}
-	}
-	
-	public static void main(String[] args) {
-		CarDao c = new CarDao();
-		for (Car car : c.listCars()) {
-			System.out.println(car.getCategory());
 		}
 	}
 }

@@ -22,18 +22,18 @@ public class CustomField extends JLabel{
 	private JTextField textField;
 	private JComboBox<String> comboBox;
 	
-	public CustomField(String text) {
+	public CustomField(String text, int y) {
 		label = new JLabel(text);
-		label.setBounds(111, 40, 320, 15);
+		label.setBounds(111, y, 320, 20);
 		label.setFont(label.getFont().deriveFont(Font.BOLD, 16));
 	}
 	
 	public CustomField(String text, int x, int y) {
 		label = new JLabel(text);
-		label.setBounds(x, y, 320, 15);
+		label.setBounds(x, y, 320, 20);
 		
 		textField = new JTextField("");
-		textField.setBounds(x,y+23,320,35);
+		textField.setBounds(x,y+28,320,35);
 		textField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
 		textField.setCaretColor(Color.BLACK);
 		textField.setEditable(true);
@@ -41,26 +41,26 @@ public class CustomField extends JLabel{
 	
 	public CustomField(String text, int x, int y, String textValue) {
 		label = new JLabel(text);
-		label.setBounds(x, y, 320, 15);
+		label.setBounds(x, y, 320, 20);
 		
 		textField = new JTextField(textValue);
-		textField.setBounds(x,y+23,320,35);
+		textField.setBounds(x,y+28,320,35);
 		textField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
 		textField.setCaretColor(ColorUtils.SECUNDARY_COLOR);
-		textField.setEditable(true);
+		textField.setEditable(false);
 	}
 	
 	public CustomField(String text, int x, int y, String[] optionComboBox) {
 		label = new JLabel(text);
-		label.setBounds(x, y, 320, 15);
+		label.setBounds(x, y, 320, 20);
 		
 		comboBox = new JComboBox<>(optionComboBox);
 		comboBox.setBackground(Color.WHITE);
-		comboBox.setBounds(x,y+23,320,35);
+		comboBox.setBounds(x,y+28,320,35);
 		comboBox.setBorder(null);
 		comboBox.setEditable(false);
 		comboBox.setFocusable(false);
-		comboBox.setForeground(ColorUtils.PRIMARY_COLOR);
+		comboBox.setForeground(Color.BLACK);
 	}
 
 	/**

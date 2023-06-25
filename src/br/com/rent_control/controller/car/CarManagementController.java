@@ -1,7 +1,6 @@
 package br.com.rent_control.controller.car;
 
 import java.awt.event.*;
-import br.com.rent_control.view.*;
 import br.com.rent_control.view.car.AddCarScreen;
 import br.com.rent_control.view.car.CarManagementScreen;
 
@@ -9,6 +8,7 @@ import br.com.rent_control.view.car.CarManagementScreen;
  * @author ayumi
  *
  */
+
 public class CarManagementController {
 
 	/**

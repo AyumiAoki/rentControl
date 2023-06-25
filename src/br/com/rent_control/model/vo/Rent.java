@@ -12,8 +12,8 @@ public class Rent {
 	private String pickUpLocation;
 	private String deliveryDate;
 	private String deliveryLocation;
-	private Customer customer;
-	private Car car;
+	private String cpfCustomer;
+	private int idCar;
 	private boolean carProtection;
 	private boolean gps;
 	private boolean cleaning;
@@ -41,15 +41,15 @@ public class Rent {
 	 * @param babyChair
 	 * @param boosterSeat
 	 */
-	public Rent(String withdrawalDate, String pickUpLocation, String deliveryDate, String deliveryLocation, Customer customer,
-			Car car, boolean carProtection, boolean gps, boolean cleaning, boolean drinkComfort, boolean babyChair,
+	public Rent(String withdrawalDate, String pickUpLocation, String deliveryDate, String deliveryLocation, String cpfCustomer,
+			int idCar, boolean carProtection, boolean gps, boolean cleaning, boolean drinkComfort, boolean babyChair,
 			boolean boosterSeat) {
 		this.withdrawalDate = withdrawalDate;
 		this.pickUpLocation = pickUpLocation;
 		this.deliveryDate = deliveryDate;
 		this.deliveryLocation = deliveryLocation;
-		this.customer = customer;
-		this.car = car;
+		this.cpfCustomer = cpfCustomer;
+		this.idCar = idCar;
 		this.carProtection = carProtection;
 		this.gps = gps;
 		this.cleaning = cleaning;
@@ -119,29 +119,29 @@ public class Rent {
 	/**
 	 * @return o customer
 	 */
-	public Customer getUser() {
-		return customer;
+	public String getCpfCustomer() {
+		return cpfCustomer;
 	}
 
 	/**
 	 * @param customer o customer a ser configurado
 	 */
-	public void setUser(Customer customer) {
-		this.customer = customer;
+	public void setCpfCustomer(String cpfCustomer) {
+		this.cpfCustomer = cpfCustomer;
 	}
 
 	/**
 	 * @return o car
 	 */
-	public Car getCar() {
-		return car;
+	public int getIdCar() {
+		return idCar;
 	}
 
 	/**
 	 * @param car o car a ser configurado
 	 */
-	public void setCar(Car car) {
-		this.car = car;
+	public void setIdCar(int idCar) {
+		this.idCar = idCar;
 	}
 
 	/**
@@ -227,6 +227,4 @@ public class Rent {
 	public void setBoosterSeat(boolean boosterSeat) {
 		this.boosterSeat = boosterSeat;
 	}
-	
-	
 }

@@ -7,6 +7,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+
+import br.com.rent_control.controller.RentControl;
+import br.com.rent_control.controller.rent.CarCardController;
 import br.com.rent_control.model.vo.Car;
 import br.com.rent_control.view.MenuPanel;
 import br.com.rent_control.view.components.ColorUtils;
@@ -19,6 +22,7 @@ import br.com.rent_control.view.components.ColorUtils;
 public class CarCardPanel extends JPanel {
 
 	private static final long serialVersionUID = 3127568446943655484L;
+	private final RentControl frameRentControl;
 	private MenuPanel menuPanel;
 
 	private JLabel groupLabel;
@@ -40,15 +44,17 @@ public class CarCardPanel extends JPanel {
 
 	private JPanel infoPanel;
 	private JPanel detailsPanel;
+	
+	private int idCar;
 
-	private final Color COLOR_SECUNDARY = new Color(236, 238, 244);
-
-	public CarCardPanel(Car car, MenuPanel menuPanel) {
+	public CarCardPanel(Car car, final RentControl frameRentControl, MenuPanel menuPanel, int idCar) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setBackground(ColorUtils.SECUNDARY_COLOR);
 		setBorder(new LineBorder(ColorUtils.SECUNDARY_DARK_COLOR, 2));
 
+		this.frameRentControl = frameRentControl;
 		this.menuPanel = menuPanel;
+		this.idCar = idCar;
 
 		// Elementos do painel de informações
 		groupLabel = new JLabel(car.getCategory());
@@ -93,7 +99,7 @@ public class CarCardPanel extends JPanel {
 		// Painel para as informações iniciais
 		infoPanel = new JPanel();
 		infoPanel.setLayout(null);
-		infoPanel.setBackground(COLOR_SECUNDARY);
+		infoPanel.setBackground(ColorUtils.SECUNDARY_COLOR);
 
 		// Adicionar as informações ao painel
 		infoPanel.add(groupLabel);
@@ -210,14 +216,16 @@ public class CarCardPanel extends JPanel {
 			}
 		});
 		
-		selectCarButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
+		new CarCardController(this);
 	}
 	
+	/**
+	 * @return o frameRentControl
+	 */
+	public RentControl getFrameRentControl() {
+		return frameRentControl;
+	}
+
 	/**
 	 * @return the menuPanel
 	 */
@@ -244,5 +252,19 @@ public class CarCardPanel extends JPanel {
 	 */
 	public void setSelectCarButton(JButton selectCarButton) {
 		this.selectCarButton = selectCarButton;
+	}
+
+	/**
+	 * @return o idCar
+	 */
+	public int getIdCar() {
+		return idCar;
+	}
+
+	/**
+	 * @param idCar o idCar a ser configurado
+	 */
+	public void setIdCar(int idCar) {
+		this.idCar = idCar;
 	}
 }

@@ -53,7 +53,7 @@ public class RentalScreen extends JPanel{
     		add(mensage);
         } else {
         	for (Car car : carDao.listCars()) {
-    			CarCardPanel card = new CarCardPanel(car, this.getMenuPanel());
+    			CarCardPanel card = new CarCardPanel(car, this.getFrameRentControl(), this.getMenuPanel(), car.getId());
     			jp.add(card);
     		}
         }

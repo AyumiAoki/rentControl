@@ -12,7 +12,7 @@ import br.com.rent_control.model.vo.Customer;
  * @version 1.0, 2023-06-08
  */
 
-public class CustomerDao extends ConnectionDB {    
+public class CustomerDao extends ConnectionDB {
 
 	public boolean addCustomer(Customer customer) {
 		String sql = "insert into customer VALUES (?,?,?,?)";
@@ -35,7 +35,7 @@ public class CustomerDao extends ConnectionDB {
 
 	public List<Customer> listCustomer() {
 		List<Customer> customers = new ArrayList<Customer>();
-		
+
 		String sql = "select * from customer";
 
 		try (Connection connection = ConnectionDB.getConnection();
@@ -45,10 +45,10 @@ public class CustomerDao extends ConnectionDB {
 			while (rs.next()) {
 				Customer customer = new Customer();
 
+				customer.setCpf(rs.getString(Customer.COLUMN_CPF));
 				customer.setName(rs.getString(Customer.COLUMN_NAME));
-			    customer.setCpf(rs.getString(Customer.COLUMN_CPF));
-			    customer.setLicenseNumber(Integer.parseInt(rs.getString(Customer.COLUMN_LICENSENUMBER)));
-			    customer.setDateOfBirth(rs.getString(Customer.COLUMN_DDN));
+				customer.setLicenseNumber(Integer.parseInt(rs.getString(Customer.COLUMN_LICENSENUMBER)));
+				customer.setDateOfBirth(rs.getString(Customer.COLUMN_DDN));
 				customers.add(customer);
 			}
 			return customers;
@@ -57,7 +57,33 @@ public class CustomerDao extends ConnectionDB {
 		}
 		return null;
 	}
-	
+
+	public Customer getCustomerByCpf(String cpf) {
+		String sql = "SELECT * FROM customer WHERE cpf = ?";
+
+		try (Connection connection = ConnectionDB.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+			preparedStatement.setString(1, cpf);
+
+			try (ResultSet rs = preparedStatement.executeQuery()) {
+				if (rs.next()) {
+					Customer customer = new Customer();
+					customer.setCpf(rs.getString(Customer.COLUMN_CPF));
+					customer.setName(rs.getString(Customer.COLUMN_NAME));
+					customer.setDateOfBirth(rs.getString(Customer.COLUMN_DDN));
+					customer.setLicenseNumber(Integer.parseInt(rs.getString(Customer.COLUMN_LICENSENUMBER)));
+
+					return customer;
+				}
+			}
+		} catch (SQLException e) {
+			System.err.println("Erro ao buscar o cliente: " + e.getMessage());
+		}
+
+		return null;
+	}
+
 	public boolean updateCustomer(Customer customer, String cpf) {
 		String sql = "update customer set name = ?, cpf = ?, idNumber = ?, dateOfBirth = ? where cpf = ?";
 
@@ -77,7 +103,7 @@ public class CustomerDao extends ConnectionDB {
 			return false;
 		}
 	}
-	
+
 	public boolean deleteCustomer(Customer customer) {
 		String sql = "delete from customer where cpf = ?";
 
@@ -93,7 +119,7 @@ public class CustomerDao extends ConnectionDB {
 			return false;
 		}
 	}
-	
+
 	public boolean deleteCustomerByCpf(String cpf) {
 		String sql = "delete from customer where cpf = ?";
 

@@ -28,11 +28,11 @@ public class AddCustomerScreen extends JPanel {
 		this.menuPanel = menuPanel;
 		this.frameRentControl = frameRentControl;
 		
-		messagerField = new CustomField("Cadastro de cliente");
+		messagerField = new CustomField("Cadastro de cliente", 40);
 		nameField = new CustomField("Nome", 111, 92);
 		cpfField = new CustomField("CPF", 455, 92);
-		dateOfBirthField = new CustomField("Data de nascimento", 455, 182);
-		cnhField = new CustomField("Número da licensa de motorista", 111, 182);
+		dateOfBirthField = new CustomField("CheckDate de nascimento", 455, 179);
+		cnhField = new CustomField("Número da licensa de motorista", 111, 179);
 		
 		addButton = new JButton("Cadastrar");
 		addButton.setForeground(Color.WHITE);

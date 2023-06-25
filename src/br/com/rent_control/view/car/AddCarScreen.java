@@ -44,23 +44,23 @@ public class AddCarScreen extends JPanel{
 		this.menuPanel = menuPanel;
 		this.frameRentControl = frameRentControl;
 		
-		messagerField = new CustomField("Cadastro de veículo");
+		messagerField = new CustomField("Cadastro de veículo", 40);
 		categoryField = new CustomField("Categoria", 111, 92, getCategoryOptions());
 		modelCarField = new CustomField("Modelo", 455, 92);
-		maxPassengersField = new CustomField("Quantidade de passageiros", 111, 182, getMaxPassengersOptions());
-		trunkSizeField = new CustomField("Volume do porta malas (L)", 455, 182);
-		transmissionTypeField = new CustomField("Tipo de câmbio", 111, 272, getTransmissionTypeOptions());
-		fuelTypeField = new CustomField("Tipo de combustível", 455, 272, getFuelTypeOptions()); 
-		consumptionAverageField = new CustomField("Média de consumo (Km/L)", 111, 362); 
-		dailyCostField = new CustomField("Custo diário", 455, 362); 
-		hasAcField = new CustomField("Possui ar condicionado?", 111, 452, getHasOptions()); 
-		hasAirbagField = new CustomField("Possui airbag?", 455, 452, getHasOptions()); 
-		hasAbsBrakesField = new CustomField("Possui freio abs?", 111, 542, getHasOptions()); 
-		hasDvdPlayerField = new CustomField("Possui dvd ?", 455, 542, getHasOptions()); 
+		maxPassengersField = new CustomField("Quantidade de passageiros", 111, 179, getMaxPassengersOptions());
+		trunkSizeField = new CustomField("Volume do porta malas (L)", 455, 179);
+		transmissionTypeField = new CustomField("Tipo de câmbio", 111, 266, getTransmissionTypeOptions());
+		fuelTypeField = new CustomField("Tipo de combustível", 455, 266, getFuelTypeOptions()); 
+		consumptionAverageField = new CustomField("Média de consumo (Km/L)", 111, 353); 
+		dailyCostField = new CustomField("Custo diário", 455, 353); 
+		hasAcField = new CustomField("Possui ar condicionado?", 111, 440, getHasOptions()); 
+		hasAirbagField = new CustomField("Possui airbag?", 455, 440, getHasOptions()); 
+		hasAbsBrakesField = new CustomField("Possui freio abs?", 111, 527, getHasOptions()); 
+		hasDvdPlayerField = new CustomField("Possui dvd ?", 455, 527, getHasOptions()); 
 		
 		addCarButton = new JButton("Cadastrar");
 		addCarButton.setForeground(Color.WHITE);
-		addCarButton.setBounds(323, 632, 240, 35);
+		addCarButton.setBounds(323, 617, 240, 35);
 		addCarButton.setBackground(ColorUtils.PRIMARY_COLOR);
 		addCarButton.setBorder(null);
 		

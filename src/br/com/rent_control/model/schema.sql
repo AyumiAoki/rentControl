@@ -35,9 +35,9 @@ create table car(
 create table rent(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     withdrawalDate varchar(8) not null,
-    withdrawalTime varchar(4) not null,
+    pickUpLocation varchar(50) not null,
     deliveryDate varchar(8) not null,
-    deliveryTime varchar(4) not null,
+    returnLocation varchar(50) not null,
     carProtection boolean not null,
     gps boolean not null,
     cleaning boolean not null,
@@ -50,4 +50,12 @@ create table rent(
     foreign key (idCar) references car(id)
 );
 
+create table rentalAddresses(
+    address varchar(50) not null,
+    primary key (address)
+);
+
 insert into employee values ("Ayumi Aoki", "04761241233", "ayumi", "123");
+insert into rentalAddresses values ("Agencia aeroporto");
+insert into rentalAddresses values ("Agencia carrefur adrianopolis");
+insert into rentalAddresses values ("Agencia carrefur centro");
