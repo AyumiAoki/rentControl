@@ -42,7 +42,7 @@ public class CarManagementScreen extends JPanel {
 		newCar = new JButton("Novo");
 		newCar.setForeground(Color.WHITE);
 		newCar.setBounds(750, 20, 80, 34);
-		newCar.setBackground(ColorUtils.PRIMARY_LIGHT_COLOR);
+		newCar.setBackground(ColorUtils.PRIMARY_COLOR);
 		newCar.setBorder(null);
 
 		add(newCar);
