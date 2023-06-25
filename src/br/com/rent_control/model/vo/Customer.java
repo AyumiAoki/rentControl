@@ -11,7 +11,6 @@ public class Customer {
 	private String name;
 	private String cpf;
 	private long licenseNumber;
-	private int idNumber;
 	private String dateOfBirth;
 	
 	//Constants with column names
@@ -33,11 +32,10 @@ public class Customer {
 	 * @param iDNumber
 	 * @param dateOfBirth
 	 */
-	public Customer(String name, String cpf, long licenseNumber, int idNumber, String dateOfBirth) {
+	public Customer(String name, String cpf, long licenseNumber, String dateOfBirth) {
 		this.name = name;
 		this.cpf = cpf;
 		this.licenseNumber = licenseNumber;
-		this.idNumber = idNumber;
 		this.dateOfBirth = dateOfBirth;
 	}
 
@@ -87,22 +85,6 @@ public class Customer {
 	 */
 	public void setLicenseNumber(long licenseNumber) {
 		this.licenseNumber = licenseNumber;
-	}
-	
-	/**
-	 * Returns the ID number of user.
-	 * @return double containing ID number of user.
-	 */
-	public int getIDNumber() {
-		return idNumber;
-	}
-	
-	/**
-	 * Defines the ID number of user.
-	 * @param iDNumber The ID number of user to set.
-	 */
-	public void setIDNumber(int idNumber) {
-		this.idNumber = idNumber;
 	}
 	
 	/**

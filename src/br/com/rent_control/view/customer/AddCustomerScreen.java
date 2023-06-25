@@ -5,6 +5,7 @@ import javax.swing.*;
 import br.com.rent_control.view.MenuPanel;
 import br.com.rent_control.controller.*;
 import br.com.rent_control.controller.customer.AddCustomerController;
+import br.com.rent_control.model.vo.Customer;
 import br.com.rent_control.view.components.*;
 
 public class AddCustomerScreen extends JPanel {
@@ -31,10 +32,43 @@ public class AddCustomerScreen extends JPanel {
 		messagerField = new CustomField("Cadastro de cliente", 40);
 		nameField = new CustomField("Nome", 111, 92);
 		cpfField = new CustomField("CPF", 455, 92);
-		dateOfBirthField = new CustomField("CheckDate de nascimento", 455, 179);
+		dateOfBirthField = new CustomField("Data de nascimento", 455, 179);
 		cnhField = new CustomField("Número da licensa de motorista", 111, 179);
 		
 		addButton = new JButton("Cadastrar");
+		addButton.setForeground(Color.WHITE);
+		addButton.setBounds(323, 300, 240, 35);
+		addButton.setBackground(ColorUtils.PRIMARY_COLOR);
+		addButton.setBorder(null);
+		
+		add(messagerField.getLabel());
+		add(nameField.getLabel());
+		add(nameField.getTextField());
+		add(cpfField.getLabel());
+		add(cpfField.getTextField());
+		add(dateOfBirthField.getLabel());
+		add(dateOfBirthField.getTextField());
+		add(cnhField.getLabel());
+		add(cnhField.getTextField());
+		add(addButton);
+		
+		new AddCustomerController(this);
+	}
+	
+	public AddCustomerScreen(final RentControl frameRentControl, final MenuPanel menuPanel, Customer customer) {
+		setLayout(null);
+		setBackground(Color.white);
+	
+		this.menuPanel = menuPanel;
+		this.frameRentControl = frameRentControl;
+		
+		messagerField = new CustomField("Edição de cliente", 40);
+		nameField = new CustomField("Nome", 111, 92, customer.getName(),true);
+		cpfField = new CustomField("CPF", 455, 92, customer.getCpf());
+		dateOfBirthField = new CustomField("Data de nascimento", 455, 179, customer.getDateOfBirth(), true);
+		cnhField = new CustomField("Número da licensa de motorista", 111, 179, customer.getLicenseNumber() + "", true);
+		
+		addButton = new JButton("Salvar");
 		addButton.setForeground(Color.WHITE);
 		addButton.setBounds(323, 300, 240, 35);
 		addButton.setBackground(ColorUtils.PRIMARY_COLOR);

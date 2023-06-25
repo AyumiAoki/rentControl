@@ -84,16 +84,15 @@ public class CustomerDao extends ConnectionDB {
 		return null;
 	}
 
-	public boolean updateCustomer(Customer customer, String cpf) {
-		String sql = "update customer set name = ?, cpf = ?, idNumber = ?, dateOfBirth = ? where cpf = ?";
+	public boolean updateCustomer(Customer customer) {
+		String sql = "update customer set name = ?, cpf = ?, dateOfBirth = ? where cpf = ?";
 
 		try (Connection connection = ConnectionDB.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 			preparedStatement.setString(1, customer.getName());
 			preparedStatement.setString(2, customer.getCpf());
-			preparedStatement.setInt(3, customer.getIDNumber());
-			preparedStatement.setString(4, customer.getDateOfBirth());
-			preparedStatement.setString(5, cpf);
+			preparedStatement.setString(3, customer.getDateOfBirth());
+			preparedStatement.setString(4, customer.getCpf());
 
 			preparedStatement.executeUpdate();
 

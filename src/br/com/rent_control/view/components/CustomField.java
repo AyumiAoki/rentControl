@@ -50,6 +50,17 @@ public class CustomField extends JLabel{
 		textField.setEditable(false);
 	}
 	
+	public CustomField(String text, int x, int y, String textValue, boolean enable) {
+		label = new JLabel(text);
+		label.setBounds(x, y, 320, 20);
+		
+		textField = new JTextField(textValue);
+		textField.setBounds(x,y+28,320,35);
+		textField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
+		textField.setCaretColor(ColorUtils.SECUNDARY_COLOR);
+		textField.setEditable(enable);
+	}
+	
 	public CustomField(String text, int x, int y, String[] optionComboBox) {
 		label = new JLabel(text);
 		label.setBounds(x, y, 320, 20);
