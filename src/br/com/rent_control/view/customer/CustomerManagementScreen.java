@@ -23,19 +23,19 @@ public class CustomerManagementScreen extends JPanel {
 	private CustomerDao customerDao;
 
 	public interface ActionButton {
-	    void action(String id, String type);
+		void action(String id, String type);
 	}
-	
+
 	public CustomerManagementScreen(final RentControl frameRentControl, MenuPanel menuPanel) {
 		setLayout(null);
 		setBackground(Color.white);
-		
+
 		this.frameRentControl = frameRentControl;
 		this.menuPanel = menuPanel;
 		messagerLabel = new JLabel("Clientes");
 		messagerLabel.setBounds(50, 24, 320, 15);
 		messagerLabel.setFont(messagerLabel.getFont().deriveFont(Font.BOLD, 16));
-		
+
 		newCustomer = new JButton("Novo");
 		newCustomer.setForeground(Color.WHITE);
 		newCustomer.setBounds(750, 20, 80, 34);
@@ -43,53 +43,58 @@ public class CustomerManagementScreen extends JPanel {
 		newCustomer.setBorder(null);
 
 		customerDao = new CustomerDao();
-		
+
 		tableSetup();
-		
+
 		add(newCustomer);
 		add(messagerLabel);
-		
+
 		new CustomerManagementController(this);
 	}
-	
+
 	private ActionButton deleteOrEdit = (String id, String type) -> {
-		if(type.equals("edit")) {
-			System.out.println("Edição!");
+		if (type.equals("edit")) {
+			Customer customer = customerDao.getCustomerByCpf(id);
+			menuPanel.getContentPanel().removeAll();
+			menuPanel.getContentPanel().add(new AddCustomerScreen(getFrameRentControl(), menuPanel, customer));
+			menuPanel.getContentPanel().revalidate();
+			menuPanel.getContentPanel().repaint();
 			return;
-		} else {
-			if(customerDao.deleteCustomerByCpf(id)) {
-				JOptionPane.showMessageDialog(null, "Cliente excluido com sucesso!");
-				this.remove(scrollPane);
-				tableSetup();
-				this.revalidate();
-				this.repaint();
-			} else {
-				JOptionPane.showMessageDialog(null, "Erro ao excluir cliente!");
-			}			
 		}
+		if (customerDao.deleteCustomerByCpf(id)) {
+			JOptionPane.showMessageDialog(null, "Cliente excluido com sucesso!");
+			this.remove(scrollPane);
+			tableSetup();
+			this.revalidate();
+			this.repaint();
+		} else {
+			JOptionPane.showMessageDialog(null, "Erro ao excluir cliente!");
+		}
+
 	};
-	
+
 	private void tableSetup() {
 		customers = customerDao.listCustomer();
 		CustomTable customTable = new CustomTable(deleteOrEdit, getDataTable());
 		scrollPane = new JScrollPane(customTable);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.setBounds(50, 100, 789, 500);
-        scrollPane.setBorder(null);
-        this.add(scrollPane);
-		
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setBounds(50, 100, 789, 500);
+		scrollPane.setBorder(null);
+		this.add(scrollPane);
+
 	}
-	
-	private Object[][] getDataTable(){
+
+	private Object[][] getDataTable() {
 		Object[][] data = new Object[customers.size() + 1][4];
-		data[0] = new Object[]{"Nome", "CPF", "CNH", "ID"};
+		data[0] = new Object[] { "Nome", "CPF", "CNH", "ID" };
 		for (int i = 0; i < customers.size(); i++) {
-            Customer usuario = customers.get(i);
-            data[i + 1] = new Object[]{usuario.getName(), usuario.getCpf(), usuario.getLicenseNumber(), usuario.getCpf()};
-        }
+			Customer usuario = customers.get(i);
+			data[i + 1] = new Object[] { usuario.getName(), usuario.getCpf(), usuario.getLicenseNumber(),
+					usuario.getCpf() };
+		}
 		return data;
 	}
-	
+
 	/**
 	 * @return o frameRentControl
 	 */
@@ -103,14 +108,14 @@ public class CustomerManagementScreen extends JPanel {
 	public MenuPanel getMenuPanel() {
 		return menuPanel;
 	}
-	
+
 	/**
 	 * @param menuPanel the menuPanel to set
 	 */
 	public void setMenuPanel(MenuPanel menuPanel) {
 		this.menuPanel = menuPanel;
 	}
-	
+
 	/**
 	 * @return the messagerLabel
 	 */
@@ -151,5 +156,5 @@ public class CustomerManagementScreen extends JPanel {
 	 */
 	public void setUsers(List<Customer> customers) {
 		this.customers = customers;
-	}	
+	}
 }
