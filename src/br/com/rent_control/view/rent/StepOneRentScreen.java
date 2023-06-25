@@ -43,14 +43,16 @@ public class StepOneRentScreen extends JPanel {
 
 	private Customer customer;
 	private int idCar;
-
-	public StepOneRentScreen(final RentControl frameRentControl, MenuPanel menuPanel, int idCar) {
+	private double dailyCost;
+	
+	public StepOneRentScreen(final RentControl frameRentControl, MenuPanel menuPanel, int idCar, double dailyCost) {
 		setLayout(null);
 		setBackground(Color.white);
 		
 		this.menuPanel = menuPanel;
 		this.frameRentControl = frameRentControl;
 		this.idCar = idCar;
+		this.dailyCost = dailyCost;
 		
 		fieldsPanel = new JPanel();
 		fieldsPanel.setLayout(null);
@@ -330,5 +332,19 @@ public class StepOneRentScreen extends JPanel {
 	 */
 	public void setIdCar(int idCar) {
 		this.idCar = idCar;
+	}
+
+	/**
+	 * @return o dailyCost
+	 */
+	public double getDailyCost() {
+		return dailyCost;
+	}
+
+	/**
+	 * @param dailyCost o dailyCost a ser configurado
+	 */
+	public void setDailyCost(double dailyCost) {
+		this.dailyCost = dailyCost;
 	}
 }

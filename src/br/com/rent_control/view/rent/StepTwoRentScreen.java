@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import br.com.rent_control.controller.RentControl;
 import br.com.rent_control.controller.rent.StepTwoRentController;
+import br.com.rent_control.model.vo.Rent;
 import br.com.rent_control.view.MenuPanel;
 import br.com.rent_control.view.components.*;
 
@@ -19,9 +20,9 @@ public class StepTwoRentScreen extends JPanel{
 	private static final long serialVersionUID = 5098612675418528285L;
 	private MenuPanel menuPanel;
 	private final RentControl frameRentControl;
-	
-	private int idCar;
-	private String cpfCustomer;
+	private Rent rent;
+	private int dailyAmount;
+	private double dailyCost;
 
 	private CustomField rentMessagerLabel;
 	private JToggleButton additionalButtonOne;
@@ -29,16 +30,18 @@ public class StepTwoRentScreen extends JPanel{
 	private JToggleButton additionalButtonThree;
 	private JToggleButton additionalButtonFour;
 	private JToggleButton additionalButtonFive;
+	private JToggleButton additionalButtonSix;
 	private JButton proceedButton;
 
-	public StepTwoRentScreen(final RentControl frameRentControl, MenuPanel menuPanel, int idCar, String cpfCustomer) {
+	public StepTwoRentScreen(final RentControl frameRentControl, MenuPanel menuPanel, Rent rent, int dailyAmount, double dailyCost) {
 		setLayout(null);
 		setBackground(Color.white);
 		
 		this.menuPanel = menuPanel;
 		this.frameRentControl = frameRentControl;
-		this.idCar = idCar;
-		this.cpfCustomer = cpfCustomer;
+		this.rent = rent;
+		this.dailyAmount = dailyAmount;
+		this.dailyCost = dailyCost;
 		
 		rentMessagerLabel = new CustomField("Aluguel do veículo - Adicionais", 40);
 		
@@ -63,15 +66,15 @@ public class StepTwoRentScreen extends JPanel{
 		additionalButtonThree.setBounds(111, 218, 664, 35);
 		additionalButtonThree.setBackground(Color.white);
 		additionalButtonThree.setBorder(new LineBorder(ColorUtils.SECUNDARY_DARK_COLOR, 2));
-		additionalButtonThree.add(new JLabel("Bebê conforto (crianças de 0 a a ano)"), BorderLayout.WEST);
-		additionalButtonThree.add(new JLabel("R$ 29,90 * valor único"), BorderLayout.EAST);
+		additionalButtonThree.add(new JLabel("Limpeza do veículo"), BorderLayout.WEST);
+		additionalButtonThree.add(new JLabel("R$ 34,90 * valor único"), BorderLayout.EAST);
 		
 		additionalButtonFour = new JToggleButton();
 		additionalButtonFour.setLayout(new BorderLayout());
 		additionalButtonFour.setBounds(111, 285, 664, 35);
 		additionalButtonFour.setBackground(Color.white);
 		additionalButtonFour.setBorder(new LineBorder(ColorUtils.SECUNDARY_DARK_COLOR, 2));
-		additionalButtonFour.add(new JLabel("Cadeira de bebê (crianças de 1 a 4 anos)"), BorderLayout.WEST);
+		additionalButtonFour.add(new JLabel("Bebê conforto (crianças de 0 a a ano)"), BorderLayout.WEST);
 		additionalButtonFour.add(new JLabel("R$ 29,90 * valor único"), BorderLayout.EAST);
 		
 		additionalButtonFive = new JToggleButton();
@@ -79,12 +82,20 @@ public class StepTwoRentScreen extends JPanel{
 		additionalButtonFive.setBounds(111, 352, 664, 35);
 		additionalButtonFive.setBackground(Color.white);
 		additionalButtonFive.setBorder(new LineBorder(ColorUtils.SECUNDARY_DARK_COLOR, 2));
-		additionalButtonFive.add(new JLabel("Assento de elevação (crianças de 4 a 7 anos)"), BorderLayout.WEST);
+		additionalButtonFive.add(new JLabel("Cadeira de bebê (crianças de 1 a 4 anos)"), BorderLayout.WEST);
 		additionalButtonFive.add(new JLabel("R$ 29,90 * valor único"), BorderLayout.EAST);
+		
+		additionalButtonSix = new JToggleButton();
+		additionalButtonSix.setLayout(new BorderLayout());
+		additionalButtonSix.setBounds(111, 419, 664, 35);
+		additionalButtonSix.setBackground(Color.white);
+		additionalButtonSix.setBorder(new LineBorder(ColorUtils.SECUNDARY_DARK_COLOR, 2));
+		additionalButtonSix.add(new JLabel("Assento de elevação (crianças de 4 a 7 anos)"), BorderLayout.WEST);
+		additionalButtonSix.add(new JLabel("R$ 29,90 * valor único"), BorderLayout.EAST);
 		
 		proceedButton = new JButton("Prosseguir");
 		proceedButton.setForeground(Color.WHITE);
-		proceedButton.setBounds(323, 451, 240, 35);
+		proceedButton.setBounds(323, 518, 240, 35);
 		proceedButton.setBackground(ColorUtils.PRIMARY_COLOR);
 		proceedButton.setBorder(null);
 		
@@ -94,6 +105,7 @@ public class StepTwoRentScreen extends JPanel{
 		add(additionalButtonThree);
 		add(additionalButtonFour);
 		add(additionalButtonFive);
+		add(additionalButtonSix);
 		add(proceedButton);
 		
 		new StepTwoRentController(this);
@@ -114,40 +126,54 @@ public class StepTwoRentScreen extends JPanel{
 	public void setMenuPanel(MenuPanel menuPanel) {
 		this.menuPanel = menuPanel;
 	}
-
-	/**
-	 * @return o idCar
-	 */
-	public int getIdCar() {
-		return idCar;
-	}
-
-	/**
-	 * @param idCar o idCar a ser configurado
-	 */
-	public void setIdCar(int idCar) {
-		this.idCar = idCar;
-	}
-
-	/**
-	 * @return o cpfCustomer
-	 */
-	public String getCpfCustomer() {
-		return cpfCustomer;
-	}
-
-	/**
-	 * @param cpfCustomer o cpfCustomer a ser configurado
-	 */
-	public void setCpfCustomer(String cpfCustomer) {
-		this.cpfCustomer = cpfCustomer;
-	}
-
+	
 	/**
 	 * @return o frameRentControl
 	 */
 	public RentControl getFrameRentControl() {
 		return frameRentControl;
+	}
+
+	/**
+	 * @return o rent
+	 */
+	public Rent getRent() {
+		return rent;
+	}
+
+	/**
+	 * @param rent o rent a ser configurado
+	 */
+	public void setRent(Rent rent) {
+		this.rent = rent;
+	}
+	
+	/**
+	 * @return o dailyAmount
+	 */
+	public int getDailyAmount() {
+		return dailyAmount;
+	}
+
+	/**
+	 * @param dailyAmount o dailyAmount a ser configurado
+	 */
+	public void setDailyAmount(int dailyAmount) {
+		this.dailyAmount = dailyAmount;
+	}
+
+	/**
+	 * @return o dailyCost
+	 */
+	public double getDailyCost() {
+		return dailyCost;
+	}
+
+	/**
+	 * @param dailyCost o dailyCost a ser configurado
+	 */
+	public void setDailyCost(double dailyCost) {
+		this.dailyCost = dailyCost;
 	}
 
 	/**
@@ -218,5 +244,19 @@ public class StepTwoRentScreen extends JPanel{
 	 */
 	public void setAdditionalButtonFive(JToggleButton additionalButtonFive) {
 		this.additionalButtonFive = additionalButtonFive;
+	}
+	
+	/**
+	 * @return o additionalButtonSix
+	 */
+	public JToggleButton getAdditionalButtonSix() {
+		return additionalButtonSix;
+	}
+
+	/**
+	 * @param additionalButtonSix o additionalButtonSix a ser configurado
+	 */
+	public void setAdditionalButtonSix(JToggleButton additionalButtonSix) {
+		this.additionalButtonSix = additionalButtonSix;
 	}
 }
