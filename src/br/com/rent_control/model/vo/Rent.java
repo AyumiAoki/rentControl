@@ -2,12 +2,12 @@ package br.com.rent_control.model.vo;
 
 /**
  * Class Rent - Represents a rent in the application
+ * 
  * @author Ayumi Aoki &lt;ayumi.santana@icomp.ufam.edu.br&gt;
- * @version 1.0, 2023-06-06
  */
 
 public class Rent {
-	
+
 	private String withdrawalDate;
 	private String pickUpLocation;
 	private String deliveryDate;
@@ -20,14 +20,16 @@ public class Rent {
 	private boolean drinkComfort;
 	private boolean babyChair;
 	private boolean boosterSeat;
-	
+
 	/**
 	 * Parameterless class constructor.
-	 */	
-	public Rent() {}
+	 */
+	public Rent() {
+	}
 
 	/**
 	 * Class constructor with parameters.
+	 * 
 	 * @param withdrawalDate
 	 * @param pickUpLocation
 	 * @param deliveryDate
@@ -41,9 +43,9 @@ public class Rent {
 	 * @param babyChair
 	 * @param boosterSeat
 	 */
-	public Rent(String withdrawalDate, String pickUpLocation, String deliveryDate, String deliveryLocation, String cpfCustomer,
-			int idCar, boolean carProtection, boolean gps, boolean cleaning, boolean drinkComfort, boolean babyChair,
-			boolean boosterSeat) {
+	public Rent(String withdrawalDate, String pickUpLocation, String deliveryDate, String deliveryLocation,
+			String cpfCustomer, int idCar, boolean carProtection, boolean gps, boolean cleaning, boolean drinkComfort,
+			boolean babyChair, boolean boosterSeat) {
 		this.withdrawalDate = withdrawalDate;
 		this.pickUpLocation = pickUpLocation;
 		this.deliveryDate = deliveryDate;
@@ -60,6 +62,7 @@ public class Rent {
 
 	/**
 	 * Returns the withdrawal date.
+	 * 
 	 * @return String containing the withdrawal date.
 	 */
 	public String getWithdrawalDate() {
@@ -67,162 +70,217 @@ public class Rent {
 	}
 
 	/**
-	 * @param withdrawalDate o withdrawalDate a ser configurado
+	 * Defines the withdrawal date.
+	 * 
+	 * @param withdrawalDate The withdrawal date to be defined.
 	 */
 	public void setWithdrawalDate(String withdrawalDate) {
 		this.withdrawalDate = withdrawalDate;
 	}
 
 	/**
-	 * Returns the withdrawal date.
-	 * @return String containing the withdrawal date.
+	 * Returns the pickup location.
+	 * 
+	 * @return String containing the pickup location.
 	 */
 	public String getPickUpLocation() {
 		return pickUpLocation;
 	}
 
 	/**
-	 * @param pickUpLocation o pickUpLocation a ser configurado
+	 * Defines the pickup location.
+	 * 
+	 * @param pickUpLocation Pickup location to be defined.
 	 */
 	public void setPickUpLocation(String pickUpLocation) {
 		this.pickUpLocation = pickUpLocation;
 	}
 
 	/**
-	 * @return o deliveryDate
+	 * 
+	 * Returns the return date.
+	 * 
+	 * @return String containing the return date.
 	 */
 	public String getDeliveryDate() {
 		return deliveryDate;
 	}
 
 	/**
-	 * @param deliveryDate o deliveryDate a ser configurado
+	 * Defines the return date.
+	 * 
+	 * @param deliveryDate The return date to be defined.
 	 */
 	public void setDeliveryDate(String deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 
 	/**
-	 * @return o deliveryLocation
+	 * Returns the drop-off location.
+	 * 
+	 * @return String containing the return location.
 	 */
 	public String getDeliveryLocation() {
 		return deliveryLocation;
 	}
 
 	/**
-	 * @param deliveryLocation o deliveryLocation a ser configurado
+	 * Defines the return location.
+	 * 
+	 * @param deliveryLocation The return location to be defined.
 	 */
 	public void setDeliveryLocation(String deliveryLocation) {
 		this.deliveryLocation = deliveryLocation;
 	}
 
 	/**
-	 * @return o customer
+	 * Return the customer's cpf.
+	 * 
+	 * @return String containing the customer's CPF.
 	 */
 	public String getCpfCustomer() {
 		return cpfCustomer;
 	}
 
 	/**
-	 * @param customer o customer a ser configurado
+	 * Define the customer's cpf.
+	 * 
+	 * @param customer The customer's cpf to be defined.
 	 */
 	public void setCpfCustomer(String cpfCustomer) {
 		this.cpfCustomer = cpfCustomer;
 	}
 
 	/**
-	 * @return o car
+	 * Returns the id of the vehicle to be allocated
+	 * 
+	 * @return int containing the vehicle id.
 	 */
 	public int getIdCar() {
 		return idCar;
 	}
 
 	/**
-	 * @param car o car a ser configurado
+	 * Define the id of the car to be allocated.
+	 * 
+	 * @param car The id of the car to set.
 	 */
 	public void setIdCar(int idCar) {
 		this.idCar = idCar;
 	}
 
 	/**
-	 * @return o carProtection
+	 * Returns if car protection has been added to the lease.
+	 * 
+	 * @return boolean containing true or false if car protection was added to the
+	 *         lease.
 	 */
 	public boolean isCarProtection() {
 		return carProtection;
 	}
 
 	/**
-	 * @param carProtection o carProtection a ser configurado
+	 * Defines whether the vehicle has protection added.
+	 * 
+	 * @param carProtection The value that indicates whether the car has protection
+	 *                      or not.
 	 */
 	public void setCarProtection(boolean carProtection) {
 		this.carProtection = carProtection;
 	}
 
 	/**
-	 * @return o gps
+	 * Returns whether the GPS has been added to the location.
+	 * 
+	 * @return boolean containing true or false if the GPS was added to the
+	 *         location.
 	 */
 	public boolean isGps() {
 		return gps;
 	}
 
 	/**
-	 * @param gps o gps a ser configurado
+	 * Defines whether the vehicle has GPS added.
+	 * 
+	 * @param gps The value that indicates whether the car has GPS or not.
 	 */
 	public void setGps(boolean gps) {
 		this.gps = gps;
 	}
 
 	/**
-	 * @return o cleaning
+	 * Returns whether vehicle cleaning has been added to the lease.
+	 * 
+	 * @return boolean containing true or false if cleaning was added to tenancy.
 	 */
 	public boolean isCleaning() {
 		return cleaning;
 	}
 
 	/**
-	 * @param cleaning o cleaning a ser configurado
+	 * Defines if the vehicle has the cleaning added.
+	 * 
+	 * @param cleaning The value that indicates whether the car is clean or not.
 	 */
 	public void setCleaning(boolean cleaning) {
 		this.cleaning = cleaning;
 	}
 
 	/**
-	 * @return o drinkComfort
+	 * Returns if the baby comfort was added to the lease.
+	 * 
+	 * @return boolean containing true or false if the baby comfort was added to the
+	 *         lease.
 	 */
 	public boolean isDrinkComfort() {
 		return drinkComfort;
 	}
 
 	/**
-	 * @param drinkComfort o drinkComfort a ser configurado
+	 * Defines whether the vehicle has baby comfort added.
+	 * 
+	 * @param drinkComfort The value that indicates whether the car has baby comfort
+	 *                     or not.
 	 */
 	public void setDrinkComfort(boolean drinkComfort) {
 		this.drinkComfort = drinkComfort;
 	}
 
 	/**
-	 * @return o babyChair
+	 * Returns if the baby chair was added to the location.
+	 * 
+	 * @return boolean containing true or false if the baby chair was added to the
+	 *         lease.
 	 */
 	public boolean isBabyChair() {
 		return babyChair;
 	}
 
 	/**
-	 * @param babyChair o babyChair a ser configurado
+	 * Defines if the vehicle has a baby seat added.
+	 * 
+	 * @param babyChair The value that indicates whether the car has a baby seat or
+	 *                  not.
 	 */
 	public void setBabyChair(boolean babyChair) {
 		this.babyChair = babyChair;
 	}
 
 	/**
-	 * @return o boosterSeat
+	 * Returns whether the booster seat has been added to the lease.
+	 * 
+	 * @return boolean containing true or false if the booster seat has been added
+	 *         to the lease.
 	 */
 	public boolean isBoosterSeat() {
 		return boosterSeat;
 	}
 
 	/**
-	 * @param boosterSeat o boosterSeat a ser configurado
+	 * Defines whether the vehicle has the booster seat added.
+	 * 
+	 * @param boosterSeat The value indicating whether the car has a booster seat or
+	 *                    not.
 	 */
 	public void setBoosterSeat(boolean boosterSeat) {
 		this.boosterSeat = boosterSeat;

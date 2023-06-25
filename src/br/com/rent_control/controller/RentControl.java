@@ -1,11 +1,9 @@
 package br.com.rent_control.controller;
 
+import javax.swing.*;
 import br.com.rent_control.model.CreateDatabase;
 import br.com.rent_control.view.*;
-
 import java.awt.BorderLayout;
-
-import javax.swing.*;
 
 /**
  * Class RentControl - Represents the main class in the application
@@ -19,6 +17,9 @@ public class RentControl extends JFrame {
 	private LoginScreen telaLogin;
 	private CreateDatabase createDatabase;
 
+	/**
+	 * Parameterless class constructor.
+	 */
 	public RentControl() {
 		createDatabase = new CreateDatabase();
 		telaLogin = new LoginScreen(this);
@@ -34,6 +35,9 @@ public class RentControl extends JFrame {
 		createDatabase.createDbTables();
 	}
 
+	/**
+	 * Main application method
+	 */
 	public static void main(String[] args) {
 		new RentControl();
 	}

@@ -5,6 +5,11 @@ import java.awt.event.ActionListener;
 import br.com.rent_control.view.customer.AddCustomerScreen;
 import br.com.rent_control.view.customer.CustomerManagementScreen;
 
+/**
+ * @author ayumi
+ *
+ */
+
 public class CustomerManagementController {
 	public CustomerManagementController(CustomerManagementScreen customerManagementScreen) {
 		customerManagementScreen.getNewCustomer().addActionListener(new ActionListener() {

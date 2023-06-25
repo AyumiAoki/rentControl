@@ -1,26 +1,28 @@
 package br.com.rent_control.view.components;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
 import br.com.rent_control.view.customer.CustomerManagementScreen.ActionButton;
+
+/**
+ * Class CustomTable - Represents a custom table
+ * 
+ * @author Ayumi Aoki &lt;ayumi.santana@icomp.ufam.edu.br&gt;
+ */
 
 public class CustomTable extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private ActionButton actionButton;
 
+	/**
+	 * Class constructor with parameter.
+	 * 
+	 * @param actionButton The actions that the button should perform.
+	 * @param data         The data the table should display.
+	 */
 	public CustomTable(ActionButton actionButton, Object[][] data) {
 		this.actionButton = actionButton;
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -34,7 +36,7 @@ public class CustomTable extends JPanel {
 			panel.setBorder(null);
 			panel.setBackground(Color.white);
 			panel.setBorder(new EmptyBorder(10, 10, 10, 10));
-			
+
 			if (row == 0) {
 				panel.setBackground(new Color(243, 246, 249));
 			}
@@ -67,12 +69,26 @@ public class CustomTable extends JPanel {
 		}
 	}
 
+	/**
+	 * Method that displayed the label
+	 * 
+	 * @param label
+	 * @param panel
+	 * @param fontWeight
+	 */
 	private void displayLabel(String label, JPanel panel, int fontWeight) {
 		JLabel newLabel = new JLabel(label);
 		newLabel.setFont(newLabel.getFont().deriveFont(fontWeight, 14));
 		panel.add(newLabel);
 	}
 
+	/**
+	 * Method that displays the icon
+	 * 
+	 * @param id
+	 * @param path
+	 * @param panel
+	 */
 	private void displayIcon(String id, String path, JPanel panel) {
 		JButton btn = new JButton();
 		btn.setIcon(new ImageIcon("src/br/com/rent_control/view/images/" + path + ".png"));

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package br.com.rent_control.view.rent;
 
 import java.awt.Color;
@@ -15,9 +12,11 @@ import br.com.rent_control.view.MenuPanel;
 import br.com.rent_control.view.components.*;
 
 /**
- * @author ayumi
- *
+ * Class StepOneRentScreen - Represents the first stage of vehicle rental
+ * 
+ * @author Ayumi Aoki &lt;ayumi.santana@icomp.ufam.edu.br&gt;
  */
+
 public class StepOneRentScreen extends JPanel {
 
 	private static final long serialVersionUID = 8140101290388352518L;
@@ -44,16 +43,24 @@ public class StepOneRentScreen extends JPanel {
 	private Customer customer;
 	private int idCar;
 	private double dailyCost;
-	
+
+	/**
+	 * Class constructor with parameter.
+	 * 
+	 * @param frameRentControl
+	 * @param menuPanel
+	 * @param idCar
+	 * @param dailyCost
+	 */
 	public StepOneRentScreen(final RentControl frameRentControl, MenuPanel menuPanel, int idCar, double dailyCost) {
 		setLayout(null);
 		setBackground(Color.white);
-		
+
 		this.menuPanel = menuPanel;
 		this.frameRentControl = frameRentControl;
 		this.idCar = idCar;
 		this.dailyCost = dailyCost;
-		
+
 		fieldsPanel = new JPanel();
 		fieldsPanel.setLayout(null);
 		fieldsPanel.setBounds(0, 139, 886, 542);
@@ -67,7 +74,7 @@ public class StepOneRentScreen extends JPanel {
 		searchButton.setBounds(535, 104, 240, 35);
 		searchButton.setBackground(ColorUtils.PRIMARY_COLOR);
 		searchButton.setBorder(null);
-		
+
 		searchButton.addActionListener(e -> new StepOneRentController(this).searchButtonClicked());
 
 		add(rentMessagerLabel.getLabel());
@@ -76,6 +83,9 @@ public class StepOneRentScreen extends JPanel {
 		add(cpfField.getTextField());
 	}
 
+	/**
+	 * Method that displays user information and date fields for rent
+	 */
 	public void showFields() {
 		customerMessagerLabel = new CustomField("Dados do locatário", 24);
 		nameFieldDisable = new CustomField("Nome", 111, 60, customer.getName());
@@ -121,21 +131,29 @@ public class StepOneRentScreen extends JPanel {
 		fieldsPanel.add(returnLocation.getComboBox());
 		fieldsPanel.add(returnButton);
 		fieldsPanel.add(proceedButton);
-		
+
 		returnButton.addActionListener(e -> new StepOneRentController(this).returnButtonClicked());
 		proceedButton.addActionListener(e -> new StepOneRentController(this).proceedButtonClicked());
-		
+
 		add(fieldsPanel);
 		revalidate();
 		repaint();
 	}
 
+	/**
+	 * Method that removes the fields from the panel
+	 */
 	public void removeFieldsPanel() {
 		remove(fieldsPanel);
 		revalidate();
 		repaint();
 	}
 
+	/**
+	 * Method that returns the list of rental addresses
+	 * 
+	 * @return String[] containing the list of addresses
+	 */
 	private String[] getRentalAddresses() {
 		RentalAddressesDao dao = new RentalAddressesDao();
 		List<String> options = new ArrayList<String>();
@@ -144,205 +162,254 @@ public class StepOneRentScreen extends JPanel {
 		}
 		return options.toArray(new String[0]);
 	}
-	
+
 	/**
-	 * @return o frameRentControl
+	 * Returns the Jframe of the application.
+	 * 
+	 * @return RentControl containing the application frame instance.
 	 */
 	public RentControl getFrameRentControl() {
 		return frameRentControl;
 	}
 
 	/**
-	 * @return o menuPanel
+	 * Returns the application's options menu
+	 * 
+	 * @return MenuPanel containing the application menu
 	 */
 	public MenuPanel getMenuPanel() {
 		return menuPanel;
 	}
 
 	/**
-	 * @param menuPanel o menuPanel a ser configurado
-	 */
-	public void setMenuPanel(MenuPanel menuPanel) {
-		this.menuPanel = menuPanel;
-	}
-
-	/**
-	 * @return o cpfField
+	 * Returns a custom text field
+	 * 
+	 * @return CustomField containing field information
 	 */
 	public CustomField getCpfField() {
 		return cpfField;
 	}
 
 	/**
-	 * @param cpfField o cpfField a ser configurado
+	 * Define custom text field
+	 * 
+	 * @param cpfField The custom text field to set
 	 */
 	public void setCpfField(CustomField cpfField) {
 		this.cpfField = cpfField;
 	}
 
 	/**
-	 * @return o nameFieldDisable
+	 * Returns a custom text field
+	 * 
+	 * @return CustomField containing field information
 	 */
 	public CustomField getNameFieldDisable() {
 		return nameFieldDisable;
 	}
 
 	/**
-	 * @param nameFieldDisable o nameFieldDisable a ser configurado
+	 * Define custom text field
+	 * 
+	 * @param nameFieldDisable The custom text field to set
 	 */
 	public void setNameFieldDisable(CustomField nameFieldDisable) {
 		this.nameFieldDisable = nameFieldDisable;
 	}
 
 	/**
-	 * @return o cpfFieldDisable
+	 * Returns a custom text field
+	 * 
+	 * @return CustomField containing field information
 	 */
 	public CustomField getCpfFieldDisable() {
 		return cpfFieldDisable;
 	}
 
 	/**
-	 * @param cpfFieldDisable o cpfFieldDisable a ser configurado
+	 * Define custom text field
+	 * 
+	 * @param cpfFieldDisable The custom text field to set
 	 */
 	public void setCpfFieldDisable(CustomField cpfFieldDisable) {
 		this.cpfFieldDisable = cpfFieldDisable;
 	}
 
 	/**
-	 * @return o dateOfBirthFieldDisable
+	 * Returns a custom text field
+	 * 
+	 * @return CustomField containing field information
 	 */
 	public CustomField getDateOfBirthFieldDisable() {
 		return dateOfBirthFieldDisable;
 	}
 
 	/**
-	 * @param dateOfBirthFieldDisable o dateOfBirthFieldDisable a ser configurado
+	 * Define custom text field
+	 * 
+	 * @param dateOfBirthFieldDisable The custom text field to set
 	 */
 	public void setDateOfBirthFieldDisable(CustomField dateOfBirthFieldDisable) {
 		this.dateOfBirthFieldDisable = dateOfBirthFieldDisable;
 	}
 
 	/**
-	 * @return o cnhFieldDisable
+	 * Returns a custom text field
+	 * 
+	 * @return CustomField containing field information
 	 */
 	public CustomField getCnhFieldDisable() {
 		return cnhFieldDisable;
 	}
 
 	/**
-	 * @param cnhFieldDisable o cnhFieldDisable a ser configurado
+	 * Define custom text field
+	 * 
+	 * @param cnhFieldDisable The custom text field to set
 	 */
 	public void setCnhFieldDisable(CustomField cnhFieldDisable) {
 		this.cnhFieldDisable = cnhFieldDisable;
 	}
 
 	/**
-	 * @return o withdrawalDate
+	 * Returns a custom text field
+	 * 
+	 * @return CustomField containing field information
 	 */
 	public CustomField getWithdrawalDate() {
 		return withdrawalDate;
 	}
 
 	/**
-	 * @param withdrawalDate o withdrawalDate a ser configurado
+	 * Define custom text field
+	 * 
+	 * @param withdrawalDate The custom text field to set
 	 */
 	public void setWithdrawalDate(CustomField withdrawalDate) {
 		this.withdrawalDate = withdrawalDate;
 	}
 
 	/**
-	 * @return o pickUpLocation
+	 * Returns a custom text field
+	 * 
+	 * @return CustomField containing field information
 	 */
 	public CustomField getPickUpLocation() {
 		return pickUpLocation;
 	}
 
 	/**
-	 * @param pickUpLocation o pickUpLocation a ser configurado
+	 * Define custom text field
+	 * 
+	 * @param pickUpLocation The custom text field to set
 	 */
 	public void setPickUpLocation(CustomField pickUpLocation) {
 		this.pickUpLocation = pickUpLocation;
 	}
 
 	/**
-	 * @return o deliveryDate
+	 * Returns a custom text field
+	 * 
+	 * @return CustomField containing field information
 	 */
 	public CustomField getDeliveryDate() {
 		return deliveryDate;
 	}
 
 	/**
-	 * @param deliveryDate o deliveryDate a ser configurado
+	 * Define custom text field
+	 * 
+	 * @param deliveryDate The custom text field to set
 	 */
 	public void setDeliveryDate(CustomField deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 
 	/**
-	 * @return o returnLocation
+	 * Returns a custom text field
+	 * 
+	 * @return CustomField containing field information
 	 */
 	public CustomField getReturnLocation() {
 		return returnLocation;
 	}
 
 	/**
-	 * @param returnLocation o returnLocation a ser configurado
+	 * Define custom text field
+	 * 
+	 * @param returnLocation The custom text field to set
 	 */
 	public void setReturnLocation(CustomField returnLocation) {
 		this.returnLocation = returnLocation;
 	}
 
 	/**
-	 * @return o returnButton
+	 * Returns a button
+	 * 
+	 * @return JButtono containing the button instance
 	 */
 	public JButton getReturnButton() {
 		return returnButton;
 	}
 
 	/**
-	 * @param returnButton o returnButton a ser configurado
+	 * Define button changes
+	 * 
+	 * @param returnButton The button to be set
 	 */
 	public void setReturnButton(JButton returnButton) {
 		this.returnButton = returnButton;
 	}
 
 	/**
-	 * @return o customer
+	 * Returns a customer
+	 * 
+	 * @return Customer containing customer data
 	 */
 	public Customer getCustomer() {
 		return customer;
 	}
 
 	/**
-	 * @param customer o customer a ser configurado
+	 * Define a customer
+	 * 
+	 * @param customer The client to be edited
 	 */
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 
 	/**
-	 * @return o idCar
+	 * Returns the vehicle id.
+	 * 
+	 * @return int containing the vehicle id.
 	 */
 	public int getIdCar() {
 		return idCar;
 	}
 
 	/**
-	 * @param idCar o idCar a ser configurado
+	 * Defines the vehicle id.
+	 * 
+	 * @param idCar The id to set.
 	 */
 	public void setIdCar(int idCar) {
 		this.idCar = idCar;
 	}
 
 	/**
-	 * @return o dailyCost
+	 * Returns the daily Cost.
+	 * 
+	 * @return double containing the daily Cost.
 	 */
 	public double getDailyCost() {
 		return dailyCost;
 	}
 
 	/**
-	 * @param dailyCost o dailyCost a ser configurado
+	 * Defines the daily Cost.
+	 * 
+	 * @param dailyCost The daily Cost to set.
 	 */
 	public void setDailyCost(double dailyCost) {
 		this.dailyCost = dailyCost;

@@ -11,9 +11,6 @@ import br.com.rent_control.view.car.CarManagementScreen;
 
 public class CarManagementController {
 
-	/**
-	 * 
-	 */
 	public CarManagementController(CarManagementScreen carManagementScreen) {
 		carManagementScreen.getNewCar().addActionListener(new ActionListener() {
 			@Override

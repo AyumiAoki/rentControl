@@ -4,7 +4,6 @@ package br.com.rent_control.model.vo;
  * Class Customer - Represents a user in the application
  * 
  * @author Ayumi Aoki &lt;ayumi.santana@icomp.ufam.edu.br&gt;
- * @version 1.0, 2023-06-07
  */
 
 public class Employee {
@@ -42,56 +41,72 @@ public class Employee {
 	}
 
 	/**
-	 * @return o name
+	 * Returns the name of the employee.
+	 * 
+	 * @return String containing the employee's name.
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * @param name o name a ser configurado
+	 * Defines the name of the employee.
+	 * 
+	 * @param name The name to be defined.
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * @return o cpf
+	 * Returns the cpf of the employee.
+	 * 
+	 * @return String containing the employee's cpf.
 	 */
 	public String getCpf() {
 		return cpf;
 	}
 
 	/**
-	 * @param cpf o cpf a ser configurado
+	 * Defines the cpf of the employee.
+	 * 
+	 * @param cpf The cpf to be defined.
 	 */
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
 	/**
-	 * @return o nickname
+	 * Returns the nickname of the employee.
+	 * 
+	 * @return String containing the employee's nickname.
 	 */
 	public String getNickname() {
 		return nickname;
 	}
 
 	/**
-	 * @param nickname o nickname a ser configurado
+	 * Defines the nickname of the employee.
+	 * 
+	 * @param nickname The nickname to be defined.
 	 */
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
 
 	/**
-	 * @return o password
+	 * Returns the password of the employee.
+	 * 
+	 * @return String containing the employee's password.
 	 */
 	public String getPassword() {
 		return password;
 	}
 
 	/**
-	 * @param password o password a ser configurado
+	 * Defines the password of the employee.
+	 * 
+	 * @param password The password to be defined.
 	 */
 	public void setPassword(String password) {
 		this.password = password;

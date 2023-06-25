@@ -55,8 +55,8 @@ public class StepOneRentController {
 		CheckDate checkDate = new CheckDate();
 
 		if (!withdrawalDate.equals("") && !deliveryDate.equals("")) {
-			if (withdrawalDate.length() > 8 && deliveryDate.length() > 8) {
-				JOptionPane.showMessageDialog(null, "A data precisa estar no formato 00000000");
+			if (withdrawalDate.length() != 8 || deliveryDate.length() != 8) {
+				JOptionPane.showMessageDialog(null, "A data precisa estar no formato 00000000 e com exatamente 8 digitos");
 			} else if(!withdrawalDate.matches("\\d+") && !deliveryDate.matches("\\d+")) {
 				JOptionPane.showMessageDialog(null, "Insira apenas números");
 			}else {

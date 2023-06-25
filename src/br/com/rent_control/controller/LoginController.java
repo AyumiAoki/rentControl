@@ -1,6 +1,3 @@
-/**
- * 
- */
 package br.com.rent_control.controller;
 
 import java.awt.BorderLayout;
@@ -37,6 +34,8 @@ public class LoginController {
 	}
 
 	/**
+	 * Method that returns the application's main panel.
+	 * 
 	 * @return o contentPanel
 	 */
 	public ContentPanel getContentPanel() {

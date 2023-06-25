@@ -1,6 +1,3 @@
-/**
- * 
- */
 package br.com.rent_control.view;
 
 import javax.swing.*;

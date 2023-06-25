@@ -1,6 +1,3 @@
-/**
- * 
- */
 package br.com.rent_control.controller;
 
 import java.awt.*;
@@ -30,6 +27,11 @@ public class MenuPanelController {
 		buttonSelect = null;
 	}
 	
+	/**
+	 * Action method when clicking on buttons
+	 * @param button
+	 * @param component
+	 */
 	public void changeScreen(OptionsMenuButton button, Component component) {
 		menuPanelScreen.getContentPanel().removeAll();
         menuPanelScreen.getContentPanel().add(component);
