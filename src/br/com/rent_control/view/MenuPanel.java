@@ -46,21 +46,21 @@ public class MenuPanel extends JPanel {
 		backgroundPanelMenu = new ImageIcon(
 				getClass().getResource("/br/com/rent_control/view/images/backgroundPanelMenu.png"));
 
-		booKCarButton = new OptionsMenuButton("iconRentalButton.png", 75);
-		customerButton = new OptionsMenuButton("iconUserButton.png", 115);
-		addCarButton = new OptionsMenuButton("iconCarButton.png", 155);
+		customerButton = new OptionsMenuButton("iconUserButton.png", 75);
+		addCarButton = new OptionsMenuButton("iconCarButton.png", 115);
+		booKCarButton = new OptionsMenuButton("iconRentalButton.png", 155);
 
-		add(booKCarButton.getButton());
 		add(customerButton.getButton());
 		add(addCarButton.getButton());
+		add(booKCarButton.getButton());
 
 		menuPanelControl = new MenuPanelController(this);
-		booKCarButton.getButton().addActionListener(
-				e -> menuPanelControl.changeScreen(booKCarButton, new RentalScreen(this.frameRentControl, this)));
 		customerButton.getButton().addActionListener(e -> menuPanelControl.changeScreen(customerButton,
 				new CustomerManagementScreen(this.frameRentControl, this)));
 		addCarButton.getButton().addActionListener(
 				e -> menuPanelControl.changeScreen(addCarButton, new CarManagementScreen(this.frameRentControl, this)));
+		booKCarButton.getButton().addActionListener(
+				e -> menuPanelControl.changeScreen(booKCarButton, new RentalScreen(this.frameRentControl, this)));
 	}
 
 	/**
