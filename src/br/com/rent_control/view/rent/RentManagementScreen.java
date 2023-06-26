@@ -1,115 +1,104 @@
-package br.com.rent_control.view.customer;
+package br.com.rent_control.view.rent;
 
 import java.awt.*;
 import javax.swing.*;
 import java.util.List;
 import br.com.rent_control.controller.RentControl;
-import br.com.rent_control.controller.customer.CustomerManagementController;
-import br.com.rent_control.model.dao.CustomerDao;
-import br.com.rent_control.model.dao.RentDao;
-import br.com.rent_control.model.vo.Customer;
+import br.com.rent_control.controller.rent.RentManagementController;
 import br.com.rent_control.view.MenuPanel;
 import br.com.rent_control.view.components.ColorUtils;
 import br.com.rent_control.view.components.CustomTable;
+import br.com.rent_control.view.customer.CustomerManagementScreen.ActionButton;
+import br.com.rent_control.model.dao.CarDao;
+import br.com.rent_control.model.dao.CustomerDao;
+import br.com.rent_control.model.dao.RentDao;
+import br.com.rent_control.model.vo.*;
 
 /**
- * Class CustomerManagementScreen - Represents the client management screen
+ * Class RentManagementScreen - Represents the rent management screen
  * 
  * @author Ayumi Aoki &lt;ayumi.santana@icomp.ufam.edu.br&gt;
  */
 
-public class CustomerManagementScreen extends JPanel {
+public class RentManagementScreen extends JPanel{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 6269839751385076881L;
 	private final RentControl frameRentControl;
 	private MenuPanel menuPanel;
 	private JScrollPane scrollPane;
 	private JLabel messagerLabel;
-	private JButton newCustomer;
-	private List<Customer> customers;
+	private JButton newRent;
+	private List<Rent> rents;
+	private RentDao rentDao;
 	private CustomerDao customerDao;
+	private CarDao carDao;
 
-	/**
-	 * Interface that represents the action of the button
-	 *
-	 */
-	public interface ActionButton {
-		void action(String id, String type);
-	}
-
-	/**
-	 * Class constructor with parameter.
-	 * 
-	 * @param frameRentControl
-	 * @param menuPanel
-	 */
-	public CustomerManagementScreen(final RentControl frameRentControl, MenuPanel menuPanel) {
+	public RentManagementScreen(final RentControl frameRentControl, MenuPanel menuPanel) {
 		setLayout(null);
 		setBackground(Color.white);
 
 		this.frameRentControl = frameRentControl;
 		this.menuPanel = menuPanel;
-		messagerLabel = new JLabel("Clientes");
+		messagerLabel = new JLabel("Reservas");
 		messagerLabel.setBounds(50, 24, 320, 15);
 		messagerLabel.setFont(messagerLabel.getFont().deriveFont(Font.BOLD, 16));
 
-		newCustomer = new JButton("Novo");
-		newCustomer.setForeground(Color.WHITE);
-		newCustomer.setBounds(750, 20, 80, 34);
-		newCustomer.setBackground(ColorUtils.PRIMARY_COLOR);
-		newCustomer.setBorder(null);
-
+		newRent = new JButton("Nova");
+		newRent.setForeground(Color.WHITE);
+		newRent.setBounds(750, 20, 80, 34);
+		newRent.setBackground(ColorUtils.PRIMARY_COLOR);
+		newRent.setBorder(null);
+		
+		rentDao = new RentDao();
 		customerDao = new CustomerDao();
-
+		carDao = new CarDao();
 		tableSetup();
-
-		add(newCustomer);
+		
+		add(newRent);
 		add(messagerLabel);
-
-		new CustomerManagementController(this);
+		
+		new RentManagementController(this);
 	}
-
+	
 	/**
 	 * Method that has the action to delete or edit
 	 */
 	private ActionButton deleteOrEdit = (String id, String type) -> {
 		if (type.equals("edit")) {
-			Customer customer = customerDao.getCustomerByCpf(id);
+			Rent rent = rentDao.getRentById(id);
+			
+			int idCar = rentDao.getIdCarById(id);
+			double dailyCost = carDao.getCarById(String.valueOf(idCar)).getDailyCost();
+			
 			menuPanel.getContentPanel().removeAll();
-			menuPanel.getContentPanel().add(new AddCustomerScreen(getFrameRentControl(), menuPanel, customer));
+			menuPanel.getContentPanel().add(new StepOneRentScreen(getFrameRentControl(), menuPanel, idCar, dailyCost, rent));
 			menuPanel.getContentPanel().revalidate();
 			menuPanel.getContentPanel().repaint();
 			return;
-		} else {
-			RentDao rentDao = new RentDao();
-			if (rentDao.isCpfInRent(id)) {
-				JOptionPane.showMessageDialog(null, "Não foi possível excluir o cliente, pois ele tem uma alocação aberta!");
-			} else {
-				if (customerDao.deleteCustomerByCpf(id)) {
-					this.remove(scrollPane);
-					tableSetup();
-					this.revalidate();
-					this.repaint();
-					JOptionPane.showMessageDialog(null, "Cliente excluido com sucesso!");
-				} else {
-					JOptionPane.showMessageDialog(null, "Erro ao excluir cliente!");
-				}
-			}
 		}
+		if (rentDao.deleteRentById(Integer.parseInt(id))) {
+			this.remove(scrollPane);
+			tableSetup();
+			this.revalidate();
+			this.repaint();
+			JOptionPane.showMessageDialog(null, "Locação excluída com sucesso!");
+		} else {
+			JOptionPane.showMessageDialog(null, "Erro ao excluir locação!");
+		}
+
 	};
 
 	/**
 	 * Method that updates the screen with the table
 	 */
 	private void tableSetup() {
-		customers = customerDao.listCustomer();
+		rents = rentDao.listRents();
 		CustomTable customTable = new CustomTable(deleteOrEdit, getDataTable());
 		scrollPane = new JScrollPane(customTable);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(50, 100, 789, 500);
 		scrollPane.setBorder(null);
 		this.add(scrollPane);
-
 	}
 
 	/**
@@ -118,12 +107,13 @@ public class CustomerManagementScreen extends JPanel {
 	 * @return Object[][]
 	 */
 	private Object[][] getDataTable() {
-		Object[][] data = new Object[customers.size() + 1][4];
-		data[0] = new Object[] { "Nome", "CPF", "CNH", "ID" };
-		for (int i = 0; i < customers.size(); i++) {
-			Customer usuario = customers.get(i);
-			data[i + 1] = new Object[] { usuario.getName(), usuario.getCpf(), usuario.getLicenseNumber(),
-					usuario.getCpf() };
+		Object[][] data = new Object[rents.size() + 1][4];
+		data[0] = new Object[] { "Veículo", "Locatário", "Devolução", "ID" };
+		for (int i = 0; i < rents.size(); i++) {
+			Rent rentR = rents.get(i);
+			String formattedDate = rentR.getDeliveryDate().substring(0, 2) + "/" + rentR.getDeliveryDate().substring(2, 4) + "/" + rentR.getDeliveryDate().substring(4);
+			data[i + 1] = new Object[] { carDao.getModelById(rentR.getIdCar()), customerDao.getNameCustomerByCpf(rentR.getCpfCustomer()), formattedDate,
+					rentR.getIdRent() };
 		}
 		return data;
 	}
@@ -169,17 +159,17 @@ public class CustomerManagementScreen extends JPanel {
 	 * 
 	 * @return JButtono containing the button instance
 	 */
-	public JButton getNewCustomer() {
-		return newCustomer;
+	public JButton getNewRent() {
+		return newRent;
 	}
 
 	/**
 	 * Define button changes
 	 * 
-	 * @param newCustomer The button to be set
+	 * @param newRent The button to be set
 	 */
-	public void setNewCustomer(JButton newCustomer) {
-		this.newCustomer = newCustomer;
+	public void setNewRent(JButton newRent) {
+		this.newRent = newRent;
 	}
 
 	/**
@@ -188,16 +178,16 @@ public class CustomerManagementScreen extends JPanel {
 	 * @return customer list
 	 * 
 	 */
-	public List<Customer> getUsers() {
-		return customers;
+	public List<Rent> getRent() {
+		return rents;
 	}
 
 	/**
-	 * Define the customer list
+	 * Define the rent list
 	 * 
-	 * @param customers The list of customers to be defined
+	 * @param rents The list of rents to be defined
 	 */
-	public void setUsers(List<Customer> customers) {
-		this.customers = customers;
+	public void setRent(List<Rent> rents) {
+		this.rents = rents;
 	}
 }

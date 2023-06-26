@@ -7,7 +7,7 @@ import br.com.rent_control.controller.RentControl;
 import br.com.rent_control.view.car.CarManagementScreen;
 import br.com.rent_control.view.components.OptionsMenuButton;
 import br.com.rent_control.view.customer.CustomerManagementScreen;
-import br.com.rent_control.view.rent.RentalScreen;
+import br.com.rent_control.view.rent.RentManagementScreen;
 
 /**
  * Class MenuPanel - Represents the menu panel containing the buttons with the
@@ -60,7 +60,7 @@ public class MenuPanel extends JPanel {
 		addCarButton.getButton().addActionListener(
 				e -> menuPanelControl.changeScreen(addCarButton, new CarManagementScreen(this.frameRentControl, this)));
 		booKCarButton.getButton().addActionListener(
-				e -> menuPanelControl.changeScreen(booKCarButton, new RentalScreen(this.frameRentControl, this)));
+				e -> menuPanelControl.changeScreen(booKCarButton, new RentManagementScreen(this.frameRentControl, this)));
 	}
 
 	/**

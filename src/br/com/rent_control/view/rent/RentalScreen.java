@@ -52,7 +52,7 @@ public class RentalScreen extends JPanel {
 
 		CarDao carDao = new CarDao();
 
-		if (carDao.listCars().size() == 0) {
+		if (carDao.listAvailableCars().size() == 0) {
 			mensage = new JLabel("Nenhum carro disponível para aluguel!");
 			mensage.setForeground(ColorUtils.PRIMARY_COLOR);
 			mensage.setFont(mensage.getFont().deriveFont(Font.BOLD, 18));
@@ -60,7 +60,7 @@ public class RentalScreen extends JPanel {
 			mensage.setHorizontalAlignment(JLabel.CENTER);
 			add(mensage);
 		} else {
-			for (Car car : carDao.listCars()) {
+			for (Car car : carDao.listAvailableCars()) {
 				CarCardPanel card = new CarCardPanel(car, this.getFrameRentControl(), this.getMenuPanel(), car.getId(),
 						car.getDailyCost());
 				jp.add(card);

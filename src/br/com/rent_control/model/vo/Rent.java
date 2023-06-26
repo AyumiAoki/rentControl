@@ -20,6 +20,22 @@ public class Rent {
 	private boolean drinkComfort;
 	private boolean babyChair;
 	private boolean boosterSeat;
+	private int idRent;
+
+	// Constants with column names
+	public static final String COLUMN_IDRENT = "id";
+	public static final String COLUMN_WITHDRAWALDATE = "withdrawalDate";
+	public static final String COLUMN_PICKUPLOCATION = "pickUpLocation";
+	public static final String COLUMN_RETURNDATE = "deliveryDate";
+	public static final String COLUMN_RETURNLOCATION = "returnLocation";
+	public static final String COLUMN_CARPROTECTION = "carProtection";
+	public static final String COLUMN_GPS = "gps";
+	public static final String COLUMN_CLEANING = "cleaning";
+	public static final String COLUMN_DRINKCOMFORT = "drinkComfort";
+	public static final String COLUMN_BABYCHAIR = "babyChair";
+	public static final String COLUMN_BOOSTERSEAT = "boosterSeat";
+	public static final String COLUMN_IDCAR = "idCar";
+	public static final String COLUMN_CPFCUSTOMER = "cpfCustomer";
 
 	/**
 	 * Parameterless class constructor.
@@ -284,5 +300,23 @@ public class Rent {
 	 */
 	public void setBoosterSeat(boolean boosterSeat) {
 		this.boosterSeat = boosterSeat;
+	}
+	
+	/**
+	 * Returns the id of the rent.
+	 * 
+	 * @return int containing the rent id.
+	 */
+	public int getIdRent() {
+		return idRent;
+	}
+
+	/**
+	 * Define the id of the rent.
+	 * 
+	 * @param car The id of the rent to set.
+	 */
+	public void setIdRent(int idRent) {
+		this.idRent = idRent;
 	}
 }

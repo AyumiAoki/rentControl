@@ -5,6 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 import br.com.rent_control.model.vo.Car;
 import br.com.rent_control.model.dao.CarDao;
+import br.com.rent_control.model.dao.RentDao;
 import br.com.rent_control.controller.*;
 import br.com.rent_control.controller.car.CarManagementController;
 import br.com.rent_control.view.MenuPanel;
@@ -60,15 +61,20 @@ public class CarManagementScreen extends JPanel {
 			menuPanel.getContentPanel().repaint();
 			return;
 		} else {
-			if(carDao.deleteCarById(Integer.parseInt(id))) {
-				JOptionPane.showMessageDialog(null, "Veículo excluido com sucesso!");
-				this.remove(scrollPane);
-				tableSetup();
-				this.revalidate();
-				this.repaint();
+			RentDao rentDao = new RentDao();
+			if (rentDao.isCarIdInRent(Integer.parseInt(id))) {
+				JOptionPane.showMessageDialog(null, "Não foi possível excluir o veículo, pois ele está alocado!");
 			} else {
-				JOptionPane.showMessageDialog(null, "Erro ao excluir veículo!");
-			}		
+				if (carDao.deleteCarById(Integer.parseInt(id))) {
+					this.remove(scrollPane);
+					tableSetup();
+					this.revalidate();
+					this.repaint();
+					JOptionPane.showMessageDialog(null, "Veículo excluido com sucesso!");
+				} else {
+					JOptionPane.showMessageDialog(null, "Erro ao excluir veículo!");
+				}
+			}
 		}
 	};
 

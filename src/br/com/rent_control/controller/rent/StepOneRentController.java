@@ -56,10 +56,11 @@ public class StepOneRentController {
 
 		if (!withdrawalDate.equals("") && !deliveryDate.equals("")) {
 			if (withdrawalDate.length() != 8 || deliveryDate.length() != 8) {
-				JOptionPane.showMessageDialog(null, "A data precisa estar no formato 00000000 e com exatamente 8 digitos");
-			} else if(!withdrawalDate.matches("\\d+") && !deliveryDate.matches("\\d+")) {
+				JOptionPane.showMessageDialog(null,
+						"A data precisa estar no formato 00000000 e com exatamente 8 digitos");
+			} else if (!withdrawalDate.matches("\\d+") && !deliveryDate.matches("\\d+")) {
 				JOptionPane.showMessageDialog(null, "Insira apenas números");
-			}else {
+			} else {
 				int withdrawalDay = Integer.parseInt(withdrawalDate.substring(0, 2));
 				int withdrawalMonth = Integer.parseInt(withdrawalDate.substring(2, 4));
 				int withdrawalYear = Integer.parseInt(withdrawalDate.substring(4, 8));
@@ -67,8 +68,9 @@ public class StepOneRentController {
 				int deliveryDay = Integer.parseInt(deliveryDate.substring(0, 2));
 				int deliveryMonth = Integer.parseInt(deliveryDate.substring(2, 4));
 				int deliveryYear = Integer.parseInt(deliveryDate.substring(4, 8));
-				
-				int dailyAmount = new CheckDate().calculateDifferenceDays(withdrawalDay, withdrawalMonth, withdrawalYear, deliveryDay, deliveryMonth, deliveryYear);
+
+				int dailyAmount = new CheckDate().calculateDifferenceDays(withdrawalDay, withdrawalMonth,
+						withdrawalYear, deliveryDay, deliveryMonth, deliveryYear);
 
 				if (!checkDate.checkDate(withdrawalDay, withdrawalMonth, withdrawalYear)) {
 					JOptionPane.showMessageDialog(null, "Data de retirada inválida");
@@ -80,14 +82,29 @@ public class StepOneRentController {
 				} else {
 					Rent rent = new Rent();
 					rent.setIdCar(stepOneRentScreen.getIdCar());
-					rent.setCpfCustomer(stepOneRentScreen.getCustomer().getCpf());
 					rent.setWithdrawalDate(withdrawalDate);
-					rent.setPickUpLocation(stepOneRentScreen.getPickUpLocation().getComboBox().getSelectedItem().toString());
+					rent.setPickUpLocation(
+							stepOneRentScreen.getPickUpLocation().getComboBox().getSelectedItem().toString());
 					rent.setDeliveryDate(deliveryDate);
-					rent.setDeliveryLocation(stepOneRentScreen.getReturnLocation().getComboBox().getSelectedItem().toString());
-					
+					rent.setDeliveryLocation(
+							stepOneRentScreen.getReturnLocation().getComboBox().getSelectedItem().toString());
+
 					stepOneRentScreen.getMenuPanel().getContentPanel().removeAll();
-					stepOneRentScreen.getMenuPanel().getContentPanel().add(new StepTwoRentScreen(stepOneRentScreen.getFrameRentControl(), stepOneRentScreen.getMenuPanel(), rent, dailyAmount, stepOneRentScreen.getDailyCost()));
+
+					if (stepOneRentScreen.getProceedButton().getText().equals("Próximo")) {
+						rent.setCpfCustomer(stepOneRentScreen.getRent().getCpfCustomer());
+						stepOneRentScreen.getMenuPanel().getContentPanel()
+								.add(new StepTwoRentScreen(stepOneRentScreen.getFrameRentControl(),
+										stepOneRentScreen.getMenuPanel(), rent, dailyAmount,
+										stepOneRentScreen.getDailyCost(), stepOneRentScreen.getRent()));
+					} else {
+						rent.setCpfCustomer(stepOneRentScreen.getCustomer().getCpf());
+						stepOneRentScreen.getMenuPanel().getContentPanel()
+								.add(new StepTwoRentScreen(stepOneRentScreen.getFrameRentControl(),
+										stepOneRentScreen.getMenuPanel(), rent, dailyAmount,
+										stepOneRentScreen.getDailyCost()));
+
+					}
 					stepOneRentScreen.getMenuPanel().getContentPanel().revalidate();
 					stepOneRentScreen.getMenuPanel().getContentPanel().repaint();
 				}

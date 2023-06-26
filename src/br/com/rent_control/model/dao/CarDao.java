@@ -86,6 +86,45 @@ public class CarDao {
 	}
 
 	/**
+	 * Method that returns a list of all cars that are not in the 'rent' table.
+	 *
+	 * @return List of cars not in 'rent' table.
+	 */
+	public List<Car> listAvailableCars() {
+		List<Car> cars = new ArrayList<>();
+
+		String sql = "SELECT * FROM car WHERE NOT EXISTS (SELECT 1 FROM rent WHERE rent.idCar = car.id)";
+
+		try (Connection connection = ConnectionDB.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql);
+				ResultSet rs = preparedStatement.executeQuery()) {
+
+			while (rs.next()) {
+				Car car = new Car();
+
+				car.setCategory(rs.getString(Car.COLUMN_CATEGORY));
+				car.setModelCar(rs.getString(Car.COLUMN_MODEL));
+				car.setMaxPassengers(rs.getInt(Car.COLUMN_MAXPASSENGERS));
+				car.setTrunkSize(rs.getDouble(Car.COLUMN_TRUNKSIZE));
+				car.setTransmissionType(rs.getString(Car.COLUMN_TRANSMISSIONTYPE));
+				car.setFuelType(rs.getString(Car.COLUMN_FUELTYPE));
+				car.setConsumptionAverage(rs.getDouble(Car.COLUMN_CONSUMPTIONAVARAGE));
+				car.setDailyCost(rs.getDouble(Car.COLUMN_DAILY));
+				car.setHasAc(rs.getBoolean(Car.COLUMN_HASAC));
+				car.setHasAirbag(rs.getBoolean(Car.COLUMN_HASAIRBAG));
+				car.setHasAbsBrakes(rs.getBoolean(Car.COLUMN_HASABS));
+				car.setHasDvdPlayer(rs.getBoolean(Car.COLUMN_HASDVD));
+				car.setId(rs.getInt(Car.ID));
+				cars.add(car);
+			}
+			return cars;
+		} catch (SQLException e) {
+			System.err.println("Erro ao listar carros disponíveis: " + e.getMessage());
+		}
+		return null;
+	}
+
+	/**
 	 * Method that searches for a car by id.
 	 * 
 	 * @param id The id of the car to be fetched.
@@ -120,7 +159,35 @@ public class CarDao {
 				}
 			}
 		} catch (SQLException e) {
-			System.err.println("Erro ao buscar o cliente: " + e.getMessage());
+			System.err.println("Erro ao buscar o carro: " + e.getMessage());
+		}
+
+		return null;
+	}
+
+	/**
+	 * Method that searches for a car model by ID.
+	 *
+	 * @param id The ID of the car to be fetched.
+	 * @return The model of the car, or null if not found.
+	 */
+	public String getModelById(int id) {
+		String sql = "SELECT MODEL FROM car WHERE id = ?";
+
+		try (Connection connection = ConnectionDB.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+			preparedStatement.setInt(1, id);
+
+			try (ResultSet rs = preparedStatement.executeQuery()) {
+				if (rs.next()) {
+					Car car = new Car();
+					car.setModelCar(rs.getString(Car.COLUMN_MODEL));
+					return car.getModelCar();
+				}
+			}
+		} catch (SQLException e) {
+			System.err.println("Erro ao buscar o carro: " + e.getMessage());
 		}
 
 		return null;

@@ -10,13 +10,13 @@ import br.com.rent_control.view.MenuPanel;
 import br.com.rent_control.view.components.*;
 
 /**
- * Class RentClosing - Represents the vehicle rental finalization screen in the
+ * Class RentClosingScreen - Represents the vehicle rental finalization screen in the
  * application
  * 
  * @author Ayumi Aoki &lt;ayumi.santana@icomp.ufam.edu.br&gt;
  */
 
-public class RentClosing extends JPanel {
+public class RentClosingScreen extends JPanel {
 
 	private static final long serialVersionUID = 2270868975260905007L;
 	private MenuPanel menuPanel;
@@ -49,7 +49,7 @@ public class RentClosing extends JPanel {
 	 * @param dailyAmount
 	 * @param dailyCost
 	 */
-	public RentClosing(final RentControl frameRentControl, MenuPanel menuPanel, Rent rent, int dailyAmount,
+	public RentClosingScreen(final RentControl frameRentControl, MenuPanel menuPanel, Rent rent, int dailyAmount,
 			double dailyCost) {
 		setLayout(null);
 		setBackground(Color.white);
@@ -58,11 +58,48 @@ public class RentClosing extends JPanel {
 		this.frameRentControl = frameRentControl;
 		this.rent = rent;
 		yAdditional = 143;
-		amount = 0;
-
-		df = new DecimalFormat("#.00");
 
 		rentMessagerLabel = new CustomField("Aluguel do veículo - Fechamento", 40);
+		
+		fields(dailyAmount, dailyCost);
+		
+		rentButton = new JButton("Finalizar aluguel");
+		rentButton.setForeground(Color.WHITE);
+		rentButton.setBounds(323, yAdditional, 240, 35);
+		rentButton.setBackground(ColorUtils.PRIMARY_COLOR);
+		rentButton.setBorder(null);
+		add(rentButton);
+
+		rentButton.addActionListener(e -> new RentClosingController(this).rentButtonClicked());
+	}
+	
+	public RentClosingScreen(final RentControl frameRentControl, MenuPanel menuPanel, Rent rent, int dailyAmount,
+			double dailyCost, boolean update) {
+		setLayout(null);
+		setBackground(Color.white);
+
+		this.menuPanel = menuPanel;
+		this.frameRentControl = frameRentControl;
+		this.rent = rent;
+		yAdditional = 143;
+
+		rentMessagerLabel = new CustomField("Aluguel do veículo - Fechamento", 40);
+		
+		fields(dailyAmount, dailyCost);
+		
+		rentButton = new JButton("Atualizar locação");
+		rentButton.setForeground(Color.WHITE);
+		rentButton.setBounds(323, yAdditional, 240, 35);
+		rentButton.setBackground(ColorUtils.PRIMARY_COLOR);
+		rentButton.setBorder(null);
+		add(rentButton);
+
+		rentButton.addActionListener(e -> new RentClosingController(this).rentButtonClicked());
+	}
+	
+	public void fields(int dailyAmount, double dailyCost) {
+		amount = 0;
+		df = new DecimalFormat("#.00");
 
 		dailyCostLabel = new JLabel();
 		dailyCostLabel.setLayout(new BorderLayout());
@@ -176,12 +213,6 @@ public class RentClosing extends JPanel {
 
 		yAdditional += 83;
 
-		rentButton = new JButton("Finalizar aluguel");
-		rentButton.setForeground(Color.WHITE);
-		rentButton.setBounds(323, yAdditional, 240, 35);
-		rentButton.setBackground(ColorUtils.PRIMARY_COLOR);
-		rentButton.setBorder(null);
-
 		add(rentMessagerLabel.getLabel());
 		add(dailyCostLabel);
 		add(additionalOneLabel);
@@ -192,9 +223,6 @@ public class RentClosing extends JPanel {
 		add(additionalSixLabel);
 		add(rentalFeeLabel);
 		add(predictedTotal);
-		add(rentButton);
-
-		rentButton.addActionListener(e -> new RentClosingController(this).rentButtonClicked());
 	}
 
 	/**
@@ -232,5 +260,19 @@ public class RentClosing extends JPanel {
 	 */
 	public void setRent(Rent rent) {
 		this.rent = rent;
+	}
+
+	/**
+	 * @return o rentButton
+	 */
+	public JButton getRentButton() {
+		return rentButton;
+	}
+
+	/**
+	 * @param rentButton o rentButton a ser configurado
+	 */
+	public void setRentButton(JButton rentButton) {
+		this.rentButton = rentButton;
 	}
 }

@@ -101,6 +101,32 @@ public class CustomerDao extends ConnectionDB {
 	}
 
 	/**
+	 * Method that searches for a customer's name by CPF.
+	 *
+	 * @param cpf The CPF of the customer to be searched for.
+	 * @return The name of the customer, or null if not found.
+	 */
+	public String getNameCustomerByCpf(String cpf) {
+		String sql = "SELECT NAME FROM customer WHERE cpf = ?";
+
+		try (Connection connection = ConnectionDB.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+			preparedStatement.setString(1, cpf);
+
+			try (ResultSet rs = preparedStatement.executeQuery()) {
+				if (rs.next()) {
+					return rs.getString("NAME");
+				}
+			}
+		} catch (SQLException e) {
+			System.err.println("Erro ao buscar o cliente: " + e.getMessage());
+		}
+
+		return null;
+	}
+
+	/**
 	 * Method that updates a customer in the database table.
 	 * 
 	 * @param customer The customer to be upgraded.
