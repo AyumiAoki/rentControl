@@ -41,17 +41,15 @@ public class AddCarController {
 				&& !hasAirbag.equals("") && !hasAbsBrakes.equals("") && !hasDvdPlayer.equals("")) {
 			List<String> listCar = Arrays.asList(category, modelCar, maxPassengers, trunkSize, transmissionType,
 					fuelType, consumptionAverage, dailyCost, hasAc, hasAirbag, hasAbsBrakes, hasDvdPlayer);
-			if (!trunkSize.matches("[0-9.,]+") && !consumptionAverage.matches("[0-9.,]+") && !dailyCost.matches("[0-9.,]+")) {
+			if (!trunkSize.matches("[0-9.,]+") && !consumptionAverage.matches("[0-9.,]+")
+					&& !dailyCost.matches("[0-9.,]+")) {
 				JOptionPane.showMessageDialog(null,
 						"Insira apenas números nos campos de volume do porta mala, média de consumo e custo diário!");
 			} else {
-				if (addCarScreen.getAddCarButton().getText().equals("Salvar")) {
-
+				if (addCarScreen.getAddCarButton().getText().equals("Salvar"))
 					updateCar(listCar);
-				} else {
-
+				else
 					addCar(listCar);
-				}
 			}
 		} else {
 			JOptionPane.showMessageDialog(null, "Preencha todos os campos!");

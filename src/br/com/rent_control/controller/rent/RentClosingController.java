@@ -15,25 +15,33 @@ import br.com.rent_control.view.rent.*;
 
 public class RentClosingController {
 
-	private RentClosing rentClosing;
+	private RentClosingScreen rentClosingScreen;
 	private RentDao rentDao;
 
-	public RentClosingController(RentClosing rentClosing) {
-		this.rentClosing = rentClosing;
+	public RentClosingController(RentClosingScreen rentClosingScreen) {
+		this.rentClosingScreen = rentClosingScreen;
 		rentDao = new RentDao();
 	}
 
 	public void rentButtonClicked() {
-		if(rentDao.rentVehicle(rentClosing.getRent())) {
-			JOptionPane.showMessageDialog(null, "Locação realizada com sucesso!");
+		if (rentClosingScreen.getRentButton().getText().equals("Finalizar aluguel")) {
+			if (rentDao.rentVehicle(rentClosingScreen.getRent())) {
+				JOptionPane.showMessageDialog(null, "Locação realizada com sucesso!");
+			} else {
+				JOptionPane.showMessageDialog(null, "Não foi possível realizar a locação!");
+			}
 		} else {
-			JOptionPane.showMessageDialog(null, "Não foi possível realizar a locação!");
+			if (rentDao.updateRent(rentClosingScreen.getRent())) {
+				JOptionPane.showMessageDialog(null, "Locação atualizada com sucesso!");
+			} else {
+				JOptionPane.showMessageDialog(null, "Não foi possível atualizar a locação!");
+			}
 		}
-		
-		rentClosing.getMenuPanel().getContentPanel().removeAll();
-		rentClosing.getMenuPanel().getContentPanel()
-				.add(new RentalScreen(rentClosing.getFrameRentControl(), rentClosing.getMenuPanel()));
-		rentClosing.getMenuPanel().getContentPanel().revalidate();
-		rentClosing.getMenuPanel().getContentPanel().repaint();
+
+		rentClosingScreen.getMenuPanel().getContentPanel().removeAll();
+		rentClosingScreen.getMenuPanel().getContentPanel().add(
+				new RentManagementScreen(rentClosingScreen.getFrameRentControl(), rentClosingScreen.getMenuPanel()));
+		rentClosingScreen.getMenuPanel().getContentPanel().revalidate();
+		rentClosingScreen.getMenuPanel().getContentPanel().repaint();
 	}
 }

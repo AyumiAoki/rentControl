@@ -6,7 +6,7 @@ import javax.swing.event.*;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.metal.MetalButtonUI;
 import br.com.rent_control.view.components.ColorUtils;
-import br.com.rent_control.view.rent.RentClosing;
+import br.com.rent_control.view.rent.RentClosingScreen;
 import br.com.rent_control.view.rent.StepTwoRentScreen;
 
 /**
@@ -28,7 +28,7 @@ public class StepTwoRentController {
 		eventsButton(stepTwoRentScreen.getAdditionalButtonFive());
 		eventsButton(stepTwoRentScreen.getAdditionalButtonSix());
 	}
-	
+
 	public void eventsButton(JToggleButton toggleButton) {
 		toggleButton.setUI(new MetalButtonUI() {
 			@Override
@@ -58,16 +58,29 @@ public class StepTwoRentController {
 		boolean additionalFour = stepTwoRentScreen.getAdditionalButtonFour().isSelected();
 		boolean additionalFive = stepTwoRentScreen.getAdditionalButtonFive().isSelected();
 		boolean additionalSix = stepTwoRentScreen.getAdditionalButtonSix().isSelected();
-		
+
 		stepTwoRentScreen.getRent().setCarProtection(additionalOne);
 		stepTwoRentScreen.getRent().setGps(additionalTwo);
 		stepTwoRentScreen.getRent().setCleaning(additionalThree);
 		stepTwoRentScreen.getRent().setDrinkComfort(additionalFour);
 		stepTwoRentScreen.getRent().setBabyChair(additionalFive);
 		stepTwoRentScreen.getRent().setBoosterSeat(additionalSix);
-		
+
 		stepTwoRentScreen.getMenuPanel().getContentPanel().removeAll();
-		stepTwoRentScreen.getMenuPanel().getContentPanel().add(new RentClosing(stepTwoRentScreen.getFrameRentControl(), stepTwoRentScreen.getMenuPanel(), stepTwoRentScreen.getRent(), stepTwoRentScreen.getDailyAmount(), stepTwoRentScreen.getDailyCost()));
+		
+		if (stepTwoRentScreen.getRentDataDB() != null) {
+			stepTwoRentScreen.getRent().setIdRent(stepTwoRentScreen.getRentDataDB().getIdRent());
+			
+			stepTwoRentScreen.getMenuPanel().getContentPanel()
+					.add(new RentClosingScreen(stepTwoRentScreen.getFrameRentControl(),
+							stepTwoRentScreen.getMenuPanel(), stepTwoRentScreen.getRent(),
+							stepTwoRentScreen.getDailyAmount(), stepTwoRentScreen.getDailyCost(), true));
+		} else {
+			stepTwoRentScreen.getMenuPanel().getContentPanel()
+					.add(new RentClosingScreen(stepTwoRentScreen.getFrameRentControl(),
+							stepTwoRentScreen.getMenuPanel(), stepTwoRentScreen.getRent(),
+							stepTwoRentScreen.getDailyAmount(), stepTwoRentScreen.getDailyCost()));
+		}
 		stepTwoRentScreen.getMenuPanel().getContentPanel().revalidate();
 		stepTwoRentScreen.getMenuPanel().getContentPanel().repaint();
 	}

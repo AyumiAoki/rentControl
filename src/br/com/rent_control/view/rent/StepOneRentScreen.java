@@ -5,8 +5,10 @@ import java.util.*;
 import javax.swing.*;
 import br.com.rent_control.controller.RentControl;
 import br.com.rent_control.controller.rent.StepOneRentController;
+import br.com.rent_control.model.dao.CustomerDao;
 import br.com.rent_control.model.dao.RentalAddressesDao;
 import br.com.rent_control.model.vo.Customer;
+import br.com.rent_control.model.vo.Rent;
 import br.com.rent_control.model.vo.RentalAddresses;
 import br.com.rent_control.view.MenuPanel;
 import br.com.rent_control.view.components.*;
@@ -43,6 +45,7 @@ public class StepOneRentScreen extends JPanel {
 	private Customer customer;
 	private int idCar;
 	private double dailyCost;
+	private Rent rent;
 
 	/**
 	 * Class constructor with parameter.
@@ -81,6 +84,28 @@ public class StepOneRentScreen extends JPanel {
 		add(cpfField.getLabel());
 		add(searchButton);
 		add(cpfField.getTextField());
+	}
+	
+	public StepOneRentScreen(final RentControl frameRentControl, MenuPanel menuPanel, int idCar, double dailyCost, Rent rent) {
+		setLayout(null);
+		setBackground(Color.white);
+
+		this.menuPanel = menuPanel;
+		this.frameRentControl = frameRentControl;
+		this.idCar = idCar;
+		this.dailyCost = dailyCost;
+		this.rent = rent;
+
+		fieldsPanel = new JPanel();
+		fieldsPanel.setLayout(null);
+		fieldsPanel.setBounds(0, 76, 886, 605);
+		fieldsPanel.setBackground(Color.white);
+		customer = new Customer();
+
+		rentMessagerLabel = new CustomField("Atualização do locação do veículo", 40);
+		
+		showFields(rent);
+		add(rentMessagerLabel.getLabel());
 	}
 
 	/**
@@ -133,6 +158,55 @@ public class StepOneRentScreen extends JPanel {
 		fieldsPanel.add(proceedButton);
 
 		returnButton.addActionListener(e -> new StepOneRentController(this).returnButtonClicked());
+		proceedButton.addActionListener(e -> new StepOneRentController(this).proceedButtonClicked());
+
+		add(fieldsPanel);
+		revalidate();
+		repaint();
+	}
+	
+	public void showFields(Rent rent) {
+		CustomerDao customerDao = new CustomerDao();
+		Customer customer = customerDao.getCustomerByCpf(rent.getCpfCustomer());
+		
+		customerMessagerLabel = new CustomField("Dados do locatário", 24);
+		nameFieldDisable = new CustomField("Nome", 111, 60, customer.getName());
+		cpfFieldDisable = new CustomField("CPF", 455, 60, customer.getCpf());
+		dateOfBirthFieldDisable = new CustomField("Data de nascimento", 111, 147, customer.getDateOfBirth());
+		cnhFieldDisable = new CustomField("Número da licensa", 455, 147, String.valueOf(customer.getLicenseNumber()));
+
+		dateMessagerLabel = new CustomField("Data da locação", 242);
+		withdrawalDate = new CustomField("Data da retirada", 111, 278, rent.getWithdrawalDate(), true);
+		pickUpLocation = new CustomField("Local da retirada", 455, 278, getRentalAddresses(), rent.getPickUpLocation());
+		deliveryDate = new CustomField("Data da devolução", 111, 365, rent.getDeliveryDate(), true);
+		returnLocation = new CustomField("Local da devolução", 455, 365, getRentalAddresses(), rent.getDeliveryLocation());
+
+		proceedButton = new JButton("Próximo");
+		proceedButton.setForeground(Color.WHITE);
+		proceedButton.setBounds(323, 460, 240, 35);
+		proceedButton.setBackground(ColorUtils.PRIMARY_COLOR);
+		proceedButton.setBorder(null);
+
+		fieldsPanel.add(customerMessagerLabel.getLabel());
+		fieldsPanel.add(nameFieldDisable.getLabel());
+		fieldsPanel.add(nameFieldDisable.getTextField());
+		fieldsPanel.add(cpfFieldDisable.getLabel());
+		fieldsPanel.add(cpfFieldDisable.getTextField());
+		fieldsPanel.add(dateOfBirthFieldDisable.getLabel());
+		fieldsPanel.add(dateOfBirthFieldDisable.getTextField());
+		fieldsPanel.add(cnhFieldDisable.getLabel());
+		fieldsPanel.add(cnhFieldDisable.getTextField());
+		fieldsPanel.add(dateMessagerLabel.getLabel());
+		fieldsPanel.add(withdrawalDate.getLabel());
+		fieldsPanel.add(withdrawalDate.getTextField());
+		fieldsPanel.add(pickUpLocation.getLabel());
+		fieldsPanel.add(pickUpLocation.getComboBox());
+		fieldsPanel.add(deliveryDate.getLabel());
+		fieldsPanel.add(deliveryDate.getTextField());
+		fieldsPanel.add(returnLocation.getLabel());
+		fieldsPanel.add(returnLocation.getComboBox());
+		fieldsPanel.add(proceedButton);
+
 		proceedButton.addActionListener(e -> new StepOneRentController(this).proceedButtonClicked());
 
 		add(fieldsPanel);
@@ -413,5 +487,33 @@ public class StepOneRentScreen extends JPanel {
 	 */
 	public void setDailyCost(double dailyCost) {
 		this.dailyCost = dailyCost;
+	}
+
+	/**
+	 * @return o rent
+	 */
+	public Rent getRent() {
+		return rent;
+	}
+
+	/**
+	 * @param rent o rent a ser configurado
+	 */
+	public void setRent(Rent rent) {
+		this.rent = rent;
+	}
+
+	/**
+	 * @return o proceedButton
+	 */
+	public JButton getProceedButton() {
+		return proceedButton;
+	}
+
+	/**
+	 * @param proceedButton o proceedButton a ser configurado
+	 */
+	public void setProceedButton(JButton proceedButton) {
+		this.proceedButton = proceedButton;
 	}
 }

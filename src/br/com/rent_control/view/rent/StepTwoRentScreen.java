@@ -21,6 +21,7 @@ public class StepTwoRentScreen extends JPanel {
 	private MenuPanel menuPanel;
 	private final RentControl frameRentControl;
 	private Rent rent;
+	private Rent rentDataDB;
 	private int dailyAmount;
 	private double dailyCost;
 
@@ -50,6 +51,7 @@ public class StepTwoRentScreen extends JPanel {
 		this.menuPanel = menuPanel;
 		this.frameRentControl = frameRentControl;
 		this.rent = rent;
+		this.rentDataDB = null;
 		this.dailyAmount = dailyAmount;
 		this.dailyCost = dailyCost;
 
@@ -100,6 +102,88 @@ public class StepTwoRentScreen extends JPanel {
 		additionalButtonSix.setBounds(111, 419, 664, 35);
 		additionalButtonSix.setBackground(Color.white);
 		additionalButtonSix.setBorder(new LineBorder(ColorUtils.SECUNDARY_DARK_COLOR, 2));
+		additionalButtonSix.add(new JLabel("Assento de elevação (crianças de 4 a 7 anos)"), BorderLayout.WEST);
+		additionalButtonSix.add(new JLabel("R$ 29,90 * valor único"), BorderLayout.EAST);
+
+		proceedButton = new JButton("Prosseguir");
+		proceedButton.setForeground(Color.WHITE);
+		proceedButton.setBounds(323, 518, 240, 35);
+		proceedButton.setBackground(ColorUtils.PRIMARY_COLOR);
+		proceedButton.setBorder(null);
+
+		add(rentMessagerLabel.getLabel());
+		add(additionalButtonOne);
+		add(additionalButtonTwo);
+		add(additionalButtonThree);
+		add(additionalButtonFour);
+		add(additionalButtonFive);
+		add(additionalButtonSix);
+		add(proceedButton);
+
+		new StepTwoRentController(this);
+		
+		proceedButton.addActionListener(e -> new StepTwoRentController(this).proceedButtonClicked());
+	}
+	
+	public StepTwoRentScreen(final RentControl frameRentControl, MenuPanel menuPanel, Rent rent, int dailyAmount,
+			double dailyCost, Rent rentDataBD) {
+		setLayout(null);
+		setBackground(Color.white);
+
+		this.menuPanel = menuPanel;
+		this.frameRentControl = frameRentControl;
+		this.rent = rent;
+		this.rentDataDB = rentDataBD;
+		this.dailyAmount = dailyAmount;
+		this.dailyCost = dailyCost;
+
+		rentMessagerLabel = new CustomField("Aluguel do veículo - Adicionais", 40);
+
+		additionalButtonOne = new JToggleButton();
+		additionalButtonOne.setLayout(new BorderLayout());
+		additionalButtonOne.setBounds(111, 84, 664, 35);
+		additionalButtonOne.setBackground(Color.white);
+		additionalButtonOne.setBorder(rentDataBD.isCarProtection()? new LineBorder(ColorUtils.PRIMARY_COLOR, 2) : new LineBorder(ColorUtils.SECUNDARY_DARK_COLOR, 2));
+		additionalButtonOne.add(new JLabel("Proteção do carro"), BorderLayout.WEST);
+		additionalButtonOne.add(new JLabel("R$ 29,90/dia"), BorderLayout.EAST);
+
+		additionalButtonTwo = new JToggleButton();
+		additionalButtonTwo.setLayout(new BorderLayout());
+		additionalButtonTwo.setBounds(111, 151, 664, 35);
+		additionalButtonTwo.setBackground(Color.white);
+		additionalButtonTwo.setBorder(rentDataBD.isGps()? new LineBorder(ColorUtils.PRIMARY_COLOR, 2) : new LineBorder(ColorUtils.SECUNDARY_DARK_COLOR, 2));
+		additionalButtonTwo.add(new JLabel("GPS"), BorderLayout.WEST);
+		additionalButtonTwo.add(new JLabel("R$ 12,90/dia"), BorderLayout.EAST);
+
+		additionalButtonThree = new JToggleButton();
+		additionalButtonThree.setLayout(new BorderLayout());
+		additionalButtonThree.setBounds(111, 218, 664, 35);
+		additionalButtonThree.setBackground(Color.white);
+		additionalButtonThree.setBorder(rentDataBD.isCleaning()? new LineBorder(ColorUtils.PRIMARY_COLOR, 2) : new LineBorder(ColorUtils.SECUNDARY_DARK_COLOR, 2));
+		additionalButtonThree.add(new JLabel("Limpeza do veículo"), BorderLayout.WEST);
+		additionalButtonThree.add(new JLabel("R$ 34,90 * valor único"), BorderLayout.EAST);
+
+		additionalButtonFour = new JToggleButton();
+		additionalButtonFour.setLayout(new BorderLayout());
+		additionalButtonFour.setBounds(111, 285, 664, 35);
+		additionalButtonFour.setBackground(Color.white);
+		additionalButtonFour.setBorder(rentDataBD.isDrinkComfort()? new LineBorder(ColorUtils.PRIMARY_COLOR, 2) : new LineBorder(ColorUtils.SECUNDARY_DARK_COLOR, 2));
+		additionalButtonFour.add(new JLabel("Bebê conforto (crianças de 0 a a ano)"), BorderLayout.WEST);
+		additionalButtonFour.add(new JLabel("R$ 29,90 * valor único"), BorderLayout.EAST);
+
+		additionalButtonFive = new JToggleButton();
+		additionalButtonFive.setLayout(new BorderLayout());
+		additionalButtonFive.setBounds(111, 352, 664, 35);
+		additionalButtonFive.setBackground(Color.white);
+		additionalButtonFive.setBorder(rentDataBD.isBabyChair()? new LineBorder(ColorUtils.PRIMARY_COLOR, 2) : new LineBorder(ColorUtils.SECUNDARY_DARK_COLOR, 2));
+		additionalButtonFive.add(new JLabel("Cadeira de bebê (crianças de 1 a 4 anos)"), BorderLayout.WEST);
+		additionalButtonFive.add(new JLabel("R$ 29,90 * valor único"), BorderLayout.EAST);
+
+		additionalButtonSix = new JToggleButton();
+		additionalButtonSix.setLayout(new BorderLayout());
+		additionalButtonSix.setBounds(111, 419, 664, 35);
+		additionalButtonSix.setBackground(Color.white);
+		additionalButtonSix.setBorder(rentDataBD.isBoosterSeat()? new LineBorder(ColorUtils.PRIMARY_COLOR, 2) : new LineBorder(ColorUtils.SECUNDARY_DARK_COLOR, 2));
 		additionalButtonSix.add(new JLabel("Assento de elevação (crianças de 4 a 7 anos)"), BorderLayout.WEST);
 		additionalButtonSix.add(new JLabel("R$ 29,90 * valor único"), BorderLayout.EAST);
 
@@ -302,5 +386,33 @@ public class StepTwoRentScreen extends JPanel {
 	 */
 	public void setAdditionalButtonSix(JToggleButton additionalButtonSix) {
 		this.additionalButtonSix = additionalButtonSix;
+	}
+
+	/**
+	 * @return o proceedButton
+	 */
+	public JButton getProceedButton() {
+		return proceedButton;
+	}
+
+	/**
+	 * @param proceedButton o proceedButton a ser configurado
+	 */
+	public void setProceedButton(JButton proceedButton) {
+		this.proceedButton = proceedButton;
+	}
+
+	/**
+	 * @return o rentDataDB
+	 */
+	public Rent getRentDataDB() {
+		return rentDataDB;
+	}
+
+	/**
+	 * @param rentDataDB o rentDataDB a ser configurado
+	 */
+	public void setRentDataDB(Rent rentDataDB) {
+		this.rentDataDB = rentDataDB;
 	}
 }
