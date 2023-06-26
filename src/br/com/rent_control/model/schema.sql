@@ -55,7 +55,10 @@ create table rentalAddresses(
     primary key (address)
 );
 
-insert into employee values ("Ayumi Aoki", "04761241233", "ayumi", "123");
+insert into employee values ("Ayumi Aoki", "04761241233", "admin", "123");
+insert into customer values ("Ayumi Aoki", "04761241233", 123456789, "13032003");
+insert into car values (1, "Compacto", "Fiat mob", 5, 320, "manual", "hibrido", 10, 79.9, true, true, true, false);
+insert into rent values (1, "26062023", "Agencia aeroporto", "28062023", "Agencia aeroporto", true, false, false, false, false, false, "04761241233", 1);
 insert into rentalAddresses values ("Agencia aeroporto");
 insert into rentalAddresses values ("Agencia carrefur adrianopolis");
 insert into rentalAddresses values ("Agencia carrefur centro");
