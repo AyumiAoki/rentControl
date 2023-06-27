@@ -11,12 +11,19 @@ import java.awt.*;
 public class ContentPanel extends JPanel {
 
     private static final long serialVersionUID = -3093766985729099958L;
-    
+    private final ImageIcon backgroundPanel;
+
     /**
      * Parameterless constructor
      */
     public ContentPanel() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBackground(Color.white);
+        backgroundPanel = new ImageIcon(getClass().getResource("/br/com/rent_control/view/images/backgroundPanelContent.png"));
     }
+
+	@Override
+	public void paintComponent(Graphics g) {
+		g.drawImage(backgroundPanel.getImage(), 0, 0, backgroundPanel.getIconWidth(), backgroundPanel.getIconHeight(),
+				this);
+	}
 }

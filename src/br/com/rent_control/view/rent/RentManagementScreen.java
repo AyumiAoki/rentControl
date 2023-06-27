@@ -77,11 +77,11 @@ public class RentManagementScreen extends JPanel{
 			return;
 		}
 		if (rentDao.deleteRentById(Integer.parseInt(id))) {
+			JOptionPane.showMessageDialog(null, "Locação excluída com sucesso!");
 			this.remove(scrollPane);
 			tableSetup();
 			this.revalidate();
 			this.repaint();
-			JOptionPane.showMessageDialog(null, "Locação excluída com sucesso!");
 		} else {
 			JOptionPane.showMessageDialog(null, "Erro ao excluir locação!");
 		}

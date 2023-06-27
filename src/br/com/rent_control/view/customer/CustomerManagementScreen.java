@@ -86,11 +86,11 @@ public class CustomerManagementScreen extends JPanel {
 				JOptionPane.showMessageDialog(null, "Não foi possível excluir o cliente, pois ele tem uma alocação aberta!");
 			} else {
 				if (customerDao.deleteCustomerByCpf(id)) {
+					JOptionPane.showMessageDialog(null, "Cliente excluido com sucesso!");
 					this.remove(scrollPane);
 					tableSetup();
 					this.revalidate();
 					this.repaint();
-					JOptionPane.showMessageDialog(null, "Cliente excluido com sucesso!");
 				} else {
 					JOptionPane.showMessageDialog(null, "Erro ao excluir cliente!");
 				}

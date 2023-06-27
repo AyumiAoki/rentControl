@@ -35,7 +35,7 @@ public class AddCustomerController {
 		if (!name.equals("") && !cpf.equals("") && !licenseNumber.equals("") && !dateOfBirth.equals("")) {
 			if (!name.matches("[a-zA-Z ]+")) {
 				JOptionPane.showMessageDialog(null, "Insira apenas letras no campo nome");
-			} else if (!cpf.matches("\\d+") && !licenseNumber.matches("\\d+") && !dateOfBirth.matches("\\d+")) {
+			} else if (!cpf.matches("\\d+") || !licenseNumber.matches("\\d+") || !dateOfBirth.matches("\\d+")) {
 				JOptionPane.showMessageDialog(null,
 						"Insira apenas números nos campos CPF, número da CNH e Data de nascimento!");
 			} else if(cpf.length() != 11) {

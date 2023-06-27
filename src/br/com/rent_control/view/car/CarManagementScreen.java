@@ -66,11 +66,11 @@ public class CarManagementScreen extends JPanel {
 				JOptionPane.showMessageDialog(null, "Não foi possível excluir o veículo, pois ele está alocado!");
 			} else {
 				if (carDao.deleteCarById(Integer.parseInt(id))) {
+					JOptionPane.showMessageDialog(null, "Veículo excluido com sucesso!");
 					this.remove(scrollPane);
 					tableSetup();
 					this.revalidate();
 					this.repaint();
-					JOptionPane.showMessageDialog(null, "Veículo excluido com sucesso!");
 				} else {
 					JOptionPane.showMessageDialog(null, "Erro ao excluir veículo!");
 				}
